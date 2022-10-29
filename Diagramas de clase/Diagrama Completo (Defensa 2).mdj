@@ -782,7 +782,7 @@
 											"top": 735,
 											"width": 297.1083984375,
 											"height": 13,
-											"text": "+cambiarAZombieComiendo()",
+											"text": "+cambiarAAlienComiendo()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -799,7 +799,7 @@
 											"top": 750,
 											"width": 297.1083984375,
 											"height": 13,
-											"text": "+cambiarAZombieCaminando()",
+											"text": "+cambiarAAlienCaminando()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -867,7 +867,7 @@
 											"top": 810,
 											"width": 297.1083984375,
 											"height": 13,
-											"text": "+colisionProyectilZombie(p Proyectil, z Zombie)",
+											"text": "+colisionProyectilAlien(p Proyectil, z Alien)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -884,7 +884,7 @@
 											"top": 825,
 											"width": 297.1083984375,
 											"height": 13,
-											"text": "+colisionPlantaZombie(p Planta, z Zombie)",
+											"text": "+colisionNaveAlien(p Nave, z Alien)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7543,7 +7543,7 @@
 											"top": 823,
 											"width": 383.97607421875,
 											"height": 13,
-											"text": "Manejador Zombies"
+											"text": "Manejador Aliens"
 										},
 										{
 											"_type": "LabelView",
@@ -7630,7 +7630,7 @@
 											"top": 856,
 											"width": 383.97607421875,
 											"height": 13,
-											"text": "+ManejadorZombies(zom ListaZombie, tab: ListaFila, cantZ: int)",
+											"text": "+ManejadorAliens(zom ListaAliens, tab: ListaFila, cantZ: int)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9763,7 +9763,7 @@
 											"top": 1413,
 											"width": 220.6953125,
 											"height": 13,
-											"text": "-removerZombie(z: Alien)",
+											"text": "-removerAlien(z: Alien)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9832,7 +9832,7 @@
 											"top": 1458,
 											"width": 220.6953125,
 											"height": 13,
-											"text": "+getPrimerZombie(): Alien",
+											"text": "+getPrimerAlien(): Alien",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9849,7 +9849,7 @@
 											"top": 1473,
 											"width": 220.6953125,
 											"height": 13,
-											"text": "+getPrimerPlanta(): Nave",
+											"text": "+getPrimeraNave(): Nave",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9866,7 +9866,7 @@
 											"top": 1488,
 											"width": 220.6953125,
 											"height": 13,
-											"text": "+getPlantas(): List",
+											"text": "+getNaves(): List",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9883,7 +9883,7 @@
 											"top": 1503,
 											"width": 220.6953125,
 											"height": 13,
-											"text": "+AgregarPlanta(p: Nave, posY: int)",
+											"text": "+AgregarNave(p: Nave, posY: int)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -10613,7 +10613,7 @@
 										"$ref": "AAAAAAGD9budiieghqY="
 									},
 									"edgePosition": 1,
-									"text": "#lista de zombies"
+									"text": "#lista de aliens"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -11174,7 +11174,7 @@
 											"top": 1031,
 											"width": 117.00634765625,
 											"height": 13,
-											"text": "ZombieCaminando"
+											"text": "AlienCaminando"
 										},
 										{
 											"_type": "LabelView",
@@ -11406,7 +11406,7 @@
 											"top": 1143,
 											"width": 109.7763671875,
 											"height": 13,
-											"text": "ZombieComiendo"
+											"text": "AlienComiendo"
 										},
 										{
 											"_type": "LabelView",
@@ -20244,7 +20244,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGEFcFoczx6KP8="
 									},
-									"name": "int posX"
+									"name": "int posX",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20252,7 +20253,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGEFcFoczx6KP8="
 									},
-									"name": "int posY"
+									"name": "int posY",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -20260,7 +20262,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGEFcFoczx6KP8="
 									},
-									"name": "int tipo"
+									"name": "int tipo",
+									"type": ""
 								}
 							]
 						}
@@ -20461,7 +20464,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD8ak1jHt0b9o="
 							},
-							"name": "cambiarAZombieComiendo"
+							"name": "cambiarAAlienComiendo"
 						},
 						{
 							"_type": "UMLOperation",
@@ -20469,7 +20472,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD8ak1jHt0b9o="
 							},
-							"name": "cambiarAZombieCaminando"
+							"name": "cambiarAAlienCaminando"
 						},
 						{
 							"_type": "UMLOperation",
@@ -20525,7 +20528,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD8ak1jHt0b9o="
 							},
-							"name": "colisionProyectilZombie",
+							"name": "colisionProyectilAlien",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -20533,8 +20536,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGEFbiAVcQC4Uc="
 									},
-									"name": "p Proyectil",
-									"type": ""
+									"name": "p Proyectil"
 								},
 								{
 									"_type": "UMLParameter",
@@ -20542,8 +20544,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGEFbiAVcQC4Uc="
 									},
-									"name": "z Zombie",
-									"type": ""
+									"name": "z Alien"
 								}
 							]
 						},
@@ -20553,7 +20554,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD8ak1jHt0b9o="
 							},
-							"name": "colisionPlantaZombie",
+							"name": "colisionNaveAlien",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -20561,8 +20562,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGEFbj+GszR0wk="
 									},
-									"name": "p Planta",
-									"type": ""
+									"name": "p Nave"
 								},
 								{
 									"_type": "UMLParameter",
@@ -20570,8 +20570,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGEFbj+GszR0wk="
 									},
-									"name": "z Zombie",
-									"type": ""
+									"name": "z Alien"
 								}
 							]
 						},
@@ -22048,7 +22047,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Manejador Zombies",
+					"name": "Manejador Aliens",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -22142,7 +22141,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD8dvLrRxjMMI="
 							},
-							"name": "ManejadorZombies",
+							"name": "ManejadorAliens",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -22150,8 +22149,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGEBh2NvingTcY="
 									},
-									"name": "zom ListaZombie",
-									"type": ""
+									"name": "zom ListaAliens"
 								},
 								{
 									"_type": "UMLParameter",
@@ -22393,7 +22391,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD9btKqhDxoKY="
 							},
-							"name": "lista de zombies",
+							"name": "lista de aliens",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAGD9budiSedeIo=",
@@ -22709,7 +22707,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD9btKqhDxoKY="
 							},
-							"name": "removerZombie",
+							"name": "removerAlien",
 							"visibility": "private",
 							"parameters": [
 								{
@@ -22795,7 +22793,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD9btKqhDxoKY="
 							},
-							"name": "getPrimerZombie",
+							"name": "getPrimerAlien",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -22816,7 +22814,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD9btKqhDxoKY="
 							},
-							"name": "getPrimerPlanta",
+							"name": "getPrimeraNave",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -22837,7 +22835,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD9btKqhDxoKY="
 							},
-							"name": "getPlantas",
+							"name": "getNaves",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -22856,7 +22854,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGD9btKqhDxoKY="
 							},
-							"name": "AgregarPlanta",
+							"name": "AgregarNave",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -23031,7 +23029,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ZombieCaminando",
+					"name": "AlienCaminando",
 					"ownedElements": [
 						{
 							"_type": "UMLInterfaceRealization",
@@ -23083,7 +23081,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ZombieComiendo",
+					"name": "AlienComiendo",
 					"ownedElements": [
 						{
 							"_type": "UMLInterfaceRealization",
