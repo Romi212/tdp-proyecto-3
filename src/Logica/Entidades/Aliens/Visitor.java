@@ -1,4 +1,5 @@
 package Logica.Entidades.Aliens;
 
-public class AlienA {
+public interface Visitor {
+
 }
