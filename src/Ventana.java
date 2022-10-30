@@ -39,6 +39,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Rectangle;
 
 public class Ventana {
 
@@ -60,7 +61,7 @@ public class Ventana {
 		frmLaHorda.setResizable(false);
 		
 		
-		frmLaHorda.setBounds(100, 100, 585, 461);
+		frmLaHorda.setBounds(100, 100, 579, 439);
 		frmLaHorda.getContentPane().setBackground(new Color(0,0,0,0));
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -74,37 +75,48 @@ public class Ventana {
 		layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 67, frmLaHorda.getBounds().width, 354);
 		frmLaHorda.getContentPane().add(layeredPane);
+		
 		JPanel panelAliens = new JPanel();
-		panelAliens.setBackground(new Color(0,0,0,0));
+		
 		panelAliens.setBounds(0, 0, frmLaHorda.getBounds().width, 354);
 		layeredPane.add(panelAliens);
+		panelAliens.setOpaque(false);
 		panelAliens.setLayout(null);
 		
-		JLabel Alien = new JLabel();
+		JLabel Alien = new JLabel("");
 		Alien.setIcon(new ImageIcon(Ventana.class.getResource("/resources/satelite.gif")));
-		Alien.setBounds(365, 54, 70, 70);
-		
-		
+		Alien.setBounds(225, 158, 80, 50);
 		panelAliens.add(Alien);
+		
+		
 		JPanel panelNaves = new JPanel();
-		panelNaves.setBackground(new Color(0,0,0,0));
+		
 		panelNaves.setBounds(0, 0, frmLaHorda.getBounds().width, 354);
 		layeredPane.add(panelNaves);
 		panelNaves.setLayout(null);
+		panelNaves.setOpaque(false);
+		panelNaves.setBackground(null);
 		
-		JLabel Nave = new JLabel("Nave");
-		Nave.setBounds(87, 47, 32, 22);
+		JLabel Nave = new JLabel("");
+		Nave.setIcon(new ImageIcon(Ventana.class.getResource("/resources/naveA.gif")));
+		Nave.setBounds(87, 47, 119, 84);
 		panelNaves.add(Nave);
 		JPanel panelFondo = new JPanel();
-		panelFondo.setBackground(new Color(0,0,0,0));
+		//panelFondo.setBackground(new Color(255, 102, 255));
 		panelFondo.setBounds(0, 0, frmLaHorda.getBounds().width, 354);
 		layeredPane.add(panelFondo);
+		panelFondo.setBackground(null);
+		panelFondo.setOpaque(false);
+		panelFondo.setLayout(null);
+
 		JLabel fondo = new JLabel();
-		fondo.setBounds(panelFondo.getBounds());
+		fondo.setBounds(0, 0, 575, 343);
 		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/fondo1.png"));
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height, Image.SCALE_SMOOTH);
-		ImageIcon cancer = new ImageIcon(dimg);
-		fondo.setIcon(cancer);
+		ImageIcon fondito = new ImageIcon(dimg);
+		panelFondo.setLayout(null);
+		panelFondo.setBackground(null);
+		fondo.setIcon(fondito);
 		
 		panelFondo.add(fondo);
 		
