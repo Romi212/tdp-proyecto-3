@@ -5,10 +5,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.swing.JFrame;
@@ -44,15 +42,11 @@ public class Ventana {
 	public Ventana(){
 		//Creamos properties para leer las path de las imagenes
 		p = new Properties();
-		FileInputStream archivo;
+
+		InputStream input = getClass().getResourceAsStream("/resources/config.properties");
+
 		try {
-			File f = new File(Ventana.class.getResource("/resources/config.properties").getPath());
-			archivo = new FileInputStream(f);
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-		try {
-			p.load(archivo);
+			p.load(input);
 			System.out.println(p.getProperty("naveAImg"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);

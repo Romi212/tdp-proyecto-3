@@ -39,14 +39,11 @@ public class Logica {
     }
 
     private void crearNivel(int nivel){
-        File archivo = new File(Ventana.class.getResource(p.getProperty(archivos[nivel])).getPath());
+        InputStream input = getClass().getResourceAsStream(p.getProperty(archivos[nivel]));
+
         BufferedReader br
                 = null;
-        try {
-            br = new BufferedReader(new FileReader(archivo));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        br = new BufferedReader(new InputStreamReader(input));
 
         String linea;
 
