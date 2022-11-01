@@ -2,6 +2,7 @@ package Logica;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
@@ -14,10 +15,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 
 public class Ventana {
 
@@ -30,6 +35,7 @@ public class Ventana {
 	private JLayeredPane layeredPane;
 	private Properties p;
 	private JPanel panelNaves;
+	private JComboBox elegirModo;
 	
 	/**
 	 * @wbp.parser.entryPoint
@@ -136,5 +142,28 @@ public class Ventana {
 
 	public void sacarObjeto(JPanel o){
 		panelNaves.remove(o);
+	}
+	
+	public int elegirModoDeJuego() {
+		int toReturn = -1;
+		UIManager.put("OptionPane.background", Color.BLACK);
+		UIManager.put("Panel.background", Color.BLACK); 
+		UIManager.put("Button.background", Color.LIGHT_GRAY);
+		elegirModo = new JComboBox();
+		elegirModo.setModel(new DefaultComboBoxModel(new String[] {"ModoDia", "ModoNoche"}));
+		elegirModo.setBounds(179, 183, 133, 22);
+		
+		JPanel ventanaModo = new JPanel(new FlowLayout());
+		ventanaModo.setBackground(Color.BLACK);
+		JLabel mensaje = new JLabel("Elija el modo de juego");
+		mensaje.setForeground(Color.WHITE);
+		ventanaModo.add(mensaje);
+		ventanaModo.add(elegirModo);
+		elegirModo.setSelectedIndex(0);
+		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
+		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) toReturn=0;
+		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=1;
+		
+		return toReturn;
 	}
 }

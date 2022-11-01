@@ -35,8 +35,7 @@ public class Logica {
     }
 
     private int elegirModoDeJuego(){
-        //Llama a la ventana de elegir modo
-        return 0;
+        return ventana.elegirModoDeJuego();
     }
 
     private void crearNivel(int nivel){
