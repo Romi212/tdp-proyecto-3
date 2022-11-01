@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 import Logica.Entidades.Aliens.*;
 
 public class Proyectil extends ObjetoColisionable {
-	protected Rectangle hitBox;
 	protected int danio;
 
 	protected boolean estaVivo;
@@ -12,12 +11,20 @@ public class Proyectil extends ObjetoColisionable {
 	
 	
 	
-	public Proyectil() {}
+	public Proyectil(int x, int y) {
+		estaVivo = true;
+		proyectilGrafico = new ProyectilGrafico(x,y);
+
+	}
 	
 	
 	
 	public Rectangle getHitBox() {
-		return hitBox;
+		int x = proyectilGrafico.getX();
+		int y = proyectilGrafico.getY();
+		int heigh = proyectilGrafico.getHeight();
+		int width = proyectilGrafico.getWidth();
+		return new Rectangle(x,y,width,heigh);
 	}
 	public int getDanio() {
 		return danio;

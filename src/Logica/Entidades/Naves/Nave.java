@@ -1,5 +1,7 @@
 package Logica.Entidades.Naves;
 
+import Logica.Fila;
+
 public abstract class Nave extends ObjetoColisionable{
 	protected int vida;
 	protected int precio;
@@ -7,6 +9,17 @@ public abstract class Nave extends ObjetoColisionable{
 	protected NaveGrafica naveG;
 	protected int posX;
 	protected int posY;
+	protected Fila fila;
+
+	public Nave(Fila f, int x, int y) {
+		fila = f;
+
+		//precio =
+		contadorC = 0;
+		//String s =
+		naveG = new NaveGrafica(x,y,"hola");
+
+	}
 	
 	public boolean estaViva() {
 		return vida>0;
