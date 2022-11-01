@@ -1,3 +1,5 @@
+import Logica.Ventana;
+
 import java.awt.EventQueue;
 
 public class Main {

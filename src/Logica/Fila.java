@@ -5,39 +5,60 @@ import java.util.LinkedList;
 import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.Proyectil;
+import Logica.Entidades.Sol;
 import Logica.Manejadores.ManejadorAliens;
 
 public class Fila {
-	protected int contadorSoles;
-	protected int contadorDisparo;
 	protected Nave primeraNave;
+	protected Logica logica;
 	protected LinkedList<Proyectil> listaProyectiles;
 	protected LinkedList<Alien> listaAliens;
-	protected ManejadorAliens manejadorAliens;
-	//protected VisitorDisparar visitorDisparar;
-	protected LinkedList<Celda> listaCeldas;
-	
-	
-	public Fila() {}
-	
-	private void removerAlien(Alien z) {}
-	private void removerProyectil(Proyectil p) {}
-	public Proyectil getPrimerProyectil() {
-		return listaProyectiles.getFirst();
+	protected Nave[] listaNaves;
+
+
+
+	public Fila(Logica l){
+		this.logica = l;
+		listaNaves = new Nave[9];
+		for(int i = 0; i < 9;i++){
+			listaNaves[i] = null;
+		}
 	}
-	public Alien getPrimerAlien() {
-		return listaAliens.getFirst();
+
+	private void removerAlien(Alien z){
+		 listaAliens.remove(z);
 	}
-	public Nave getPrimeraNave() {
-		return primeraNave;
+
+	private void removerProyectil(Proyectil p){
+		listaProyectiles.remove(p);
 	}
-	//public LinkedList<Nave> getNaves(){}
-	public void agregarNave(Nave p, int posY) {}
-	public void checkColisiones(Alien z) {}
-	public void disparar() {}
-	public void producirSoles() {}
-	public void pasoXTiempo() {}
-	public void actualizarContadorSoles() {}
-	
-	
+
+	public LinkedList<Alien> getAliens(){
+		return listaAliens;
+	}
+
+
+	public LinkedList<Proyectil> getProyectiles(){
+		return listaProyectiles;
+	}
+
+	public void agregarNave(Nave p, int posY){
+		listaNaves[posY] = p;
+	}
+
+	public void agregarAlien(Alien a){
+		listaAliens.addLast(a);
+	}
+
+	public void agregarProyectil(Proyectil p){
+		listaProyectiles.addLast(p);
+	}
+
+	public void agregarSol(Sol s){
+		logica.agregarObjetoGrafico(s);
+	}
+
+
+
+
 }

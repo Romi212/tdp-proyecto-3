@@ -6,7 +6,8 @@ import Logica.Entidades.Aliens.*;
 public class Proyectil extends ObjetoColisionable {
 	protected Rectangle hitBox;
 	protected int danio;
-	protected String skin;
+
+	protected boolean estaVivo;
 	protected ProyectilGrafico proyectilGrafico;
 	
 	
@@ -21,10 +22,21 @@ public class Proyectil extends ObjetoColisionable {
 	public int getDanio() {
 		return danio;
 	}
-	public void accept(Visitor v) {}
-	public void pasoXTiempo() {}
+	public void accept(Visitor v) {
+
+	}
+	public void pasoXTiempo() {
+
+	}
 	public ProyectilGrafico getProyectilGrafico() {
 		return proyectilGrafico;
 	}
-	public void destruir() {}
+
+	public void destruir() {
+
+	}
+
+	public boolean estaVivo(){
+		return estaVivo;
+	}
 }
