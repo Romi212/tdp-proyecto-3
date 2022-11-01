@@ -1,9 +1,11 @@
 package Logica;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.Naves.Nave;
+import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Entidades.Naves.Proyectil;
 import Logica.Entidades.Sol;
 import Logica.Manejadores.ManejadorAliens;
@@ -53,9 +55,20 @@ public class Fila {
 	public void agregarProyectil(Proyectil p){
 		listaProyectiles.addLast(p);
 	}
-
+	
 	public void agregarSol(Sol s){
 		logica.agregarObjetoGrafico(s);
+	}
+	
+	public LinkedList<ObjetoColisionable> getColisionables() {
+		LinkedList<ObjetoColisionable> l = new LinkedList<ObjetoColisionable>();
+		l.addLast(primeraNave);
+		Iterator<Proyectil> lP = listaProyectiles.iterator();
+		while(lP.hasNext()) {
+			l.addLast(lP.next());
+		}
+		return l;
+		
 	}
 
 
