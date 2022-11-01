@@ -4,6 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,10 +28,31 @@ public class Ventana {
 	private JTable tablaRanking;
 	private DefaultTableModel modelo;
 	private JLayeredPane layeredPane;
+	private Properties p;
+	private JPanel panelNaves;
 	
 	/**
 	 * @wbp.parser.entryPoint
 	 */
+
+	public Ventana(){
+		//Creamos properties para leer las path de las imagenes
+		p = new Properties();
+		FileInputStream archivo;
+		try {
+			File f = new File(Ventana.class.getResource("/resources/config.properties").getPath());
+			archivo = new FileInputStream(f);
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			p.load(archivo);
+			System.out.println(p.getProperty("naveAImg"));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
 	public void initialize() {
 		
 		frmLaHorda = new JFrame();
@@ -62,16 +88,19 @@ public class Ventana {
 		panelAliens.add(Alien);
 		
 		
-		JPanel panelNaves = new JPanel();
+		panelNaves = new JPanel();
 		
 		panelNaves.setBounds(0, 0, frmLaHorda.getBounds().width, 354);
 		layeredPane.add(panelNaves);
 		panelNaves.setLayout(null);
 		panelNaves.setOpaque(false);
 		panelNaves.setBackground(null);
-		
+
+
+
+
 		JLabel Nave = new JLabel("");
-		Nave.setIcon(new ImageIcon(Ventana.class.getResource("/resources/naveA.gif")));
+		Nave.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("naveAImg"))));
 		Nave.setBounds(87, 47, 119, 84);
 		panelNaves.add(Nave);
 		JPanel panelFondo = new JPanel();
@@ -95,6 +124,17 @@ public class Ventana {
 		
 		
 		frmLaHorda.setVisible(true);
+
+		logica = new Logica(this,p);
+		logica.empezarJuego();
 		
+	}
+
+	public void agregarObjeto(JLabel o){
+		panelNaves.add(o);
+	}
+
+	public void sacarObjeto(JPanel o){
+		panelNaves.remove(o);
 	}
 }

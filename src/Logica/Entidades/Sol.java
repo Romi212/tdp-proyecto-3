@@ -1,4 +1,6 @@
 package Logica.Entidades;
 
-public class Sol {
+import javax.swing.*;
+
+public class Sol extends JLabel {
 }
