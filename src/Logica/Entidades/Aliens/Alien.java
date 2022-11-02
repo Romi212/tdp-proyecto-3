@@ -5,7 +5,7 @@ import Logica.Entidades.Naves.NaveGrafica;
 public abstract class Alien implements Visitor{
 	
 	protected int vida;
-	protected int daño;
+	protected int daÃ±o;
 	protected AlienGrafico alienG;
 	
 	public Alien(int x, int y){
@@ -16,7 +16,7 @@ public abstract class Alien implements Visitor{
 		return vida;
 	}
 	
-	public void dañar(int cant) {
-		daño += cant;
+	public void daÃ±ar(int cant) {
+		daÃ±o += cant;
 	}
 }
