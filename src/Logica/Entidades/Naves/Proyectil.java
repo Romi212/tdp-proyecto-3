@@ -11,7 +11,8 @@ public class Proyectil extends ObjetoColisionable {
 	
 	
 	
-	public Proyectil(int x, int y) {
+	public Proyectil(int x, int y, Rectangle h) {
+		super(h);
 		estaVivo = true;
 		proyectilGrafico = new ProyectilGrafico(x,y);
 

@@ -3,9 +3,11 @@ package Logica.Entidades.Naves;
 import Logica.Entidades.Sol;
 import Logica.Fila;
 
+import java.awt.*;
+
 public abstract class NaveSol extends Nave {
-    public NaveSol(Fila f, int x, int y) {
-        super(f,x,y);
+    public NaveSol(Fila f, int x, int y, Rectangle h) {
+        super(f,x,y,h);
     }
 
     public void pasoXTiempo(){}

@@ -2,12 +2,14 @@ package Logica.Entidades.Naves;
 
 import Logica.Fila;
 
+import java.awt.*;
+
 public class NaveNocheB extends NaveDisparo {
 	
 	 protected int tiempoCongelar;
 	 
-	 public NaveNocheB(Fila f, int x, int y){
-		 super(f, x, y);
+	 public NaveNocheB(Fila f, int x, int y, Rectangle h){
+		 super(f, x, y, h);
 		 tiempoCongelar = 1000;
 	 }
 	 
