@@ -1,6 +1,7 @@
 package Logica;
 
 import Logica.Entidades.Aliens.Alien;
+import Logica.Entidades.ObjetoGrafico;
 import Logica.Manejadores.ManejadorAliens;
 import Logica.Manejadores.ManejadorNaves;
 
@@ -76,13 +77,15 @@ public class Logica {
 
         }
         else{
-
+            archivos = new String[2];
+            archivos[0] ="archivoN1";
+            archivos[1] = "archivoN2";
         }
         crearNivel(0);
 
     }
 
-    public void agregarObjetoGrafico(JLabel o){
+    public void agregarObjetoGrafico(ObjetoGrafico o){
         ventana.agregarObjeto(o);
     }
 

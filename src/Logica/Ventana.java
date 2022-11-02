@@ -1,5 +1,7 @@
 package Logica;
 
+import Logica.Entidades.ObjetoGrafico;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -32,8 +34,14 @@ public class Ventana {
 	private DefaultTableModel modelo;
 	private JLayeredPane layeredPane;
 	private Properties p;
-	private JPanel panelNaves;
+	private JPanel panelObjetos;
 	private JComboBox elegirModo;
+
+	private int alturaBotonera = 100;
+
+	private int size = 50;
+
+
 	
 	/**
 	 * @wbp.parser.entryPoint
@@ -57,44 +65,48 @@ public class Ventana {
 		
 		frmLaHorda = new JFrame();
 		
-		frmLaHorda.setResizable(false);
+		frmLaHorda.setResizable(true);
 		
 		
-		frmLaHorda.setBounds(100, 100, 579, 439);
+		frmLaHorda.setBounds(100, 100, 1215, 738);
 		frmLaHorda.getContentPane().setBackground(new Color(0,0,0,0));
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frmLaHorda.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLaHorda.getContentPane().setLayout(null);
+
+
+
+		//Paneles
+		layeredPane = new JLayeredPane();
+		layeredPane.setBounds(0, 0, frmLaHorda.getBounds().width,  frmLaHorda.getBounds().height);
+		frmLaHorda.getContentPane().add(layeredPane);
+
+		//Panel de la botonera
 		JPanel panelBotonera = new JPanel();
 		panelBotonera.setBackground(new Color(0,0,0,0));
-		panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, 67);
-		frmLaHorda.getContentPane().add(panelBotonera);
+		panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, alturaBotonera);
+		//frmLaHorda.getContentPane().add(panelBotonera);
 		panelBotonera.setLayout(null);
-		layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 67, frmLaHorda.getBounds().width, 354);
-		frmLaHorda.getContentPane().add(layeredPane);
+		layeredPane.add(panelBotonera);
+		JLabel Nave2 = new JLabel("");
+		Nave2.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("naveAImg"))));
+		Nave2.setBounds(87, 27, 119, 84);
+		panelBotonera.add(Nave2);
+		panelBotonera.setLayout(null);
+		panelBotonera.setOpaque(false);
+		panelBotonera.setBackground(null);
+
+		//Panel de Objetos
+
 		
-		JPanel panelAliens = new JPanel();
+		panelObjetos = new JPanel();
 		
-		panelAliens.setBounds(0, 0, frmLaHorda.getBounds().width, 354);
-		layeredPane.add(panelAliens);
-		panelAliens.setOpaque(false);
-		panelAliens.setLayout(null);
-		
-		JLabel Alien = new JLabel("");
-		Alien.setIcon(new ImageIcon(Ventana.class.getResource("/resources/satelite.gif")));
-		Alien.setBounds(225, 158, 80, 50);
-		panelAliens.add(Alien);
-		
-		
-		panelNaves = new JPanel();
-		
-		panelNaves.setBounds(0, 0, frmLaHorda.getBounds().width, 354);
-		layeredPane.add(panelNaves);
-		panelNaves.setLayout(null);
-		panelNaves.setOpaque(false);
-		panelNaves.setBackground(null);
+		panelObjetos.setBounds(0, alturaBotonera, frmLaHorda.getBounds().width, frmLaHorda.getBounds().height-alturaBotonera);
+		layeredPane.add(panelObjetos);
+		panelObjetos.setLayout(null);
+		panelObjetos.setOpaque(false);
+		panelObjetos.setBackground(null);
 
 
 
@@ -102,17 +114,19 @@ public class Ventana {
 		JLabel Nave = new JLabel("");
 		Nave.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("naveAImg"))));
 		Nave.setBounds(87, 47, 119, 84);
-		panelNaves.add(Nave);
+		//agregarObjeto(Nave);
+		panelObjetos.add(Nave);
 		JPanel panelFondo = new JPanel();
 		//panelFondo.setBackground(new Color(255, 102, 255));
-		panelFondo.setBounds(0, 0, frmLaHorda.getBounds().width, 354);
+		panelFondo.setBounds(0, 0, 1200,700);
 		layeredPane.add(panelFondo);
 		panelFondo.setBackground(null);
 		panelFondo.setOpaque(false);
 		panelFondo.setLayout(null);
 
+		//Panel de fondo
 		JLabel fondo = new JLabel();
-		fondo.setBounds(0, 0, 575, 343);
+		fondo.setBounds(0, 0, 1200, 700);
 		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/fondo1.png"));
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
@@ -130,12 +144,25 @@ public class Ventana {
 		
 	}
 
-	public void agregarObjeto(JLabel o){
-		panelNaves.add(o);
+	public void agregarObjeto(ObjetoGrafico o){
+		String ref = o.getRefImagen();
+		//String ref = "naveAImg";
+		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
+		//Image image = ic.getImage();
+
+		//Image newimg = image.getScaledInstance(size, size,  java.awt.Image.SCALE_SMOOTH);
+		//ic = new ImageIcon(newimg);
+
+		o.setIcon(ic);
+
+
+
+		panelObjetos.add(o);
+		//o.repaint();
 	}
 
-	public void sacarObjeto(JPanel o){
-		panelNaves.remove(o);
+	public void sacarObjeto(ObjetoGrafico o){
+		panelObjetos.remove(o);
 	}
 	
 	public int elegirModoDeJuego() {
