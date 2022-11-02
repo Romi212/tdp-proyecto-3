@@ -1,6 +1,20 @@
 package Logica.Entidades.Naves;
 import Logica.Entidades.Aliens.*;
 
+import java.awt.*;
+
 public abstract class ObjetoColisionable {
-	public void accept(Visitor v) {}
+	protected Rectangle hitbox;
+
+	public ObjetoColisionable(Rectangle h){
+		hitbox = h;
+	}
+
+	public void accept(Visitor v) {
+
+	}
+
+	public Rectangle getHitBox(){
+		return hitbox;
+	}
 }

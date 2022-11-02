@@ -2,6 +2,8 @@ package Logica.Entidades.Naves;
 
 import Logica.Fila;
 
+import java.awt.*;
+
 public abstract class Nave extends ObjetoColisionable{
 	protected int vida;
 	protected int precio;
@@ -11,7 +13,8 @@ public abstract class Nave extends ObjetoColisionable{
 	protected int posY;
 	protected Fila fila;
 
-	public Nave(Fila f, int x, int y) {
+	public Nave(Fila f, int x, int y, Rectangle h) {
+		super(h);
 		fila = f;
 
 		//precio =
