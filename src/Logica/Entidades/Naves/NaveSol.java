@@ -9,6 +9,7 @@ public abstract class NaveSol extends Nave {
     }
 
     public void pasoXTiempo(){}
+    
     public void generarSol(){
         Sol s = new Sol();
         fila.agregarSol(s);
