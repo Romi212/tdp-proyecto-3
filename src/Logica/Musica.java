@@ -8,76 +8,56 @@ public class Musica {
     protected String archivo;
     protected Player reproductor;
     protected long duracion, pausa;
-
     protected BufferedInputStream bufferedInputStream;
-    protected Thread hiloPlay, hiloRestart;
-
+    protected Thread hiloPlay;
+    protected boolean reproduciendo;
     //Hilo para iniciar
     protected Runnable iniciar = new Runnable() {
         @Override
         public void run() {
             try {
-                reproductor = new Player(bufferedInputStream);
-                duracion = bufferedInputStream.available();
-                reproductor.play();
-                System.out.println("Se supone que hace play");
-            } catch (java.io.IOException io) {
-                System.out.print("Ocurrio un error del tipo I/O o se cerro el stream de la musica");
-                io.printStackTrace();
-            }
-            catch(JavaLayerException jle){
-                System.out.print("Error en el reproductor de musica ");
-                jle.printStackTrace();
-            }
-        }
-    };
+                while(reproduciendo){
+                    FileInputStream stream = new FileInputStream(archivo);
+                    bufferedInputStream = new BufferedInputStream(stream);
+                    duracion = bufferedInputStream.available(); //Guarda la duracion total en caso de que se reinicie la musica
 
-    //Hilo para continuar reproduciendo luego de que se pauso
-    protected Runnable pausar = new Runnable() {
-        @Override
-        public void run() {
-            try {
-                reproductor = new Player(bufferedInputStream);
-                bufferedInputStream.skip(duracion - pausa);
-                reproductor.play();
-            } catch (java.io.IOException io) {
-                System.out.print("Ocurrio un error del tipo I/O o se cerro el stream de la musica");
-                io.printStackTrace();
+                    reproductor = new Player(bufferedInputStream);
+                    reproductor.play();
+                }
+                pausa = bufferedInputStream.available(); //Guarda lo que resta por leer en caso de que se reinicie la musica
+
             } catch(JavaLayerException jle){
                 System.out.print("Error en el reproductor de musica ");
                 jle.printStackTrace();
+            } catch (java.io.IOException io) {
+                System.out.print("Ocurrio un error del tipo I/O o se cerro el stream de la musica");
+                io.printStackTrace();
             }
+            reproductor.close();
+            hiloPlay.stop();
         }
     };
 
     public Musica(){
         archivo = "src/resources/musica.mp3";
-
-        try{
-            FileInputStream stream = new FileInputStream(archivo);
-            bufferedInputStream = new BufferedInputStream(stream);
-        }catch(java.io.FileNotFoundException f){
-            System.out.print("No se encuentra el archivo mp3 de la musica ");
-            f.printStackTrace();
-        }
-
+        reproduciendo = true;
         hiloPlay = new Thread(iniciar);
-        hiloRestart = new Thread(pausar);
     }
 
     public void play(){ hiloPlay.start(); }
 
-    //Guarda la longitud restante para terminar la cancion y cierra el reproductor
-    public void pausar(){
+    //Guarda la longitud restante para terminar la cancion, cierra el reproductor y detiene la ejecucion de los hilos
+    public void pausar(){ reproduciendo = false; }
+
+    public void restart(){
         try{
-            pausa = bufferedInputStream.available();
-            reproductor.close();
+            bufferedInputStream.skip(duracion - pausa);
         } catch (java.io.IOException io) {
             System.out.print("Ocurrio un error del tipo I/O o se cerro el stream de la musica");
             io.printStackTrace();
         }
-
+        hiloPlay.start();
     }
 
-    public void restart(){ hiloRestart.start(); }
+    public boolean estaReproduciendo(){ return reproduciendo; }
 }

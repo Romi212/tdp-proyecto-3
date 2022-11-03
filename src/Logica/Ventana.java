@@ -45,7 +45,6 @@ public class Ventana {
 	private int size = 50;
 
 	private Musica player;
-	private boolean reproduciendo;
 	
 	/**
 	 * @wbp.parser.entryPoint
@@ -109,9 +108,8 @@ public class Ventana {
 		Bmusica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(reproduciendo){
+				if( player.estaReproduciendo() ){
 					player.pausar();
-					reproduciendo = false;
 					ImageIcon iconoPlay = new ImageIcon("src/resources/play.png");
 					Bmusica.setIcon(iconoPlay);
 				}
@@ -124,9 +122,7 @@ public class Ventana {
 		});
 
 		panelBotonera.add(Bmusica);
-		reproduciendo = true;
 		player.play();
-		System.out.println("Llama desde ventana");
 
 		//Panel de Objetos
 		panelObjetos = new JPanel();
@@ -167,7 +163,7 @@ public class Ventana {
 
 		frmLaHorda.setVisible(true);
 
-		logica = new Logica(this,p);
+		logica = new Logica(this, p , 0, 0, 100);
 		logica.empezarJuego();
 
 	}
