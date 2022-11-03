@@ -15,4 +15,8 @@ public class SolGrafico {
 			instancia = new SolGrafico();
 		return instancia;
 	}
+	
+	public String getImagen() {
+		return imagen;
+	}
 }
