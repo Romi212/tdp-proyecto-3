@@ -40,7 +40,9 @@ public class Ventana {
 	private int alturaBotonera = 100;
 
 	private int size = 50;
-
+	
+	private static final int MODO_DIA=0;
+	private static final int MODO_NOCHE=1;
 
 	
 	/**
@@ -182,8 +184,8 @@ public class Ventana {
 		ventanaModo.add(elegirModo);
 		elegirModo.setSelectedIndex(0);
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
-		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) toReturn=0;
-		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=1;
+		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) toReturn=MODO_DIA;
+		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=MODO_NOCHE;
 		
 		return toReturn;
 	}
