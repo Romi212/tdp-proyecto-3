@@ -70,7 +70,7 @@ public class Ventana {
 		frmLaHorda.setResizable(true);
 		
 		
-		frmLaHorda.setBounds(100, 80, 1015, 614);
+		frmLaHorda.setBounds(100, 80, 1016, 623);
 		frmLaHorda.getContentPane().setBackground(new Color(0,0,0,0));
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -141,7 +141,7 @@ public class Ventana {
 		
 		frmLaHorda.setVisible(true);
 
-		logica = new Logica(this,p);
+		logica = new Logica(this,p,alturaBotonera+5,alturaBotonera,size);
 		logica.empezarJuego();
 		
 	}

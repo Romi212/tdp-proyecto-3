@@ -33,12 +33,12 @@ public class Logica {
     private Ventana ventana;
     private Properties p;
 
-    public Logica(Ventana v,Properties p){
+    public Logica(Ventana v,Properties p,int xInicial, int yInicial, int tam){
         this.p = p;
         ventana = v;
         tablero = new Fila[cantFilas];
         for(int i =0; i < cantFilas; i++){
-            Fila f = new Fila(this);
+            Fila f = new Fila(this, xInicial,yInicial+(i*tam),tam);
             tablero[i] = f;
         }
 

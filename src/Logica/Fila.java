@@ -16,10 +16,15 @@ public class Fila {
 	protected LinkedList<Proyectil> listaProyectiles;
 	protected LinkedList<Alien> listaAliens;
 	protected Nave[] listaNaves;
+	protected int xIni;
+	protected int yIni;
+	protected int tam;
 
 
-
-	public Fila(Logica l){
+	public Fila(Logica l,int xinicial, int yInicial, int tam){
+		xIni = xinicial;
+		yIni = yInicial;
+		this.tam = tam;
 		this.logica = l;
 		listaNaves = new Nave[9];
 		for(int i = 0; i < 9;i++){
