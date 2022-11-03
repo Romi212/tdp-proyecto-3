@@ -70,7 +70,7 @@ public class Ventana {
 		frmLaHorda.setResizable(true);
 		
 		
-		frmLaHorda.setBounds(100, 100, 1215, 738);
+		frmLaHorda.setBounds(100, 80, 1015, 614);
 		frmLaHorda.getContentPane().setBackground(new Color(0,0,0,0));
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -120,7 +120,7 @@ public class Ventana {
 		panelObjetos.add(Nave);
 		JPanel panelFondo = new JPanel();
 		//panelFondo.setBackground(new Color(255, 102, 255));
-		panelFondo.setBounds(0, 0, 1200,700);
+		panelFondo.setBounds(0, 0, 1000,584);
 		layeredPane.add(panelFondo);
 		panelFondo.setBackground(null);
 		panelFondo.setOpaque(false);
@@ -128,7 +128,7 @@ public class Ventana {
 
 		//Panel de fondo
 		JLabel fondo = new JLabel();
-		fondo.setBounds(0, 0, 1200, 700);
+		fondo.setBounds(0, 0, 1000, 584);
 		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/fondo1.png"));
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
