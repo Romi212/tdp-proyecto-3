@@ -1,6 +1,8 @@
 package Logica;
 
 import Logica.Entidades.Aliens.Alien;
+import Logica.Entidades.Factories.FactoryDia;
+import Logica.Entidades.Factories.FactoryNoche;
 import Logica.Entidades.Factories.ObjectsFactory;
 import Logica.Entidades.ObjetoGrafico;
 import Logica.Manejadores.ManejadorAliens;
@@ -8,9 +10,12 @@ import Logica.Manejadores.ManejadorNaves;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Properties;
 import java.awt.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Logica {
 
@@ -27,6 +32,7 @@ public class Logica {
 
     private Ventana ventana;
     private Properties p;
+
     public Logica(Ventana v,Properties p){
         this.p = p;
         ventana = v;
@@ -45,23 +51,41 @@ public class Logica {
     private void crearNivel(int nivel){
         InputStream input = getClass().getResourceAsStream(p.getProperty(archivos[nivel]));
 
-        BufferedReader br
-                = null;
+        BufferedReader br = null;
         br = new BufferedReader(new InputStreamReader(input));
-
-        String linea;
-
+        List lineas = new List();
+        //Leo el archivo del nivel
         try {
-            linea= br.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        int cantAliens = Integer.parseInt(linea);
-        LinkedList<Alien> aliens = new LinkedList<>();
+            String linea = br.readLine();
 
-        for(int i =0; i< cantAliens;i++){
-            //Crea los aliens
+            while ((linea != null) && (!linea.isEmpty())) {
+                lineas.add(linea);
+                linea = br.readLine();
+            }
+        }catch(IOException e){
+            e.printStackTrace();
         }
+        LinkedList<Alien> aliens = new LinkedList<>();
+        int cantAlien1 = Integer.parseInt(lineas.getItem(0));
+        int cantAlien2 = Integer.parseInt(lineas.getItem(1));
+        int cantAlien3 = Integer.parseInt(lineas.getItem(2));
+        int soles  = Integer.parseInt(lineas.getItem(3));
+
+
+        /*
+        for(int i =0; i< cantAlien1;i++){
+            aliens.add(factory.createAlien1());
+        }
+
+        for(int i = 0; i < cantAlien2; i++){
+            aliens.add(factory.createAlien2());
+        }
+
+        for(int i = 0; i <cantAlien3; i++){
+            aliens.add(factory.createAlien3());
+        }
+        */
+
 
         M_Aliens = new ManejadorAliens(aliens, this,tablero);
 
@@ -70,22 +94,26 @@ public class Logica {
     }
 
 
-    public void empezarJuego(){
-        int modo= elegirModoDeJuego();
+    public void empezarJuego() {
+        int modo = elegirModoDeJuego();
         //Se crean las factoies correspondientes y los archivos
-        if (modo == 0){
+        if (modo == 0) {
             archivos = new String[2];
-            archivos[0] ="archivoD1";
+            archivos[0] = "archivoD1";
             archivos[1] = "archivoD2";
 
-        }
-        else{
+        } else {
             archivos = new String[2];
-            archivos[0] ="archivoN1";
+            archivos[0] = "archivoN1";
             archivos[1] = "archivoN2";
         }
         crearNivel(0);
 
+        //Creo la factory de aliens de acuerdo al modo de juego
+        switch (modo) {
+            case 0 -> factory = new FactoryDia();
+            case 1 -> factory = new FactoryNoche();
+        }
     }
 
     public void aumentarSoles(int cant){
