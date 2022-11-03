@@ -5,5 +5,5 @@ import Logica.Entidades.Naves.Proyectil;
 
 public interface Visitor {
     public void colisionProyectilAlien(Proyectil p);
-    public void colisionNaveAlien(Nave alien);
+    public void colisionNaveAlien(Nave nave);
 }

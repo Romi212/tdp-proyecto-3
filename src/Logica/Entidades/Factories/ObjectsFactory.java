@@ -8,9 +8,9 @@ import java.awt.*;
 
 public interface ObjectsFactory {
 	
-	public Alien createAlien1(int x, int y, Rectangle h);
-	public Alien createAlien2(int x, int y, Rectangle h);
-	public Alien createAlien3(int x, int y, Rectangle h);
+	public Alien createAlien1(int x, int y, Rectangle h, String c);
+	public Alien createAlien2(int x, int y, Rectangle h, String c);
+	public Alien createAlien3(int x, int y, Rectangle h, String c);
 	public Nave createNaveA(Fila f, int x, int y, Rectangle h);
 	public Nave  createNaveB(Fila f, int x, int y, Rectangle h);
 	public Nave createNaveC(Fila f, int x, int y, Rectangle h);
