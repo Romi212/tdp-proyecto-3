@@ -10,9 +10,7 @@ public abstract class ObjetoColisionable {
 		hitbox = h;
 	}
 
-	public void accept(Visitor v) {
-
-	}
+	public abstract void accept(Visitor v);
 
 	public Rectangle getHitBox(){
 		return hitbox;

@@ -1,6 +1,7 @@
 package Logica.Entidades.Naves;
 
 import Logica.Fila;
+import Logica.Entidades.Aliens.Visitor;
 
 import java.awt.*;
 
@@ -51,6 +52,10 @@ public abstract class Nave extends ObjetoColisionable{
 
 	public int getPosY(){
 		return posY;
+	}
+	
+	public void accept(Visitor v) {
+		v.colisionNaveAlien(this);
 	}
 
 }

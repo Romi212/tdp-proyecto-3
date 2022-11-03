@@ -29,7 +29,7 @@ public class Proyectil extends ObjetoColisionable {
 		return danio;
 	}
 	public void accept(Visitor v) {
-
+		v.colisionProyectilAlien(this);
 	}
 	public void pasoXTiempo() {
 
