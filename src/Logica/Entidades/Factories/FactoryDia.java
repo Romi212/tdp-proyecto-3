@@ -15,16 +15,16 @@ import java.awt.*;
 
 public class FactoryDia implements ObjectsFactory{
 
-	public Alien createAlien1(int x, int y, Rectangle h) {
-		return new AlienDia1(x, y, h);
+	public Alien createAlien1(int x, int y, Rectangle h, String c) {
+		return new AlienDia1(x, y, h, c);
 	} //Robot
 
-	public Alien createAlien2(int x, int y, Rectangle h) {
-		return new AlienDia2(x, y, h);
+	public Alien createAlien2(int x, int y, Rectangle h, String c) {
+		return new AlienDia2(x, y, h, c);
 	} //Chubby naranja
 
-	public Alien createAlien3(int x, int y, Rectangle h) {
-		return new AlienDia3(x, y, h);
+	public Alien createAlien3(int x, int y, Rectangle h, String c) {
+		return new AlienDia3(x, y, h, c);
 	}
 
 	public Nave createNaveA(Fila f, int x, int y, Rectangle h) {

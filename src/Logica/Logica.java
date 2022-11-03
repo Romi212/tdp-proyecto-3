@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Properties;
 import java.awt.*;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -71,20 +72,47 @@ public class Logica {
         int cantAlien3 = Integer.parseInt(lineas.getItem(2));
         soles  = Integer.parseInt(lineas.getItem(3));
 
+        Random rand = new Random();
+        int filaElegida;
+        int posx;
+        int posy;
+        Fila filaActual;
+        Rectangle hitbox;
 
-        /*
         for(int i =0; i< cantAlien1;i++){
-            aliens.add(factory.createAlien1());
+            filaElegida = rand.nextInt(cantFilas);
+            filaActual = tablero[filaElegida];
+            //posx = filaActual.getxIni() + filaActual.getTam() * filaActual.cantCeldas();
+            //posy = filaActual.getyIni() + filaActual.getTam() / 2;
+            posx = 20;
+            posy = 30;
+            hitbox = new Rectangle();
+            aliens.add(factory.createAlien1(posx, posy, hitbox, p.getProperty("naveBImg")));
         }
 
         for(int i = 0; i < cantAlien2; i++){
-            aliens.add(factory.createAlien2());
+            filaElegida = rand.nextInt(cantFilas);
+            filaActual = tablero[filaElegida];
+            posx = filaActual.getxIni() + filaActual.getTam() * filaActual.cantCeldas();
+            posy = filaActual.getyIni() + filaActual.getTam() / 2;
+            hitbox = new Rectangle();
+            aliens.add(factory.createAlien2(posx, posy, hitbox, p.getProperty("naveBImg")));
         }
 
         for(int i = 0; i <cantAlien3; i++){
-            aliens.add(factory.createAlien3());
+            filaElegida = rand.nextInt(cantFilas);
+            filaActual = tablero[filaElegida];
+            posx = filaActual.getxIni() + filaActual.getTam() * filaActual.cantCeldas();
+            posy = filaActual.getyIni() + filaActual.getTam() / 2;
+            hitbox = new Rectangle();
+            aliens.add(factory.createAlien3(posx, posy, hitbox, p.getProperty("naveBImg")));
         }
-        */
+
+        Alien a =  aliens.get(0);
+        System.out.println(a.getVida());
+        System.out.println(a.getAlienG().getX());
+        System.out.println(a.getAlienG().getY());
+
 
 
         M_Aliens = new ManejadorAliens(aliens, this,tablero);
@@ -107,13 +135,17 @@ public class Logica {
             archivos[0] = "archivoN1";
             archivos[1] = "archivoN2";
         }
-        crearNivel(0);
 
         //Creo la factory de aliens de acuerdo al modo de juego
         switch (modo) {
             case 0 -> factory = new FactoryDia();
             case 1 -> factory = new FactoryNoche();
         }
+
+        crearNivel(0);
+
+
+
     }
 
     public void aumentarSoles(int cant){

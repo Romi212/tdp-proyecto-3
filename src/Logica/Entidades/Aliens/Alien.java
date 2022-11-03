@@ -15,10 +15,11 @@ public abstract class Alien implements Visitor{
 	protected Estado estado;
 	protected int velocidad;
 	
-	public Alien(int x, int y, Rectangle h){
-	//	alienG = new AlienGrafico(x, y, skin1, skin2);
+	public Alien(int x, int y, Rectangle h, String c){
+		alienG = new AlienGrafico(x, y, c);
 		estado = new AlienCaminando(this);
 		hitbox = h;
+		vida = 100;
 	}
 
 	public void daniar(int danio){

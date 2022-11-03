@@ -76,6 +76,24 @@ public class Fila {
 		
 	}
 
+	public int getxIni(){
+		return xIni;
+	}
+
+	public int getyIni(){
+		return yIni;
+	}
+
+	public int getTam(){
+		return tam;
+	}
+
+	public int cantCeldas(){
+		return listaNaves.length;
+	}
+
+
+
 
 
 

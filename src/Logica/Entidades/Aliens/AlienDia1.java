@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class AlienDia1 extends Alien{
 
-	public AlienDia1(int x, int y, Rectangle h) {
-		super(x, y, h);
+	public AlienDia1(int x, int y, Rectangle h, String c) {
+		super(x, y, h, c);
 	}
 
 }
