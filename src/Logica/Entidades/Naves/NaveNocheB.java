@@ -12,8 +12,10 @@ public class NaveNocheB extends NaveDisparo {
 		 super(f, x, y, h);
 		 tiempoCongelar = 1000;
 	 }
-	 
-	 /* Redefine el metodo para congelar a todos los zombies de su fila. Muere despues de realizar la operacion */
-	 public void generarProyectil(){ 
-	 }
+
+	//Redefine el metodo para generar dos proyectiles en lugar de uno
+	public void generarProyectil(int x, int y){
+		super.generarProyectil(x, y);
+		// super.generarProyectil(x, y + ??? );
+	}
 }

@@ -13,8 +13,8 @@ public abstract class NaveDisparo extends Nave{
 
     }
 
-    public void generarProyectil(){
-        //Proyectil p = new Proyectil();
+    public void generarProyectil(int x, int y){
+      //  Proyectil p = new Proyectil(x, y, rect);
         //fila.agregarProyectil(p);
     }
 }

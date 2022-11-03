@@ -14,5 +14,4 @@ abstract public class ObjetoGrafico extends JLabel {
         return imagen;
     }
 
-
 }

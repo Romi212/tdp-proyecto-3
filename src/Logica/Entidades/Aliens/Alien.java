@@ -1,7 +1,6 @@
 package Logica.Entidades.Aliens;
 
 import Logica.Entidades.Naves.Nave;
-import Logica.Entidades.Naves.NaveGrafica;
 import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Entidades.Naves.Proyectil;
 
@@ -46,6 +45,9 @@ public abstract class Alien implements Visitor{
 		estado = new AlienCaminando(this);
 	}
 
+	public void cambiarAAlienCongelado(){ estado = new AlienCongelado(this);
+	}
+
 	public void hacerAccion(){
 		estado.hacerAccion();
 	}
@@ -78,4 +80,5 @@ public abstract class Alien implements Visitor{
 	public int getDanio(){
 		return danio;
 	}
+
 }

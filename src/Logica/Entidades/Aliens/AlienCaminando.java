@@ -7,6 +7,7 @@ public class AlienCaminando implements Estado{
 
     public AlienCaminando(Alien a){
         alien = a;
+        alien.getAlienG().caminando();
     }
     public void hacerAccion(){
         Rectangle hitbox = alien.getHitbox();

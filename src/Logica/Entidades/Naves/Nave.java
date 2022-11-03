@@ -4,6 +4,11 @@ import Logica.Fila;
 
 import java.awt.*;
 
+
+/* NAVES:
+*
+* SOLO DIA: la que dispara toda la fila, satelite
+* SOLO NOCHE freeze, sateliteNoche  */
 public abstract class Nave extends ObjetoColisionable{
 	protected int vida;
 	protected int precio;
@@ -23,7 +28,7 @@ public abstract class Nave extends ObjetoColisionable{
 		naveG = new NaveGrafica(x,y,"hola");
 
 	}
-	
+
 	public boolean estaViva() {
 		return vida>0;
 	}

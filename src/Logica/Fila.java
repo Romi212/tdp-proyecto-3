@@ -39,11 +39,11 @@ public class Fila {
 		return listaAliens;
 	}
 
-
 	public LinkedList<Proyectil> getProyectiles(){
 		return listaProyectiles;
 	}
 
+	public Nave getPrimerNave(){ return primeraNave; }
 	public void agregarNave(Nave p, int posY){
 		listaNaves[posY] = p;
 	}

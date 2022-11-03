@@ -1,9 +1,12 @@
 package Logica.Entidades.Aliens;
 
-public class AlienGrafico {
+import javax.swing.*;
+
+public class AlienGrafico extends JLabel {
 
 	protected String skin1;
 	protected String skin2;
+	protected String skin3;
 	protected int x;
 	protected int y;
 
@@ -16,5 +19,15 @@ public class AlienGrafico {
 
 	public void moverPixeles(int cant){
 		x -= cant;
+	}
+
+	public void caminando(){
+		//this.setIcon(skin1);
+	}
+	public void comiendo(){
+		//this.setIcon(skin1);
+	}
+	public void congelado(){
+		//this.setIcon(skin1);
 	}
 }

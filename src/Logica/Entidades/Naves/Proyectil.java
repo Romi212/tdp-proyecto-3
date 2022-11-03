@@ -18,8 +18,6 @@ public class Proyectil extends ObjetoColisionable {
 
 	}
 	
-	
-	
 	public Rectangle getHitBox() {
 		int x = proyectilGrafico.getX();
 		int y = proyectilGrafico.getY();

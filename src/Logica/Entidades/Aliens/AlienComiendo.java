@@ -9,6 +9,7 @@ public class AlienComiendo implements Estado{
     public AlienComiendo(Alien a, Nave n){
         nave = n;
         alien = a;
+        a.getAlienG().comiendo();
     }
 
     @Override
@@ -16,8 +17,7 @@ public class AlienComiendo implements Estado{
         while(nave.estaViva()){
             nave.bajarVida(alien.getDanio());
         }
-        if(!nave.estaViva())
-            nave.destruir();
+        if(!nave.estaViva()) nave.destruir();
 
     }
 }

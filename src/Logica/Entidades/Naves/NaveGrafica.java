@@ -10,4 +10,5 @@ public class NaveGrafica extends JLabel {
         this.setAlignmentY(y);
         this.skin = skin;
     }
+
 }
