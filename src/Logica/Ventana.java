@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
 import java.util.Properties;
@@ -17,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -41,7 +44,8 @@ public class Ventana {
 
 	private int size = 50;
 
-
+	private Musica player;
+	private boolean reproduciendo;
 	
 	/**
 	 * @wbp.parser.entryPoint
@@ -59,6 +63,9 @@ public class Ventana {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+
+		//Creamos el reproductor de musica
+		player = new Musica();
 
 	}
 	public void initialize() {
@@ -97,9 +104,31 @@ public class Ventana {
 		panelBotonera.setOpaque(false);
 		panelBotonera.setBackground(null);
 
-		//Panel de Objetos
+		ImageIcon iconoPausa = new ImageIcon("src/resources/pausa.png");
+		JButton Bmusica = new JButton(iconoPausa);
+		Bmusica.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(reproduciendo){
+					player.pausar();
+					reproduciendo = false;
+					ImageIcon iconoPlay = new ImageIcon("src/resources/play.png");
+					Bmusica.setIcon(iconoPlay);
+				}
+				else{
+					player.restart();
+					ImageIcon iconoPausa = new ImageIcon("src/resources/pausa.png");
+					Bmusica.setIcon(iconoPausa);
+				}
+			}
+		});
 
-		
+		panelBotonera.add(Bmusica);
+		reproduciendo = true;
+		player.play();
+		System.out.println("Llama desde ventana");
+
+		//Panel de Objetos
 		panelObjetos = new JPanel();
 		
 		panelObjetos.setBounds(0, alturaBotonera, frmLaHorda.getBounds().width, frmLaHorda.getBounds().height-alturaBotonera);
@@ -135,13 +164,12 @@ public class Ventana {
 		fondo.setIcon(fondito);
 		
 		panelFondo.add(fondo);
-		
-		
+
 		frmLaHorda.setVisible(true);
 
 		logica = new Logica(this,p);
 		logica.empezarJuego();
-		
+
 	}
 
 	public void agregarObjeto(ObjetoGrafico o){
