@@ -69,7 +69,7 @@ public class Logica {
         int cantAlien1 = Integer.parseInt(lineas.getItem(0));
         int cantAlien2 = Integer.parseInt(lineas.getItem(1));
         int cantAlien3 = Integer.parseInt(lineas.getItem(2));
-        int soles  = Integer.parseInt(lineas.getItem(3));
+        soles  = Integer.parseInt(lineas.getItem(3));
 
 
         /*
