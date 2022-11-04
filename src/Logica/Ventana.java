@@ -213,8 +213,9 @@ public class Ventana {
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
 
 		a.getAlienG().setIcon(ic);
-
 		panelObjetos.add(a.getAlienG());
+		a.getAlienG().repaint();
+
 
 	}
 }
