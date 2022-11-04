@@ -30,6 +30,8 @@ public class Fila {
 		for(int i = 0; i < 9;i++){
 			listaNaves[i] = null;
 		}
+
+		listaAliens = new LinkedList<>();
 	}
 
 	private void removerAlien(Alien z){

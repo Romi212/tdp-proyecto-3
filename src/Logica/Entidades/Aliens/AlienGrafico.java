@@ -12,10 +12,13 @@ public class AlienGrafico extends JLabel {
 		clave = c;
 		x = px;
 		y = py;
+
+		this.setBounds(px, py, 119, 84);
 	}
 
 	public void moverPixeles(int cant){
-		x -= cant;
+
+		this.setBounds(x-cant, y, 119, 84);
 	}
 
 	public void caminando(){
@@ -26,5 +29,17 @@ public class AlienGrafico extends JLabel {
 	}
 	public void congelado(){
 		//this.setIcon(skin1);
+	}
+
+	public int getPX(){
+		return x;
+	}
+
+	public int getPY(){
+		return y;
+	}
+
+	public String getClave(){
+		return clave;
 	}
 }

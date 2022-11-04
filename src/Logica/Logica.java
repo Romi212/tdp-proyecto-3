@@ -26,13 +26,14 @@ public class Logica {
     private String[] archivos;
     private Fila[] tablero;
 
-    private int cantFilas =6;
+    private int cantFilas = 6;
 
     private ManejadorNaves M_Naves;
     private ManejadorAliens M_Aliens;
 
     private Ventana ventana;
     private Properties p;
+
 
     public Logica(Ventana v,Properties p,int xInicial, int yInicial, int tam){
         this.p = p;
@@ -82,42 +83,52 @@ public class Logica {
         for(int i =0; i< cantAlien1;i++){
             filaElegida = rand.nextInt(cantFilas);
             filaActual = tablero[filaElegida];
-            //posx = filaActual.getxIni() + filaActual.getTam() * filaActual.cantCeldas();
-            //posy = filaActual.getyIni() + filaActual.getTam() / 2;
-            posx = 20;
-            posy = 30;
+            posx = filaActual.getxIni() + filaActual.getTam() * (filaActual.cantCeldas() + 2);
+            posy = filaActual.getyIni() + 10;
             hitbox = new Rectangle();
-            aliens.add(factory.createAlien1(posx, posy, hitbox, p.getProperty("naveBImg")));
+            Alien a = factory.createAlien1(posx, posy, hitbox, "naveBImg");
+            aliens.add(a);
+            ventana.agregarAlien(a);
         }
 
         for(int i = 0; i < cantAlien2; i++){
             filaElegida = rand.nextInt(cantFilas);
             filaActual = tablero[filaElegida];
-            posx = filaActual.getxIni() + filaActual.getTam() * filaActual.cantCeldas();
-            posy = filaActual.getyIni() + filaActual.getTam() / 2;
+            posx = filaActual.getxIni() + filaActual.getTam() * (filaActual.cantCeldas() + 2);
+            posy = filaActual.getyIni() + 10;
             hitbox = new Rectangle();
-            aliens.add(factory.createAlien2(posx, posy, hitbox, p.getProperty("naveBImg")));
+            Alien a = factory.createAlien1(posx, posy, hitbox, "naveAbImg");
+            aliens.add(a);
+            ventana.agregarAlien(a);
         }
 
         for(int i = 0; i <cantAlien3; i++){
             filaElegida = rand.nextInt(cantFilas);
             filaActual = tablero[filaElegida];
-            posx = filaActual.getxIni() + filaActual.getTam() * filaActual.cantCeldas();
-            posy = filaActual.getyIni() + filaActual.getTam() / 2;
+            posx = filaActual.getxIni() + filaActual.getTam() * (filaActual.cantCeldas() + 2);
+            posy = filaActual.getyIni() + 10;
             hitbox = new Rectangle();
-            aliens.add(factory.createAlien3(posx, posy, hitbox, p.getProperty("naveBImg")));
+            Alien a = factory.createAlien1(posx, posy, hitbox, "sateliteimg");
+            aliens.add(a);
+            ventana.agregarAlien(a);
         }
 
         Alien a =  aliens.get(0);
+        System.out.println("La clave es: " + a.getAlienG().getClave());
+        //a.getAlienG().setIcon(new ImageIcon(Logica.class.getResource(p.getProperty(a.getAlienG().getClave()))));
         System.out.println(a.getVida());
-        System.out.println(a.getAlienG().getX());
-        System.out.println(a.getAlienG().getY());
+        //a.getAlienG().setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("naveBImg"))));
+        //Bueno esto funca
+        System.out.println("Prueba ubicacion atributo X :" + a.getAlienG().getPX());
+        System.out.println("Prueba ubicacion atributo Y :" + a.getAlienG().getPY());
+        System.out.println("Prueba ubicacion label X :" + a.getAlienG().getX());
+        System.out.println("Prueba ubicacion label Y :" + a.getAlienG().getY());
 
-
-
-        M_Aliens = new ManejadorAliens(aliens, this,tablero);
+        M_Aliens = new ManejadorAliens(aliens,this, tablero);
 
         M_Naves = new ManejadorNaves();
+
+        //M_Aliens.run();
 
     }
 

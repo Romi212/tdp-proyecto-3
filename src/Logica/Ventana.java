@@ -1,5 +1,6 @@
 package Logica;
 
+import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.ObjetoGrafico;
 
 import java.awt.Color;
@@ -11,21 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.Properties;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
-
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 
 public class Ventana {
 
@@ -210,5 +201,15 @@ public class Ventana {
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=1;
 		
 		return toReturn;
+	}
+
+	public void agregarAlien(Alien a){
+		String ref = a.getAlienG().getClave();
+		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
+
+		a.getAlienG().setIcon(ic);
+
+		panelObjetos.add(a.getAlienG());
+
 	}
 }

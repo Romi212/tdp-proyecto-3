@@ -14,6 +14,7 @@ public abstract class Alien implements Visitor{
 	protected Rectangle hitbox;
 	protected Estado estado;
 	protected int velocidad;
+
 	
 	public Alien(int x, int y, Rectangle h, String c){
 		alienG = new AlienGrafico(x, y, c);

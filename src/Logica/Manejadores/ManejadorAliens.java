@@ -47,25 +47,35 @@ public class ManejadorAliens implements Runnable {
         }
     }
 
+
     @Override
     public void run() {
         boolean hayZombies = false;
         while(noTerminoJuego){
+
             /*
             for(Fila f : tablero){
                 Iterable<Alien> aliensFila= f.getAliens();
                 for(Alien a: aliensFila){
                     hayZombies = true;
+
                     a.hacerAccion();
+                    System.out.println("Posicion X: " + a.getAlienG().getX());
+                    System.out.println("Posicion Y: " + a.getAlienG().getY());
+
                     Iterable<ObjetoColisionable> objetos = f.getColisionables();
                     for(ObjetoColisionable o : objetos){
                         o.accept(a);
                     }
 
+
                 }
             }
-            if(!hayZombies) generarHorda();*/
+            if(!hayZombies) generarHorda();
+
+             */
         }
 
     }
+
 }
