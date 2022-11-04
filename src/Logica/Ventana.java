@@ -31,6 +31,9 @@ public class Ventana {
 	private JPanel panelObjetos;
 	private JComboBox elegirModo;
 
+	private static final int MODO_DIA=0;
+	private static final int MODO_NOCHE=1;
+
 	private int alturaBotonera = 100;
 
 	private int size = 50;
@@ -40,6 +43,8 @@ public class Ventana {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
+
+
 
 	public Ventana(){
 		//Creamos properties para leer las path de las imagenes
@@ -65,7 +70,7 @@ public class Ventana {
 		frmLaHorda.setResizable(true);
 		
 		
-		frmLaHorda.setBounds(100, 100, 1215, 738);
+		frmLaHorda.setBounds(100, 80, 1016, 623);
 		frmLaHorda.getContentPane().setBackground(new Color(0,0,0,0));
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -134,7 +139,7 @@ public class Ventana {
 		panelObjetos.add(Nave);
 		JPanel panelFondo = new JPanel();
 		//panelFondo.setBackground(new Color(255, 102, 255));
-		panelFondo.setBounds(0, 0, 1200,700);
+		panelFondo.setBounds(0, 0, 1016,623);
 		layeredPane.add(panelFondo);
 		panelFondo.setBackground(null);
 		panelFondo.setOpaque(false);
@@ -142,7 +147,7 @@ public class Ventana {
 
 		//Panel de fondo
 		JLabel fondo = new JLabel();
-		fondo.setBounds(0, 0, 1200, 700);
+		fondo.setBounds(0, 0, 1000, 600);
 		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/fondo1.png"));
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
@@ -154,7 +159,7 @@ public class Ventana {
 
 		frmLaHorda.setVisible(true);
 
-		logica = new Logica(this, p , 0, 0, 100);
+		logica = new Logica(this, p , alturaBotonera+5, alturaBotonera, size);
 		logica.empezarJuego();
 
 	}
@@ -197,8 +202,8 @@ public class Ventana {
 		ventanaModo.add(elegirModo);
 		elegirModo.setSelectedIndex(0);
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
-		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) toReturn=0;
-		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=1;
+		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) toReturn=MODO_DIA;
+		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=MODO_NOCHE;
 		
 		return toReturn;
 	}
