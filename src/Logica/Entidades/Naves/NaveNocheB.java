@@ -9,7 +9,7 @@ public class NaveNocheB extends NaveDisparo {
 	 protected int tiempoCongelar;
 	 
 	 public NaveNocheB(Fila f, int x, int y, Rectangle h){
-		 super(f, x, y, h);
+		 super(f, x, y, h,"naveBbImg");
 		 tiempoCongelar = 1000;
 	 }
 

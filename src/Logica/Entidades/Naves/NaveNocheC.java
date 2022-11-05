@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class NaveNocheC extends NaveDisparo{
-    public NaveNocheC(Fila f, int x, int y, Rectangle h){ super(f, x, y, h); }
+    public NaveNocheC(Fila f, int x, int y, Rectangle h){ super(f, x, y, h,"naveCbImg"); }
 
     /* Redefine el metodo para congelar a todos los aliens de la fila. Muere luego de causar el daño*/
     public void generarProyectil(int x, int y){

@@ -19,14 +19,14 @@ public abstract class Nave extends ObjetoColisionable{
 	protected int posY;
 	protected Fila fila;
 
-	public Nave(Fila f, int x, int y, Rectangle h) {
+	public Nave(Fila f, int x, int y, Rectangle h, String skin) {
 		super(h);
 		fila = f;
 
 		//precio =
 		contadorC = 0;
 		//String s =
-		naveG = new NaveGrafica(x,y,"hola");
+		naveG = new NaveGrafica(x,y,skin);
 
 	}
 
@@ -56,6 +56,10 @@ public abstract class Nave extends ObjetoColisionable{
 	
 	public void accept(Visitor v) {
 		v.colisionNaveAlien(this);
+	}
+
+	public NaveGrafica getNaveG(){
+		return naveG;
 	}
 
 }

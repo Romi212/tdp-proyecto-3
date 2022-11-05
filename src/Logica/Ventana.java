@@ -3,11 +3,7 @@ package Logica;
 import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.ObjetoGrafico;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -18,7 +14,7 @@ import java.util.Properties;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class Ventana {
+public class Ventana  implements ActionListener{
 
 	private int largoVentana = 700;
 	private int anchoVentana = 700;
@@ -94,7 +90,28 @@ public class Ventana {
 		JLabel Nave2 = new JLabel("");
 		Nave2.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("naveAImg"))));
 		Nave2.setBounds(87, 27, 119, 84);
-		panelBotonera.add(Nave2);
+		//panelBotonera.add(Nave2);
+
+
+		JScrollPane scrollBotonera = new JScrollPane();
+
+		scrollBotonera.setBounds(250, 11, 753, 60);
+		panelBotonera.add(scrollBotonera);
+
+
+
+		JMenuBar menuBotonera = new JMenuBar();
+		JButton botonPlanta1 = new JButton("Planta 1");
+		//menuBotonera.setBounds(0,0, frmLaHorda.getBounds().width, alturaBotonera);
+		JButton botonPlanta2 = new JButton("Planta 2");
+		botonPlanta1.setBounds(250,10, size,size);
+		botonPlanta1.addActionListener(e -> agregarPlanta1());
+		botonPlanta2.setBounds(350,10, size,size);
+		menuBotonera.add(botonPlanta1);
+		menuBotonera.add(botonPlanta2);
+		scrollBotonera.setViewportView(menuBotonera);
+		//panelBotonera.add(botonPlanta1);
+		//panelBotonera.add(botonPlanta2);
 		panelBotonera.setLayout(null);
 		panelBotonera.setOpaque(false);
 		panelBotonera.setBackground(null);
@@ -178,7 +195,7 @@ public class Ventana {
 
 
 		panelObjetos.add(o);
-		//o.repaint();
+		o.repaint();
 	}
 
 	public void sacarObjeto(ObjetoGrafico o){
@@ -219,6 +236,13 @@ public class Ventana {
 		panelObjetos.add(a.getAlienG());
 		a.getAlienG().repaint();
 
+
+	}
+	private void agregarPlanta1(){
+		logica.agregarNave(250,200,1);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
 
 	}
 }

@@ -4,6 +4,7 @@ import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.Factories.FactoryDia;
 import Logica.Entidades.Factories.FactoryNoche;
 import Logica.Entidades.Factories.ObjectsFactory;
+import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.ObjetoGrafico;
 import Logica.Manejadores.ManejadorAliens;
 import Logica.Manejadores.ManejadorNaves;
@@ -149,12 +150,15 @@ public class Logica {
 
     public void agregarNave(int x, int y, int tipo){
         Rectangle rect = null;
+        Nave n = null;
         switch (tipo){
-            case 1:   tablero[x-1].agregarNave(factory.createNaveA(tablero[x-1], x, y, rect), y); break;
-            case 2:   tablero[x-1].agregarNave(factory.createNaveB(tablero[x-1], x, y, rect), y); break;
-            case 3:   tablero[x-1].agregarNave(factory.createNaveC(tablero[x-1], x, y, rect), y); break;
-            case 4:   tablero[x-1].agregarNave(factory.createSatelite(tablero[x-1], x, y, rect), y); break;
+            case 1:   n = factory.createNaveA(tablero[0], x, y, rect); break;
+            case 2:   n = factory.createNaveB(tablero[0], x, y, rect); break;
+            case 3:   n = factory.createNaveC(tablero[0], x, y, rect); break;
+            case 4:   n = factory.createSatelite(tablero[0], x, y, rect); break;
         }
+        tablero[0].agregarNave(n, 0);
+        ventana.agregarObjeto(n.getNaveG());
     }
     public void agregarObjetoGrafico(ObjetoGrafico o){
         ventana.agregarObjeto(o);

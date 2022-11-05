@@ -6,4 +6,10 @@ public class Sol extends ObjetoGrafico {
 	public void actionPerformed(){
 
     }
+
+
+    @Override
+    public String getRefImagen() {
+        return null;
+    }
 }
