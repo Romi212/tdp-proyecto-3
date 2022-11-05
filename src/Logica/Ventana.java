@@ -187,12 +187,18 @@ public class Ventana  {
 		String ref = o.getRefImagen();
 		//String ref = "naveAImg";
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
+		Image img = ic.getImage();
+
+		Image newImg = img.getScaledInstance(o.getBounds().width, o.getBounds().height, Image.SCALE_DEFAULT);
+		ic = new ImageIcon(newImg);
+		o.setIcon(ic);
+
 		//Image image = ic.getImage();
 
 		//Image newimg = image.getScaledInstance(size, size,  java.awt.Image.SCALE_SMOOTH);
 		//ic = new ImageIcon(newimg);
 
-		o.setIcon(ic);
+		//o.setIcon(ic);
 
 
 
@@ -232,20 +238,6 @@ public class Ventana  {
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=MODO_NOCHE;
 		
 		return toReturn;
-	}
-
-	public void agregarAlien(Alien a){
-		String ref = a.getAlienG().getClave();
-		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
-		Image img = ic.getImage();
-
-		Image newImg = img.getScaledInstance(a.getAlienG().getBounds().width, a.getAlienG().getBounds().height, Image.SCALE_DEFAULT);
-		ic = new ImageIcon(newImg);
-		a.getAlienG().setIcon(ic);
-		panelObjetos.add(a.getAlienG());
-		a.getAlienG().repaint();
-
-
 	}
 	private void agregarPlanta1(){
 		logica.agregarNave(250,200,1);

@@ -91,21 +91,21 @@ public class Logica {
             int tipo = rand.nextInt(3);
             switch(tipo){
                 case 0:
-                    a = factory.createAlien1(posx, posy, hitbox, "naveBImg");
+                    a = factory.createAlien1(posx, posy, hitbox, "alienAImg");
                     cantAlien1--;
                     break;
                 case 1:
-                    a = factory.createAlien2(posx, posy, hitbox, "naveAbImg");
+                    a = factory.createAlien2(posx, posy, hitbox, "alienBImg");
                     cantAlien2--;
                     break;
                 case 2:
-                    a = factory.createAlien3(posx, posy, hitbox, "sateliteimg");
+                    a = factory.createAlien3(posx, posy, hitbox, "alienCImg");
                     cantAlien3--;
                     break;
             }
             a.setFila(filaElegida);
             aliens.add(a);
-            ventana.agregarAlien(a);
+            ventana.agregarObjeto(a.getAlienG());
         }
 
 

@@ -1,8 +1,10 @@
 package Logica.Entidades.Aliens;
 
+import Logica.Entidades.ObjetoGrafico;
+
 import javax.swing.*;
 
-public class AlienGrafico extends JLabel {
+public class AlienGrafico extends ObjetoGrafico {
 
 	protected String clave;
 	protected int x;
@@ -12,14 +14,13 @@ public class AlienGrafico extends JLabel {
 		clave = c;
 		x = px;
 		y = py;
-
-		this.setBounds(px, py, 50, 50);
+		super.setBounds(px, py, 50, 50);
 	}
 
 	public void moverPixeles(int cant){
-		x = (int) this.getBounds().getX();
-		this.setBounds(x-cant, y, 50, 50);
-		this.repaint();
+		x = (int) super.getBounds().getX();
+		super.setBounds(x-cant, y, 50, 50);
+		super.repaint();
 	}
 
 	public void caminando(){
@@ -40,7 +41,8 @@ public class AlienGrafico extends JLabel {
 		return y;
 	}
 
-	public String getClave(){
+	@Override
+	public String getRefImagen() {
 		return clave;
 	}
 }
