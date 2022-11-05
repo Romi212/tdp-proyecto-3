@@ -32,7 +32,10 @@ public class Ventana  {
 
 	private int alturaBotonera = 70;
 
-	private int size = 75;
+	private int incioTableroX = 165;
+	private int incioTableroY = -25;
+
+	private int size = 73;
 
 	private Musica player;
 
@@ -248,8 +251,24 @@ public class Ventana  {
 
 	}
 	private void agregarPlanta1(){
+		JPanel panelSelecc = new JPanel();
+		for(int i = 1; i<= 9; i++){
+			for(int j = 1 ; j<= 6; j++){
+				JLabel etiqueta =new JLabel();
+				etiqueta.setBounds((incioTableroX)+(i*size)+i,(incioTableroY)+(j*size)+(2*j),size,size);
+				etiqueta.setBackground(Color.LIGHT_GRAY);
+				etiqueta.setOpaque(true);
+				panelObjetos.add(etiqueta);
+				etiqueta.repaint();
+				//etiqueta.addMouseListener(e -> hacerAlgo());
+			}
+		}
+		layeredPane.add(panelSelecc);
 		logica.agregarNave(250,200,1);
+		layeredPane.repaint();
 	}
+
+	private void hacerAlgo(){}
 
 
 }
