@@ -14,7 +14,7 @@ import java.util.Properties;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class Ventana  implements ActionListener{
+public class Ventana  {
 
 	private int largoVentana = 700;
 	private int anchoVentana = 700;
@@ -35,7 +35,9 @@ public class Ventana  implements ActionListener{
 	private int size = 75;
 
 	private Musica player;
-	
+
+	private JButton botonPlanta1;
+	private JButton botonPlanta2;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -101,9 +103,9 @@ public class Ventana  implements ActionListener{
 
 
 		JMenuBar menuBotonera = new JMenuBar();
-		JButton botonPlanta1 = new JButton("Planta 1");
+		botonPlanta1 = new JButton();
 		//menuBotonera.setBounds(0,0, frmLaHorda.getBounds().width, alturaBotonera);
-		JButton botonPlanta2 = new JButton("Planta 2");
+		botonPlanta2 = new JButton("Planta 2");
 		botonPlanta1.setBounds(250,10, size,size);
 		botonPlanta1.addActionListener(e -> agregarPlanta1());
 		botonPlanta2.setBounds(350,10, size,size);
@@ -219,7 +221,14 @@ public class Ventana  implements ActionListener{
 		ventanaModo.add(elegirModo);
 		elegirModo.setSelectedIndex(0);
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
-		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) toReturn=MODO_DIA;
+		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {
+			toReturn=MODO_DIA;
+			//CAMBIAR BOTONES A FOTO PLANTA DIA
+			ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("botonNave1")));
+			botonPlanta1.setIcon(ic);
+
+
+		}
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=MODO_NOCHE;
 		
 		return toReturn;
@@ -241,8 +250,6 @@ public class Ventana  implements ActionListener{
 	private void agregarPlanta1(){
 		logica.agregarNave(250,200,1);
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
 
-	}
+
 }
