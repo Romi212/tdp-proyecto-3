@@ -13,6 +13,7 @@ public abstract class Alien implements Visitor{
 	protected AlienGrafico alienG;
 	protected Rectangle hitbox;
 	protected Estado estado;
+	protected int fila;
 	protected int velocidad;
 
 	
@@ -21,6 +22,8 @@ public abstract class Alien implements Visitor{
 		estado = new AlienCaminando(this);
 		hitbox = h;
 		vida = 100;
+		fila = -1;
+		velocidad = 5;
 	}
 
 	public void daniar(int danio){
@@ -71,16 +74,24 @@ public abstract class Alien implements Visitor{
 		p.destruir();
 	}
 
-	public int getVelocidad(){
-		return velocidad;
-	}
-
 	public AlienGrafico getAlienG(){
 		return alienG;
 	}
 
 	public int getDanio(){
 		return danio;
+	}
+
+	public void setFila(int f){
+		fila = f;
+	}
+
+	public int getFila(){
+		return fila;
+	}
+
+	public int getVelocidad(){
+		return velocidad;
 	}
 
 }

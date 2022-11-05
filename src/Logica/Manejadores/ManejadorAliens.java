@@ -8,7 +8,7 @@ import Logica.Fila;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class ManejadorAliens implements Runnable {
+public class ManejadorAliens extends Thread {
 
     private LinkedList<Alien> proximosAliens;
     int aliensPorHorda;
@@ -40,8 +40,7 @@ public class ManejadorAliens implements Runnable {
             for (int i = 0; i < aliensPorHorda && quedan; i++) {
                 if (proximosAliens.size() > 0) {
                     Alien a = proximosAliens.removeFirst();
-                    int fila = rand.nextInt(5);
-                    tablero[fila].agregarAlien(a);
+                    tablero[a.getFila()].agregarAlien(a);
                 } else quedan = false;
             }
         }
@@ -53,27 +52,32 @@ public class ManejadorAliens implements Runnable {
         boolean hayZombies = false;
         while(noTerminoJuego){
 
-            /*
+
             for(Fila f : tablero){
                 Iterable<Alien> aliensFila= f.getAliens();
                 for(Alien a: aliensFila){
                     hayZombies = true;
 
                     a.hacerAccion();
-                    System.out.println("Posicion X: " + a.getAlienG().getX());
-                    System.out.println("Posicion Y: " + a.getAlienG().getY());
+                    try {
+                        sleep(50);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
 
+                    /*
                     Iterable<ObjetoColisionable> objetos = f.getColisionables();
                     for(ObjetoColisionable o : objetos){
                         o.accept(a);
                     }
+                     */
 
 
                 }
             }
             if(!hayZombies) generarHorda();
 
-             */
+
         }
 
     }

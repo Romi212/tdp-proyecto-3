@@ -34,9 +34,9 @@ public class Ventana {
 	private static final int MODO_DIA=0;
 	private static final int MODO_NOCHE=1;
 
-	private int alturaBotonera = 100;
+	private int alturaBotonera = 70;
 
-	private int size = 50;
+	private int size = 75;
 
 	private Musica player;
 	
@@ -159,7 +159,7 @@ public class Ventana {
 
 		frmLaHorda.setVisible(true);
 
-		logica = new Logica(this, p , alturaBotonera+5, alturaBotonera, size);
+		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
 		logica.empezarJuego();
 
 	}
@@ -211,7 +211,10 @@ public class Ventana {
 	public void agregarAlien(Alien a){
 		String ref = a.getAlienG().getClave();
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
+		Image img = ic.getImage();
 
+		Image newImg = img.getScaledInstance(a.getAlienG().getBounds().width, a.getAlienG().getBounds().height, Image.SCALE_DEFAULT);
+		ic = new ImageIcon(newImg);
 		a.getAlienG().setIcon(ic);
 		panelObjetos.add(a.getAlienG());
 		a.getAlienG().repaint();

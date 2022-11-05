@@ -12,6 +12,6 @@ public class AlienCaminando implements Estado{
     public void hacerAccion(){
         Rectangle hitbox = alien.getHitbox();
         hitbox.setLocation((int) hitbox.getX() - alien.getVelocidad(), (int) hitbox.getY());
-        alien.getAlienG().moverPixeles(1);
+        alien.getAlienG().moverPixeles(10);
     }
 }

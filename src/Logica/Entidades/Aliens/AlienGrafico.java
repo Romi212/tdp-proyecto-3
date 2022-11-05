@@ -13,12 +13,13 @@ public class AlienGrafico extends JLabel {
 		x = px;
 		y = py;
 
-		this.setBounds(px, py, 119, 84);
+		this.setBounds(px, py, 50, 50);
 	}
 
 	public void moverPixeles(int cant){
-
-		this.setBounds(x-cant, y, 119, 84);
+		x = (int) this.getBounds().getX();
+		this.setBounds(x-cant, y, 50, 50);
+		this.repaint();
 	}
 
 	public void caminando(){
