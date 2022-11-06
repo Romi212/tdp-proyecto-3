@@ -95,6 +95,10 @@ public class Fila {
 	}
 
 
+	public boolean estaOcupada(int col){
+		return listaNaves[col]!= null;
+	}
+
 
 
 

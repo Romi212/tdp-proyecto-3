@@ -1,9 +1,11 @@
 package Logica.Entidades.Naves;
 
+import Logica.Entidades.ObjetoGrafico;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class ProyectilGrafico extends JLabel {
+public class ProyectilGrafico extends ObjetoGrafico {
     protected String imagen;
 
 
@@ -21,5 +23,8 @@ public class ProyectilGrafico extends JLabel {
     }
 
 
-
+    @Override
+    public String getRefImagen() {
+        return imagen;
+    }
 }

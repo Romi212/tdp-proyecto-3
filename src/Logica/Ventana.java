@@ -6,6 +6,8 @@ import Logica.Entidades.ObjetoGrafico;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.*;
 import java.net.URL;
 import java.util.LinkedList;
@@ -32,15 +34,17 @@ public class Ventana  {
 
 	private int alturaBotonera = 70;
 
-	private int incioTableroX = 165;
-	private int incioTableroY = -25;
+	private int inicioTableroX = 165;
+	private int inicioTableroY = -25;
 
 	private int size = 73;
 
 	private Musica player;
 
-	private JButton botonPlanta1;
-	private JButton botonPlanta2;
+	private JToggleButton botonPlanta1;
+	private JToggleButton botonPlanta2;
+	private MouseListener mouseListener;
+	private Rectangle[][] tablero;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -62,6 +66,15 @@ public class Ventana  {
 
 		//Creamos el reproductor de musica
 		player = new Musica();
+
+		tablero = new Rectangle[6][9];
+
+		for(int i = 0; i<6 ; i++){
+			for(int j = 0; j<9;j++){
+				Rectangle r = new Rectangle(344 + (size*j),230+(size*i), size,size);
+				tablero[i][j] = r;
+			}
+		}
 
 	}
 	public void initialize() {
@@ -106,12 +119,13 @@ public class Ventana  {
 
 
 		JMenuBar menuBotonera = new JMenuBar();
-		botonPlanta1 = new JButton();
+		botonPlanta1 = new JToggleButton();
 		//menuBotonera.setBounds(0,0, frmLaHorda.getBounds().width, alturaBotonera);
-		botonPlanta2 = new JButton("Planta 2");
+		botonPlanta2 = new JToggleButton("Planta 2");
 		botonPlanta1.setBounds(250,10, size,size);
-		botonPlanta1.addActionListener(e -> agregarPlanta1());
+		botonPlanta1.addActionListener(e -> elegirDondePlanta(botonPlanta1));
 		botonPlanta2.setBounds(350,10, size,size);
+		botonPlanta2.addActionListener(e -> elegirDondePlanta(botonPlanta2));
 		menuBotonera.add(botonPlanta1);
 		menuBotonera.add(botonPlanta2);
 		scrollBotonera.setViewportView(menuBotonera);
@@ -167,6 +181,8 @@ public class Ventana  {
 		panelFondo.setOpaque(false);
 		panelFondo.setLayout(null);
 
+
+
 		//Panel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 600);
@@ -178,6 +194,38 @@ public class Ventana  {
 		fondo.setIcon(fondito);
 		
 		panelFondo.add(fondo);
+
+		mouseListener = new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PointerInfo a = MouseInfo.getPointerInfo();
+				Point b = a.getLocation();
+				int x = (int) b.getX();
+				int y = (int) b.getY();
+				System.out.println("El mouse esta en "+x+" , "+y);
+				agregarPlanta(x,y);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+
+			}
+		};
 
 		frmLaHorda.setVisible(true);
 
@@ -242,25 +290,54 @@ public class Ventana  {
 		
 		return toReturn;
 	}
-	private void agregarPlanta1(){
-		JPanel panelSelecc = new JPanel();
-		for(int i = 1; i<= 9; i++){
-			for(int j = 1 ; j<= 6; j++){
-				JLabel etiqueta =new JLabel();
-				etiqueta.setBounds((incioTableroX)+(i*size)+i,(incioTableroY)+(j*size)+(2*j),size,size);
-				etiqueta.setBackground(Color.LIGHT_GRAY);
-				etiqueta.setOpaque(true);
-				panelObjetos.add(etiqueta);
-				etiqueta.repaint();
-				//etiqueta.addMouseListener(e -> hacerAlgo());
+
+	private void elegirDondePlanta(JToggleButton b){
+		if(b.isSelected()) panelObjetos.addMouseListener(mouseListener);
+		else panelObjetos.removeMouseListener(mouseListener);
+	}
+	private void agregarPlanta(int x, int y) {
+
+		int fila = -1;
+		int columna = -1;
+		int realX = x;
+		int realY = y;
+		boolean encontro = false;
+		int tipo = 0;
+		for (int i = 0; i < 6 && !encontro; i++) {
+			for (int j = 0; j < 9 && !encontro; j++) {
+				if (tablero[i][j].contains(x, y)) {
+					System.out.println("Se detecto en la fila " + i + " eln col " + j);
+					fila = i;
+					columna = j;
+					encontro = true;
+					realX = tablero[i][j].getLocation().x;
+					realY = tablero[i][j].getLocation().y;
+				}
 			}
 		}
-		layeredPane.add(panelSelecc);
-		logica.agregarNave(250,200,1);
-		layeredPane.repaint();
+
+		if (fila>-1 && columna >-1 && !logica.isCeldaOcupada(fila, columna)) {
+
+			int precio = 0;
+			if (botonPlanta1.isSelected()) {
+				botonPlanta1.setSelected(false);
+				tipo = 1;
+				//Precio = ALGO
+			} else {
+				if (botonPlanta2.isSelected()) {
+					tipo = 2;
+					botonPlanta2.setSelected(false);
+					//PRECIO = OTRO
+				}
+			}
+			//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
+			logica.agregarNave(realX - 98, realY - 170, fila, columna, tipo);
+			panelObjetos.removeMouseListener(mouseListener);
+
+		}
 	}
 
-	private void hacerAlgo(){}
+	//private void hacerAlgo(){}
 
 
 }

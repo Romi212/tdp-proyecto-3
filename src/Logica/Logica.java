@@ -148,16 +148,16 @@ public class Logica {
         soles = soles+ cant;
     }
 
-    public void agregarNave(int x, int y, int tipo){
+    public void agregarNave(int x, int y,int fila, int columna, int tipo){
         Rectangle rect = null;
         Nave n = null;
         switch (tipo){
-            case 1:   n = factory.createNaveA(tablero[0], x, y, rect); break;
-            case 2:   n = factory.createNaveB(tablero[0], x, y, rect); break;
-            case 3:   n = factory.createNaveC(tablero[0], x, y, rect); break;
-            case 4:   n = factory.createSatelite(tablero[0], x, y, rect); break;
+            case 1:   n = factory.createNaveA(tablero[fila], x, y, rect); break;
+            case 2:   n = factory.createNaveB(tablero[fila], x, y, rect); break;
+            case 3:   n = factory.createNaveC(tablero[fila], x, y, rect); break;
+            case 4:   n = factory.createSatelite(tablero[fila], x, y, rect); break;
         }
-        tablero[0].agregarNave(n, 0);
+        tablero[fila].agregarNave(n, columna);
         ventana.agregarObjeto(n.getNaveG());
     }
     public void agregarObjetoGrafico(ObjetoGrafico o){
@@ -166,5 +166,9 @@ public class Logica {
 
     public void terminoNivel(boolean seGano){
 
+    }
+
+    public boolean isCeldaOcupada(int x, int y){
+        return tablero[x].estaOcupada(y);
     }
 }
