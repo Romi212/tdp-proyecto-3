@@ -11,7 +11,7 @@ public class NaveGrafica extends ObjetoGrafico {
         //this.setAlignmentX(x);
         //this.setAlignmentY(y);
         this.skin = skin;
-        this.setBounds(x, y, 50, 50);
+        this.setBounds(x, y, 70, 70);
     }
 
     @Override

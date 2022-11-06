@@ -37,7 +37,7 @@ public class Ventana  {
 	private int inicioTableroX = 165;
 	private int inicioTableroY = -25;
 
-	private int size = 73;
+	private int size = 74;
 
 	private Musica player;
 
@@ -187,13 +187,16 @@ public class Ventana  {
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 600);
 		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/fondo1.png"));
-		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height, Image.SCALE_SMOOTH);
+		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
 		panelFondo.setLayout(null);
 		panelFondo.setBackground(null);
 		fondo.setIcon(fondito);
 		
 		panelFondo.add(fondo);
+
+
+
 
 		mouseListener = new MouseListener() {
 			@Override
@@ -331,7 +334,7 @@ public class Ventana  {
 				}
 			}
 			//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
-			logica.agregarNave(realX - 98, realY - 170, fila, columna, tipo);
+			logica.agregarNave(realX - 107, realY - 178, fila, columna, tipo);
 			panelObjetos.removeMouseListener(mouseListener);
 
 		}
