@@ -14,7 +14,11 @@ import java.util.LinkedList;
 import java.util.Properties;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 public class Ventana  {
 
@@ -43,8 +47,11 @@ public class Ventana  {
 
 	private JToggleButton botonPlanta1;
 	private JToggleButton botonPlanta2;
+	private JToggleButton botonPlanta4;
 	private MouseListener mouseListener;
 	private Rectangle[][] tablero;
+
+	private JMenuBar menuBotonera;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -100,10 +107,11 @@ public class Ventana  {
 
 		//Panel de la botonera
 		JPanel panelBotonera = new JPanel();
-		panelBotonera.setBackground(new Color(0,0,0,0));
+		panelBotonera.setBackground(Color.BLACK);
 		panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, alturaBotonera);
 		//frmLaHorda.getContentPane().add(panelBotonera);
 		panelBotonera.setLayout(null);
+		panelBotonera.setOpaque(false);
 		layeredPane.add(panelBotonera);
 		JLabel Nave2 = new JLabel("");
 		Nave2.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("naveAImg"))));
@@ -112,22 +120,49 @@ public class Ventana  {
 
 
 		JScrollPane scrollBotonera = new JScrollPane();
+		scrollBotonera.setBorder(null);
 
-		scrollBotonera.setBounds(250, 11, 753, 60);
+		scrollBotonera.setBounds(250, 11, 400, 60);
+		scrollBotonera.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER);
+		scrollBotonera.setBackground(Color.BLACK);
 		panelBotonera.add(scrollBotonera);
 
 
 
-		JMenuBar menuBotonera = new JMenuBar();
+		menuBotonera = new JMenuBar();
+		menuBotonera.setBackground(Color.BLACK);
+
+
+
+
+		GridBagConstraints  gbc = new GridBagConstraints ();
+		gbc.weightx = 0.005;
 		botonPlanta1 = new JToggleButton();
-		//menuBotonera.setBounds(0,0, frmLaHorda.getBounds().width, alturaBotonera);
-		botonPlanta2 = new JToggleButton("Planta 2");
+		menuBotonera.setLayout(new GridBagLayout());
+
+		//Los botones
 		botonPlanta1.setBounds(250,10, size,size);
 		botonPlanta1.addActionListener(e -> elegirDondePlanta(botonPlanta1));
-		botonPlanta2.setBounds(350,10, size,size);
+		botonPlanta1.setBorder(null);
+
+
+
+		botonPlanta2 = new JToggleButton();
+		botonPlanta2.setBounds(350,10, size,size + 30);
 		botonPlanta2.addActionListener(e -> elegirDondePlanta(botonPlanta2));
-		menuBotonera.add(botonPlanta1);
-		menuBotonera.add(botonPlanta2);
+		botonPlanta2.setBorder(null);
+
+
+		botonPlanta4 = new JToggleButton();
+		botonPlanta4.setBounds(450,10, size,size + 30);
+		botonPlanta4.addActionListener(e -> elegirDondePlanta(botonPlanta4));
+		botonPlanta4.setBorder(null);
+
+
+
+		menuBotonera.add(botonPlanta1, gbc);
+		menuBotonera.add(botonPlanta2, gbc);
+		menuBotonera.add(botonPlanta4, gbc);
 		scrollBotonera.setViewportView(menuBotonera);
 		//panelBotonera.add(botonPlanta1);
 		//panelBotonera.add(botonPlanta2);
@@ -239,6 +274,7 @@ public class Ventana  {
 
 	public void agregarObjeto(ObjetoGrafico o){
 		String ref = o.getRefImagen();
+		System.out.println("La referencia es: " + ref);
 		//String ref = "naveAImg";
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
 		Image img = ic.getImage();
@@ -284,14 +320,24 @@ public class Ventana  {
 		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {
 			toReturn=MODO_DIA;
 			//CAMBIAR BOTONES A FOTO PLANTA DIA
-			ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("botonNave1")));
-			botonPlanta1.setIcon(ic);
-
+			ponerFotoPlanta(botonPlanta1, "botonNave1");
+			ponerFotoPlanta(botonPlanta2, "botonNave2");
+			ponerFotoPlanta(botonPlanta4, "botonNave4");
 
 		}
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=MODO_NOCHE;
 		
 		return toReturn;
+	}
+
+	public void ponerFotoPlanta(JToggleButton botonPlanta, String clave){
+		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(clave)));
+		Image img = ic.getImage();
+
+		Image newImg = img.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
+		ic = new ImageIcon(newImg);
+
+		botonPlanta.setIcon(ic);
 	}
 
 	private void elegirDondePlanta(JToggleButton b){
@@ -326,21 +372,24 @@ public class Ventana  {
 				botonPlanta1.setSelected(false);
 				tipo = 1;
 				//Precio = ALGO
-			} else {
-				if (botonPlanta2.isSelected()) {
-					tipo = 2;
-					botonPlanta2.setSelected(false);
-					//PRECIO = OTRO
-				}
+			}else if ((botonPlanta2.isSelected())) {
+				tipo = 2;
+				botonPlanta2.setSelected(false);
+			} else if ((botonPlanta4.isSelected())) {
+				tipo = 4;
+				botonPlanta4.setSelected(false);
 			}
-			//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
-			logica.agregarNave(realX - 107, realY - 178, fila, columna, tipo);
-			panelObjetos.removeMouseListener(mouseListener);
 
 		}
+		System.out.println("Tipo: " + tipo);
+
+		//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
+		logica.agregarNave(realX - 107, realY - 178, fila, columna, tipo);
+		panelObjetos.removeMouseListener(mouseListener);
+
 	}
+}
 
 	//private void hacerAlgo(){}
 
 
-}
