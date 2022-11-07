@@ -294,7 +294,7 @@ public class Ventana  {
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
 		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {
 			toReturn=MODO_DIA;
-			player = new Musica(String.valueOf( Ventana.class.getResource(p.getProperty("musicaDia")) ) );
+			player = new Musica(p.getProperty("musicaDia"));
 			//CAMBIAR BOTONES A FOTO PLANTA DIA
 			ponerFotoPlanta(botonPlanta1, "botonNave1");
 			ponerFotoPlanta(botonPlanta2, "botonNave2");
@@ -303,7 +303,7 @@ public class Ventana  {
 		}
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){
 			toReturn=MODO_NOCHE;
-			player = new Musica(String.valueOf( Ventana.class.getResource(p.getProperty("musicaNoche")) ) );
+			player = new Musica(p.getProperty("musicaNoche"));
 		}
 
 		player.play();
