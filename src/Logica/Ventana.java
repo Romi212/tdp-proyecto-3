@@ -149,6 +149,8 @@ public class Ventana  {
 		ImageIcon iconoPausa = new ImageIcon("src/resources/pausa.png");
 		JButton Bmusica = new JButton(iconoPausa);
 		Bmusica.setBackground(Color.green);
+		Bmusica.setOpaque(true);
+		//Bmusica.setBounds(0,0,50,50);
 		Bmusica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -319,6 +321,7 @@ public class Ventana  {
 		ic = new ImageIcon(newImg);
 
 		botonPlanta.setIcon(ic);
+		botonPlanta.setSelectedIcon(new ImageIcon(getClass().getResource(p.getProperty("botonNaveS"))));
 	}
 
 	private void elegirDondePlanta(JToggleButton b){
