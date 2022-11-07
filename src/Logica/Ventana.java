@@ -103,10 +103,7 @@ public class Ventana  {
 		panelBotonera.setBackground(null);
 		//frmLaHorda.getContentPane().add(panelBotonera);
 		layeredPane.add(panelBotonera);
-		JLabel Nave2 = new JLabel("");
-		Nave2.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("naveAImg"))));
-		Nave2.setBounds(87, 27, 119, 84);
-		//panelBotonera.add(Nave2);
+
 
 
 		JScrollPane scrollBotonera = new JScrollPane();
@@ -177,11 +174,7 @@ public class Ventana  {
 
 
 
-		JLabel Nave = new JLabel("");
-		Nave.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("naveAImg"))));
-		Nave.setBounds(87, 47, 119, 84);
-		//agregarObjeto(Nave);
-		panelObjetos.add(Nave);
+
 		JPanel panelFondo = new JPanel();
 		//panelFondo.setBackground(new Color(255, 102, 255));
 		panelFondo.setBounds(0, 0, 1016,623);
