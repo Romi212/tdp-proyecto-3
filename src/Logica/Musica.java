@@ -24,7 +24,9 @@ public class Musica {
                     reproductor = new Player(stream);
                     reproductor.play();
                 }
+
                 pausa = stream.available(); //Guarda lo que resta por leer en caso de que se reinicie la musica
+                reproductor.close();
 
             } catch(JavaLayerException jle){
                 System.out.print("Error en el reproductor de musica ");
@@ -33,29 +35,27 @@ public class Musica {
                 System.out.print("Ocurrio un error del tipo I/O o se cerro el stream de la musica");
                 io.printStackTrace();
             }
-            reproductor.close();
-            hiloPlay.stop();
         }
     };
 
-    //Inicia el hilo y elige la musica segun el modo de juego (0 = DIA, otro = NOCHE)
-    public Musica(int modo){
-        if(modo == 0){
-            archivo = "src/resources/musica.mp3";
-            //Artista: ApexTwin, Album: Selected Ambient Works Volume II, Track #7
-        }
-        else{
-            archivo = "src/resources/musica2.mp3";
-            //Artista: ApexTwin, Album: Selected Ambient Works Volume II, Track #2
-        }
+
+    public Musica(String path){
+        this.archivo = path;
+        System.out.println(path);
         reproduciendo = true;
-        hiloPlay = new Thread(iniciar);
     }
 
-    public void play(){ hiloPlay.start(); }
+    //inicia el hilo
+    public void play(){
+        hiloPlay = new Thread(iniciar);
+        hiloPlay.start();
+    }
 
     //Guarda la longitud restante para terminar la cancion, cierra el reproductor y detiene la ejecucion de los hilos
-    public void pausar(){ reproduciendo = false; }
+    public void pausar(){
+        reproduciendo = false;
+        hiloPlay.stop();
+    }
 
     public void restart(){
         try{

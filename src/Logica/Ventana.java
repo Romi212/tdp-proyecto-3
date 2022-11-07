@@ -61,11 +61,10 @@ public class Ventana  {
 		//Creamos properties para leer las path de las imagenes
 		p = new Properties();
 
-		InputStream input = getClass().getResourceAsStream("/resources/config.properties");
+		InputStream input = getClass().getResourceAsStream("/resources/archivos/config.properties");
 
 		try {
 			p.load(input);
-			System.out.println(p.getProperty("naveAImg"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -146,23 +145,21 @@ public class Ventana  {
 		//panelBotonera.add(botonPlanta1);
 		//panelBotonera.add(botonPlanta2);
 
-		ImageIcon iconoPausa = new ImageIcon("src/resources/pausa.png");
-		JButton Bmusica = new JButton(iconoPausa);
+		JButton Bmusica = new JButton();
 		Bmusica.setBackground(Color.green);
 		Bmusica.setOpaque(true);
-		//Bmusica.setBounds(0,0,50,50);
+		Bmusica.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("iconoPlay"))));
+		Bmusica.setBounds(0,0,50,50);
 		Bmusica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if( player.estaReproduciendo() ){
 					player.pausar();
-					ImageIcon iconoPlay = new ImageIcon("src/resources/play.png");
-					Bmusica.setIcon(iconoPlay);
+					Bmusica.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("iconoPausa"))));
 				}
 				else{
 					player.restart();
-					ImageIcon iconoPausa = new ImageIcon("src/resources/pausa.png");
-					Bmusica.setIcon(iconoPausa);
+					Bmusica.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("iconoPlay"))));
 				}
 			}
 		});
@@ -198,7 +195,7 @@ public class Ventana  {
 		//Panel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 600);
-		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/fondo1.png"));
+		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/imagenes/fondo1.png"));
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
 		panelFondo.setLayout(null);
@@ -217,7 +214,7 @@ public class Ventana  {
 				Point b = a.getLocation();
 				int x = (int) b.getX();
 				int y = (int) b.getY();
-				System.out.println("El mouse esta en "+x+" , "+y);
+			//	System.out.println("El mouse esta en "+x+" , "+y);
 				agregarPlanta(x,y);
 			}
 
@@ -251,7 +248,7 @@ public class Ventana  {
 
 	public void agregarObjeto(ObjetoGrafico o){
 		String ref = o.getRefImagen();
-		System.out.println("La referencia es: " + ref);
+	 //	System.out.println("La referencia es: " + ref);
 		//String ref = "naveAImg";
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
 		Image img = ic.getImage();
@@ -297,7 +294,7 @@ public class Ventana  {
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
 		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {
 			toReturn=MODO_DIA;
-			player = new Musica(0);
+			player = new Musica(String.valueOf( Ventana.class.getResource(p.getProperty("musicaDia")) ) );
 			//CAMBIAR BOTONES A FOTO PLANTA DIA
 			ponerFotoPlanta(botonPlanta1, "botonNave1");
 			ponerFotoPlanta(botonPlanta2, "botonNave2");
@@ -306,7 +303,7 @@ public class Ventana  {
 		}
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){
 			toReturn=MODO_NOCHE;
-			player = new Musica(1);
+			player = new Musica(String.valueOf( Ventana.class.getResource(p.getProperty("musicaNoche")) ) );
 		}
 
 		player.play();
@@ -339,7 +336,7 @@ public class Ventana  {
 		for (int i = 0; i < 6 && !encontro; i++) {
 			for (int j = 0; j < 9 && !encontro; j++) {
 				if (tablero[i][j].contains(x, y)) {
-					System.out.println("Se detecto en la fila " + i + " eln col " + j);
+				//	System.out.println("Se detecto en la fila " + i + " eln col " + j);
 					fila = i;
 					columna = j;
 					encontro = true;
@@ -365,7 +362,7 @@ public class Ventana  {
 			}
 
 		}
-		System.out.println("Tipo: " + tipo);
+	//	System.out.println("Tipo: " + tipo);
 
 		//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
 		logica.agregarNave(realX - 107, realY - 178, fila, columna, tipo);
