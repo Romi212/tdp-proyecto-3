@@ -311,14 +311,28 @@ public class Ventana  {
 		ic = new ImageIcon(newImg);
 
 		botonPlanta.setIcon(ic);
-		botonPlanta.setSelectedIcon(new ImageIcon(getClass().getResource(p.getProperty("botonNaveS"))));
+		ImageIcon ic2 = new ImageIcon(getClass().getResource(p.getProperty(clave+"S")));
+		Image img2 = ic2.getImage();
+
+		Image newImg2 = img2.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
+		ic2 = new ImageIcon(newImg2);
+
+		botonPlanta.setSelectedIcon(ic2);
+		//botonPlanta.setSelectedIcon(new ImageIcon(getClass().getResource(p.getProperty("botonNaveS"))));
 	}
 
 	private void elegirDondePlanta(JToggleButton b){
-		if(b.isSelected()) panelObjetos.addMouseListener(mouseListener);
-		else panelObjetos.removeMouseListener(mouseListener);
+		if(b.isSelected()){
+
+			panelObjetos.addMouseListener(mouseListener);
+		}
+		else {
+			panelObjetos.removeMouseListener(mouseListener);
+		}
 	}
 	private void agregarPlanta(int x, int y) {
+
+
 
 		int fila = -1;
 		int columna = -1;
