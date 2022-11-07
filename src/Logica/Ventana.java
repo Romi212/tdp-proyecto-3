@@ -44,7 +44,6 @@ public class Ventana  {
 	private int size = 74;
 
 	private Musica player;
-
 	private JToggleButton botonPlanta1;
 	private JToggleButton botonPlanta2;
 	private JToggleButton botonPlanta4;
@@ -71,9 +70,6 @@ public class Ventana  {
 			throw new RuntimeException(e);
 		}
 
-		//Creamos el reproductor de musica
-		player = new Musica();
-
 		tablero = new Rectangle[6][9];
 
 		for(int i = 0; i<6 ; i++){
@@ -87,18 +83,12 @@ public class Ventana  {
 	public void initialize() {
 		
 		frmLaHorda = new JFrame();
-		
 		frmLaHorda.setResizable(true);
-		
-		
 		frmLaHorda.setBounds(100, 80, 1016, 623);
 		frmLaHorda.getContentPane().setBackground(new Color(0,0,0,0));
-		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frmLaHorda.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLaHorda.getContentPane().setLayout(null);
-
-
 
 		//Paneles
 		layeredPane = new JLayeredPane();
@@ -109,9 +99,10 @@ public class Ventana  {
 		JPanel panelBotonera = new JPanel();
 		panelBotonera.setBackground(Color.BLACK);
 		panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, alturaBotonera);
-		//frmLaHorda.getContentPane().add(panelBotonera);
 		panelBotonera.setLayout(null);
 		panelBotonera.setOpaque(false);
+		panelBotonera.setBackground(null);
+		//frmLaHorda.getContentPane().add(panelBotonera);
 		layeredPane.add(panelBotonera);
 		JLabel Nave2 = new JLabel("");
 		Nave2.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("naveAImg"))));
@@ -121,20 +112,13 @@ public class Ventana  {
 
 		JScrollPane scrollBotonera = new JScrollPane();
 		scrollBotonera.setBorder(null);
-
 		scrollBotonera.setBounds(250, 11, 400, 60);
 		scrollBotonera.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER);
 		scrollBotonera.setBackground(Color.BLACK);
 		panelBotonera.add(scrollBotonera);
 
-
-
 		menuBotonera = new JMenuBar();
 		menuBotonera.setBackground(Color.BLACK);
-
-
-
-
 		GridBagConstraints  gbc = new GridBagConstraints ();
 		gbc.weightx = 0.005;
 		botonPlanta1 = new JToggleButton();
@@ -145,20 +129,15 @@ public class Ventana  {
 		botonPlanta1.addActionListener(e -> elegirDondePlanta(botonPlanta1));
 		botonPlanta1.setBorder(null);
 
-
-
 		botonPlanta2 = new JToggleButton();
 		botonPlanta2.setBounds(350,10, size,size + 30);
 		botonPlanta2.addActionListener(e -> elegirDondePlanta(botonPlanta2));
 		botonPlanta2.setBorder(null);
 
-
 		botonPlanta4 = new JToggleButton();
 		botonPlanta4.setBounds(450,10, size,size + 30);
 		botonPlanta4.addActionListener(e -> elegirDondePlanta(botonPlanta4));
 		botonPlanta4.setBorder(null);
-
-
 
 		menuBotonera.add(botonPlanta1, gbc);
 		menuBotonera.add(botonPlanta2, gbc);
@@ -166,12 +145,10 @@ public class Ventana  {
 		scrollBotonera.setViewportView(menuBotonera);
 		//panelBotonera.add(botonPlanta1);
 		//panelBotonera.add(botonPlanta2);
-		panelBotonera.setLayout(null);
-		panelBotonera.setOpaque(false);
-		panelBotonera.setBackground(null);
 
 		ImageIcon iconoPausa = new ImageIcon("src/resources/pausa.png");
 		JButton Bmusica = new JButton(iconoPausa);
+		Bmusica.setBackground(Color.green);
 		Bmusica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -187,9 +164,7 @@ public class Ventana  {
 				}
 			}
 		});
-
 		panelBotonera.add(Bmusica);
-		player.play();
 
 		//Panel de Objetos
 		panelObjetos = new JPanel();
@@ -299,7 +274,8 @@ public class Ventana  {
 	public void sacarObjeto(ObjetoGrafico o){
 		panelObjetos.remove(o);
 	}
-	
+
+	/* Muestra un dialogo con una comboBox para elegir el modo de juego, inicializa el reproductor segun corresponda y reproduce la musica */
 	public int elegirModoDeJuego() {
 		int toReturn = -1;
 		UIManager.put("OptionPane.background", Color.BLACK);
@@ -319,14 +295,19 @@ public class Ventana  {
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
 		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {
 			toReturn=MODO_DIA;
+			player = new Musica(0);
 			//CAMBIAR BOTONES A FOTO PLANTA DIA
 			ponerFotoPlanta(botonPlanta1, "botonNave1");
 			ponerFotoPlanta(botonPlanta2, "botonNave2");
 			ponerFotoPlanta(botonPlanta4, "botonNave4");
 
 		}
-		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1) toReturn=MODO_NOCHE;
-		
+		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){
+			toReturn=MODO_NOCHE;
+			player = new Musica(1);
+		}
+
+		player.play();
 		return toReturn;
 	}
 

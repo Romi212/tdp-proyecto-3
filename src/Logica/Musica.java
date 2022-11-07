@@ -8,7 +8,7 @@ public class Musica {
     protected String archivo;
     protected Player reproductor;
     protected long duracion, pausa;
-    protected BufferedInputStream bufferedInputStream;
+    protected BufferedInputStream stream;
     protected Thread hiloPlay;
     protected boolean reproduciendo;
     //Hilo para iniciar
@@ -17,14 +17,14 @@ public class Musica {
         public void run() {
             try {
                 while(reproduciendo){
-                    FileInputStream stream = new FileInputStream(archivo);
-                    bufferedInputStream = new BufferedInputStream(stream);
-                    duracion = bufferedInputStream.available(); //Guarda la duracion total en caso de que se reinicie la musica
+                    FileInputStream fileStream = new FileInputStream(archivo);
+                    stream = new BufferedInputStream(fileStream);
+                    duracion = stream.available(); //Guarda la duracion total en caso de que se reinicie la musica
 
-                    reproductor = new Player(bufferedInputStream);
+                    reproductor = new Player(stream);
                     reproductor.play();
                 }
-                pausa = bufferedInputStream.available(); //Guarda lo que resta por leer en caso de que se reinicie la musica
+                pausa = stream.available(); //Guarda lo que resta por leer en caso de que se reinicie la musica
 
             } catch(JavaLayerException jle){
                 System.out.print("Error en el reproductor de musica ");
@@ -38,8 +38,16 @@ public class Musica {
         }
     };
 
-    public Musica(){
-        archivo = "src/resources/musica.mp3";
+    //Inicia el hilo y elige la musica segun el modo de juego (0 = DIA, otro = NOCHE)
+    public Musica(int modo){
+        if(modo == 0){
+            archivo = "src/resources/musica.mp3";
+            //Artista: ApexTwin, Album: Selected Ambient Works Volume II, Track #7
+        }
+        else{
+            archivo = "src/resources/musica2.mp3";
+            //Artista: ApexTwin, Album: Selected Ambient Works Volume II, Track #2
+        }
         reproduciendo = true;
         hiloPlay = new Thread(iniciar);
     }
@@ -51,7 +59,7 @@ public class Musica {
 
     public void restart(){
         try{
-            bufferedInputStream.skip(duracion - pausa);
+            stream.skip(duracion - pausa);
         } catch (java.io.IOException io) {
             System.out.print("Ocurrio un error del tipo I/O o se cerro el stream de la musica");
             io.printStackTrace();
