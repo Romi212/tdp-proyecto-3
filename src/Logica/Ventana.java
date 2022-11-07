@@ -1,6 +1,6 @@
 package Logica;
 
-import Logica.Entidades.Aliens.Alien;
+//import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.ObjetoGrafico;
 
 import java.awt.*;
@@ -9,25 +9,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
-import java.net.URL;
-import java.util.LinkedList;
+//import java.net.URL;
+//import java.util.LinkedList;
 import java.util.Properties;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
+//import javax.swing.border.EmptyBorder;
+//import javax.swing.table.DefaultTableModel;
 
-import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+//import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 public class Ventana  {
 
-	private int largoVentana = 700;
-	private int anchoVentana = 700;
+	//private int largoVentana = 700;
+	//private int anchoVentana = 700;
 	private Logica logica;
 	private JFrame frmLaHorda;
-	private JTable tablaRanking;
-	private DefaultTableModel modelo;
+	//private JTable tablaRanking;
+	//private DefaultTableModel modelo;
 	private JLayeredPane layeredPane;
 	private Properties p;
 	private JPanel panelObjetos;
@@ -38,8 +38,8 @@ public class Ventana  {
 
 	private int alturaBotonera = 70;
 
-	private int inicioTableroX = 165;
-	private int inicioTableroY = -25;
+	//private int inicioTableroX = 165;
+	//private int inicioTableroY = -25;
 
 	private int size = 74;
 
@@ -313,7 +313,7 @@ public class Ventana  {
 		return toReturn;
 	}
 
-	public void ponerFotoPlanta(JToggleButton botonPlanta, String clave){
+	private void ponerFotoPlanta(JToggleButton botonPlanta, String clave){
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(clave)));
 		Image img = ic.getImage();
 
@@ -374,6 +374,6 @@ public class Ventana  {
 	}
 }
 
-	//private void hacerAlgo(){}
+
 
 
