@@ -12,5 +12,4 @@ abstract public class ObjetoGrafico extends JLabel {
 
     abstract public String getRefImagen();
 
-
 }

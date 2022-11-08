@@ -14,7 +14,6 @@ public class ProyectilGrafico extends ObjetoGrafico {
         this.setAlignmentY(y);
         imagen = "";
 
-
     }
 
     public void moverPixeles(int cant){

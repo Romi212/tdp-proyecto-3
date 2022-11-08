@@ -26,16 +26,13 @@ public class Ventana  {
 	//private int anchoVentana = 700;
 	private Logica logica;
 	private JFrame frmLaHorda;
-	//private JTable tablaRanking;
-	//private DefaultTableModel modelo;
 	private JLayeredPane layeredPane;
 	private Properties p;
 	private JPanel panelObjetos;
 	private JComboBox elegirModo;
 
-	private static final int MODO_DIA=0;
-	private static final int MODO_NOCHE=1;
-
+	private static final int MODO_DIA = 0;
+	private static final int MODO_NOCHE = 1;
 	private int alturaBotonera = 70;
 
 	//private int inicioTableroX = 165;
@@ -44,9 +41,9 @@ public class Ventana  {
 	private int size = 74;
 
 	private Musica player;
-	private JToggleButton botonPlanta1;
-	private JToggleButton botonPlanta2;
-	private JToggleButton botonPlanta4;
+	private JToggleButton botonNave1;
+	private JToggleButton botonNave2;
+	private JToggleButton botonNave4;
 	private MouseListener mouseListener;
 	private Rectangle[][] tablero;
 
@@ -54,8 +51,6 @@ public class Ventana  {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-
-
 
 	public Ventana(){
 		//Creamos properties para leer las path de las imagenes
@@ -117,30 +112,30 @@ public class Ventana  {
 		menuBotonera.setBackground(Color.BLACK);
 		GridBagConstraints  gbc = new GridBagConstraints ();
 		gbc.weightx = 0.005;
-		botonPlanta1 = new JToggleButton();
+		botonNave1 = new JToggleButton();
 		menuBotonera.setLayout(new GridBagLayout());
 
 		//Los botones
-		botonPlanta1.setBounds(250,10, size,size);
-		botonPlanta1.addActionListener(e -> elegirDondePlanta(botonPlanta1));
-		botonPlanta1.setBorder(null);
+		botonNave1.setBounds(250,10, size,size);
+		botonNave1.addActionListener(e -> elegirDondeNave(botonNave1));
+		botonNave1.setBorder(null);
 
-		botonPlanta2 = new JToggleButton();
-		botonPlanta2.setBounds(350,10, size,size + 30);
-		botonPlanta2.addActionListener(e -> elegirDondePlanta(botonPlanta2));
-		botonPlanta2.setBorder(null);
+		botonNave2 = new JToggleButton();
+		botonNave2.setBounds(350,10, size,size + 30);
+		botonNave2.addActionListener(e -> elegirDondeNave(botonNave2));
+		botonNave2.setBorder(null);
 
-		botonPlanta4 = new JToggleButton();
-		botonPlanta4.setBounds(450,10, size,size + 30);
-		botonPlanta4.addActionListener(e -> elegirDondePlanta(botonPlanta4));
-		botonPlanta4.setBorder(null);
+		botonNave4 = new JToggleButton();
+		botonNave4.setBounds(450,10, size,size + 30);
+		botonNave4.addActionListener(e -> elegirDondeNave(botonNave4));
+		botonNave4.setBorder(null);
 
-		menuBotonera.add(botonPlanta1, gbc);
-		menuBotonera.add(botonPlanta2, gbc);
-		menuBotonera.add(botonPlanta4, gbc);
+		menuBotonera.add(botonNave1, gbc);
+		menuBotonera.add(botonNave2, gbc);
+		menuBotonera.add(botonNave4, gbc);
 		scrollBotonera.setViewportView(menuBotonera);
-		//panelBotonera.add(botonPlanta1);
-		//panelBotonera.add(botonPlanta2);
+		//panelBotonera.add(botonNave1);
+		//panelBotonera.add(botonNave2);
 
 		JButton Bmusica = new JButton();
 		Bmusica.setBackground(Color.green);
@@ -188,7 +183,8 @@ public class Ventana  {
 		//Panel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 600);
-		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/imagenes/fondo1.png"));
+		//Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("fondo"));
+		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("fondo")));
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
 		panelFondo.setLayout(null);
@@ -208,7 +204,7 @@ public class Ventana  {
 				int x = (int) b.getX();
 				int y = (int) b.getY();
 			//	System.out.println("El mouse esta en "+x+" , "+y);
-				agregarPlanta(x,y);
+				agregarNave(x,y);
 			}
 
 			@Override
@@ -267,7 +263,8 @@ public class Ventana  {
 		panelObjetos.remove(o);
 	}
 
-	/* Muestra un dialogo con una comboBox para elegir el modo de juego, inicializa el reproductor segun corresponda y reproduce la musica */
+	/* Muestra un dialogo con una comboBox para elegir el modo de juego, inicializa la constante MODO.
+	 incializa el reproductor segun corresponda y reproduce la musica */
 	public int elegirModoDeJuego() {
 		int toReturn = -1;
 		UIManager.put("OptionPane.background", Color.BLACK);
@@ -288,10 +285,10 @@ public class Ventana  {
 		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {
 			toReturn=MODO_DIA;
 			player = new Musica(p.getProperty("musicaDia"));
-			//CAMBIAR BOTONES A FOTO PLANTA DIA
-			ponerFotoPlanta(botonPlanta1, "botonNave1");
-			ponerFotoPlanta(botonPlanta2, "botonNave2");
-			ponerFotoPlanta(botonPlanta4, "botonNave4");
+			//CAMBIAR BOTONES A FOTO Nave DIA
+			ponerFotoNave(botonNave1, "botonNave1");
+			ponerFotoNave(botonNave2, "botonNave2");
+			ponerFotoNave(botonNave4, "botonNave4");
 
 		}
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){
@@ -303,36 +300,33 @@ public class Ventana  {
 		return toReturn;
 	}
 
-	private void ponerFotoPlanta(JToggleButton botonPlanta, String clave){
+	private void ponerFotoNave(JToggleButton botonNave, String clave){
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(clave)));
 		Image img = ic.getImage();
 
 		Image newImg = img.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
 		ic = new ImageIcon(newImg);
 
-		botonPlanta.setIcon(ic);
+		botonNave.setIcon(ic);
 		ImageIcon ic2 = new ImageIcon(getClass().getResource(p.getProperty(clave+"S")));
 		Image img2 = ic2.getImage();
 
 		Image newImg2 = img2.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
 		ic2 = new ImageIcon(newImg2);
 
-		botonPlanta.setSelectedIcon(ic2);
-		//botonPlanta.setSelectedIcon(new ImageIcon(getClass().getResource(p.getProperty("botonNaveS"))));
+		botonNave.setSelectedIcon(ic2);
+		//botonNave.setSelectedIcon(new ImageIcon(getClass().getResource(p.getProperty("botonNaveS"))));
 	}
 
-	private void elegirDondePlanta(JToggleButton b){
+	private void elegirDondeNave(JToggleButton b){
 		if(b.isSelected()){
-
 			panelObjetos.addMouseListener(mouseListener);
 		}
 		else {
 			panelObjetos.removeMouseListener(mouseListener);
 		}
 	}
-	private void agregarPlanta(int x, int y) {
-
-
+	private void agregarNave(int x, int y) {
 
 		int fila = -1;
 		int columna = -1;
@@ -356,16 +350,16 @@ public class Ventana  {
 		if (fila>-1 && columna >-1 && !logica.isCeldaOcupada(fila, columna)) {
 
 			int precio = 0;
-			if (botonPlanta1.isSelected()) {
-				botonPlanta1.setSelected(false);
+			if (botonNave1.isSelected()) {
+				botonNave1.setSelected(false);
 				tipo = 1;
 				//Precio = ALGO
-			}else if ((botonPlanta2.isSelected())) {
+			}else if ((botonNave2.isSelected())) {
 				tipo = 2;
-				botonPlanta2.setSelected(false);
-			} else if ((botonPlanta4.isSelected())) {
+				botonNave2.setSelected(false);
+			} else if ((botonNave4.isSelected())) {
 				tipo = 4;
-				botonPlanta4.setSelected(false);
+				botonNave4.setSelected(false);
 			}
 
 		}

@@ -1,70 +1,53 @@
 package Logica;
-import javazoom.jl.player.Player;
-import javazoom.jl.decoder.JavaLayerException;
-import java.io.FileInputStream;
-import java.io.BufferedInputStream;
+
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Musica {
     protected String archivo;
-    protected Player reproductor;
-    protected long duracion, pausa;
-    protected BufferedInputStream stream;
-    protected Thread hiloPlay;
     protected boolean reproduciendo;
-    //Hilo para iniciar
-    protected Runnable iniciar = new Runnable() {
-        @Override
-        public void run() {
-            try {
-                while(reproduciendo){
-                    FileInputStream fileStream = new FileInputStream(archivo);
-                    stream = new BufferedInputStream(fileStream);
-                    duracion = stream.available(); //Guarda la duracion total en caso de que se reinicie la musica
-
-                    reproductor = new Player(stream);
-                    reproductor.play();
-                }
-
-                pausa = stream.available(); //Guarda lo que resta por leer en caso de que se reinicie la musica
-                reproductor.close();
-
-            } catch(JavaLayerException jle){
-                System.out.print("Error en el reproductor de musica ");
-                jle.printStackTrace();
-            } catch (java.io.IOException io) {
-                System.out.print("Ocurrio un error del tipo I/O o se cerro el stream de la musica");
-                io.printStackTrace();
-            }
-        }
-    };
-
-
-    public Musica(String path){
-        this.archivo = path;
-        System.out.println(path);
-        reproduciendo = true;
-    }
+    protected long posicionPausa;
+    protected Clip clip;
+    public Musica(String path){ System.out.println(path); this.archivo = path; }
 
     //inicia el hilo
     public void play(){
-        hiloPlay = new Thread(iniciar);
-        hiloPlay.start();
+        reproduciendo = true;
+        File file = new File(archivo);
+        if(file.exists()){
+            try{
+                AudioInputStream audio = AudioSystem.getAudioInputStream(file);
+                clip = AudioSystem.getClip();
+                clip.open(audio);
+                clip.start();
+                clip.loop(clip.LOOP_CONTINUOUSLY); //Reproduce la cancion en bucle
+            } catch (UnsupportedAudioFileException noSoportado) {
+                System.out.println("El formato de audio no es soportado");
+                noSoportado.printStackTrace();
+            } catch (IOException io) {
+                System.out.println("Error de entrada/salida reproduciendo la musica");
+                io.printStackTrace();
+            } catch (LineUnavailableException noDisponible) {
+                System.out.println("La musica no esta disponible debido a restricciones del recurso");
+                noDisponible.printStackTrace();
+            }
+        }
+        else{
+            System.out.println("No se encuentra el archivo de musica");
+        }
     }
 
-    //Guarda la longitud restante para terminar la cancion, cierra el reproductor y detiene la ejecucion de los hilos
     public void pausar(){
         reproduciendo = false;
-        hiloPlay.stop();
+        posicionPausa = clip.getMicrosecondPosition(); //Se guarda la posicion en la pista en caso de que se reinicie
+        clip.stop();
     }
 
     public void restart(){
-        try{
-            stream.skip(duracion - pausa);
-        } catch (java.io.IOException io) {
-            System.out.print("Ocurrio un error del tipo I/O o se cerro el stream de la musica");
-            io.printStackTrace();
-        }
-        hiloPlay.start();
+        reproduciendo = true;
+        clip.setMicrosecondPosition(posicionPausa);
+        clip.start();
     }
 
     public boolean estaReproduciendo(){ return reproduciendo; }

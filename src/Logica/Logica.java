@@ -91,15 +91,15 @@ public class Logica {
             int tipo = rand.nextInt(3);
             switch(tipo){
                 case 0:
-                    a = factory.createAlien1(posx, posy, hitbox, "alienAImg");
+                    a = factory.createAlien1(posx, posy, hitbox);
                     cantAlien1--;
                     break;
                 case 1:
-                    a = factory.createAlien2(posx, posy, hitbox, "alienBImg");
+                    a = factory.createAlien2(posx, posy, hitbox);
                     cantAlien2--;
                     break;
                 case 2:
-                    a = factory.createAlien3(posx, posy, hitbox, "alienCImg");
+                    a = factory.createAlien3(posx, posy, hitbox);
                     cantAlien3--;
                     break;
             }
