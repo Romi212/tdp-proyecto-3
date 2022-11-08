@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.io.*;
 //import java.net.URL;
 //import java.util.LinkedList;
+import java.util.LinkedList;
 import java.util.Properties;
 
 import javax.swing.*;
@@ -35,17 +36,19 @@ public class Ventana  {
 	private static final int MODO_NOCHE = 1;
 	private int alturaBotonera = 70;
 
-	//private int inicioTableroX = 165;
-	//private int inicioTableroY = -25;
+	private int inicioTableroX = 238;
+	private int inicioTableroY = 52;
 
 	private int size = 74;
 
 	private Musica player;
-	private JToggleButton botonNave1;
-	private JToggleButton botonNave2;
-	private JToggleButton botonNave4;
+
+	private LinkedList<JToggleButton> botonera;
+
 	private MouseListener mouseListener;
-	private Rectangle[][] tablero;
+	private Casilla[][] tablero;
+
+
 
 	private JMenuBar menuBotonera;
 	/**
@@ -64,20 +67,15 @@ public class Ventana  {
 			throw new RuntimeException(e);
 		}
 
-		tablero = new Rectangle[6][9];
+		tablero = new Casilla[6][9];
 
-		for(int i = 0; i<6 ; i++){
-			for(int j = 0; j<9;j++){
-				Rectangle r = new Rectangle(344 + (size*j),230+(size*i), size,size);
-				tablero[i][j] = r;
-			}
-		}
+		botonera = new LinkedList<>();
 
 	}
 	public void initialize() {
 		
 		frmLaHorda = new JFrame();
-		frmLaHorda.setResizable(true);
+		frmLaHorda.setResizable(false);
 		frmLaHorda.setBounds(100, 80, 1016, 623);
 		frmLaHorda.getContentPane().setBackground(new Color(0,0,0,0));
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -112,27 +110,17 @@ public class Ventana  {
 		menuBotonera.setBackground(Color.BLACK);
 		GridBagConstraints  gbc = new GridBagConstraints ();
 		gbc.weightx = 0.005;
-		botonNave1 = new JToggleButton();
 		menuBotonera.setLayout(new GridBagLayout());
+		for(int i = 0; i<3; i++){
+			JToggleButton botonNave = new JToggleButton();
+			botonNave.setBounds(250,10, size,size);
+			botonNave.addActionListener(e -> elegirDondeNave(botonNave));
+			botonNave.setBorder(null);
+			menuBotonera.add(botonNave, gbc);
+			botonera.add(botonNave);
+		}
 
-		//Los botones
-		botonNave1.setBounds(250,10, size,size);
-		botonNave1.addActionListener(e -> elegirDondeNave(botonNave1));
-		botonNave1.setBorder(null);
 
-		botonNave2 = new JToggleButton();
-		botonNave2.setBounds(350,10, size,size + 30);
-		botonNave2.addActionListener(e -> elegirDondeNave(botonNave2));
-		botonNave2.setBorder(null);
-
-		botonNave4 = new JToggleButton();
-		botonNave4.setBounds(450,10, size,size + 30);
-		botonNave4.addActionListener(e -> elegirDondeNave(botonNave4));
-		botonNave4.setBorder(null);
-
-		menuBotonera.add(botonNave1, gbc);
-		menuBotonera.add(botonNave2, gbc);
-		menuBotonera.add(botonNave4, gbc);
 		scrollBotonera.setViewportView(menuBotonera);
 		//panelBotonera.add(botonNave1);
 		//panelBotonera.add(botonNave2);
@@ -196,37 +184,20 @@ public class Ventana  {
 
 
 
-		mouseListener = new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PointerInfo a = MouseInfo.getPointerInfo();
-				Point b = a.getLocation();
-				int x = (int) b.getX();
-				int y = (int) b.getY();
-			//	System.out.println("El mouse esta en "+x+" , "+y);
-				agregarNave(x,y);
+
+
+		for(int i = 0; i<6 ; i++){
+			for(int j = 0; j<9;j++){
+
+				Casilla c = new Casilla(i,j);
+				c.addActionListener(e -> agregarNave(c));
+				c.setEnabled(false);
+				c.setBounds( inicioTableroX+ (size*j),inicioTableroY+(size*i), size,size);
+				panelObjetos.add(c);
+				//Rectangle r = new Rectangle(344 + (size*j),230+(size*i), size,size);
+				tablero[i][j] = c;
 			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-
-			}
-		};
+		}
 
 		frmLaHorda.setVisible(true);
 
@@ -286,9 +257,11 @@ public class Ventana  {
 			toReturn=MODO_DIA;
 			player = new Musica(p.getProperty("musicaDia"));
 			//CAMBIAR BOTONES A FOTO Nave DIA
-			ponerFotoNave(botonNave1, "botonNave1");
-			ponerFotoNave(botonNave2, "botonNave2");
-			ponerFotoNave(botonNave4, "botonNave4");
+			for(int i =0; i<botonera.size();i++){
+				ponerFotoNave(botonera.get(i), "botonNave"+(i+1));
+			}
+
+
 
 		}
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){
@@ -319,55 +292,61 @@ public class Ventana  {
 	}
 
 	private void elegirDondeNave(JToggleButton b){
-		if(b.isSelected()){
-			panelObjetos.addMouseListener(mouseListener);
-		}
-		else {
-			panelObjetos.removeMouseListener(mouseListener);
-		}
-	}
-	private void agregarNave(int x, int y) {
 
-		int fila = -1;
-		int columna = -1;
-		int realX = x;
-		int realY = y;
-		boolean encontro = false;
-		int tipo = 0;
-		for (int i = 0; i < 6 && !encontro; i++) {
-			for (int j = 0; j < 9 && !encontro; j++) {
-				if (tablero[i][j].contains(x, y)) {
-				//	System.out.println("Se detecto en la fila " + i + " eln col " + j);
-					fila = i;
-					columna = j;
-					encontro = true;
-					realX = tablero[i][j].getLocation().x;
-					realY = tablero[i][j].getLocation().y;
+
+
+
+		if(b.isSelected()){
+			for(int i = 0; i<6 ; i++){
+				for(int j = 0; j<9;j++){
+
+
+					tablero[i][j].setEnabled(true);
+					tablero[i][j].setBackground(Color.BLACK);
+
 				}
 			}
 		}
+		else {
+			for(int i = 0; i<6 ; i++){
+				for(int j = 0; j<9;j++){
+
+
+					tablero[i][j].setEnabled(false);
+
+				}
+			}
+		}
+	}
+	private void agregarNave(Casilla c) {
+
+		int fila = c.getFila();
+		int columna = c.getColumna();
+		int realX = c.getBounds().x;
+		int realY = c.getBounds().y;
+		int tipo =0;
 
 		if (fila>-1 && columna >-1 && !logica.isCeldaOcupada(fila, columna)) {
 
 			int precio = 0;
-			if (botonNave1.isSelected()) {
-				botonNave1.setSelected(false);
+			if (botonera.get(0).isSelected()) {
+				botonera.get(0).setSelected(false);
 				tipo = 1;
 				//Precio = ALGO
-			}else if ((botonNave2.isSelected())) {
+			}else if ((botonera.get(1).isSelected())) {
 				tipo = 2;
-				botonNave2.setSelected(false);
-			} else if ((botonNave4.isSelected())) {
+				botonera.get(1).setSelected(false);
+			} else if ((botonera.get(2).isSelected())) {
 				tipo = 4;
-				botonNave4.setSelected(false);
+				botonera.get(2).setSelected(false);
 			}
-
+			//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
+			logica.agregarNave(realX, realY, fila, columna, tipo);
+			panelObjetos.removeMouseListener(mouseListener);
 		}
 	//	System.out.println("Tipo: " + tipo);
 
-		//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
-		logica.agregarNave(realX - 107, realY - 178, fila, columna, tipo);
-		panelObjetos.removeMouseListener(mouseListener);
+
 
 	}
 }

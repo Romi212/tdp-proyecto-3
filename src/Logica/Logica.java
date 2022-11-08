@@ -159,6 +159,7 @@ public class Logica {
         }
         tablero[fila].agregarNave(n, columna);
         ventana.agregarObjeto(n.getNaveG());
+        System.out.println(tablero[fila].estaOcupada(columna));
     }
     public void agregarObjetoGrafico(ObjetoGrafico o){
         ventana.agregarObjeto(o);
