@@ -1,5 +1,6 @@
 package Logica.Entidades.Aliens;
 
+import Logica.Entidades.ColumnaFinal;
 import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Entidades.Naves.Proyectil;
@@ -72,6 +73,12 @@ public abstract class Alien implements Visitor{
 		else
 			vida = 0;
 		p.destruir();
+	}
+
+
+	@Override
+	public void colisionColumnaFinal() {
+
 	}
 
 	public AlienGrafico getAlienG(){

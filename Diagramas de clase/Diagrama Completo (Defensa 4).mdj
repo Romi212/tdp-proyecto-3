@@ -23357,7 +23357,7 @@
 											"top": 1382,
 											"width": 136.21435546875,
 											"height": 13,
-											"text": "+hitBox: Rectangle",
+											"text": "#hitBox: Rectangle",
 											"horizontalAlignment": 0
 										}
 									],
@@ -29018,7 +29018,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGEBh2NvingTcY="
 									},
-									"name": "aliens ListaAliens"
+									"name": "aliens ListaAliens",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -32530,6 +32531,7 @@
 								"$ref": "AAAAAAGEV27kuU0H0fc="
 							},
 							"name": "hitBox",
+							"visibility": "protected",
 							"type": "Rectangle"
 						}
 					],

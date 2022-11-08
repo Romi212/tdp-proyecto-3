@@ -1,6 +1,7 @@
 package Logica.Manejadores;
 
 import Logica.Entidades.Aliens.Alien;
+import Logica.Entidades.ColumnaFinal;
 import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Logica;
 import Logica.Fila;
@@ -19,13 +20,16 @@ public class ManejadorAliens extends Thread {
 
     boolean noTerminoJuego;
 
-    public ManejadorAliens(LinkedList<Alien> aliens, Logica logica, Fila[] tablero){
+    private ColumnaFinal fin;
+
+    public ManejadorAliens(LinkedList<Alien> aliens, Logica logica, Fila[] tablero, ColumnaFinal f){
         proximosAliens = aliens;
         aliensPorHorda = aliens.size()/3;
 
         this.logica = logica;
         this.tablero = tablero;
         noTerminoJuego = true;
+        this.fin = f;
     }
 
     private void generarHorda(){

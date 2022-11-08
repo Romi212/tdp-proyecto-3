@@ -1,6 +1,7 @@
 package Logica;
 
 import Logica.Entidades.Aliens.Alien;
+import Logica.Entidades.ColumnaFinal;
 import Logica.Entidades.Factories.FactoryDia;
 import Logica.Entidades.Factories.FactoryNoche;
 import Logica.Entidades.Factories.ObjectsFactory;
@@ -35,13 +36,20 @@ public class Logica {
     private Ventana ventana;
     private Properties p;
 
+    private int xIni;
+    private int yIni;
+    private int sizeC;
+
 
     public Logica(Ventana v,Properties p,int xInicial, int yInicial, int tam){
         this.p = p;
         ventana = v;
         tablero = new Fila[cantFilas];
+        xIni = xInicial;
+        yIni = yInicial;
+        sizeC = tam;
         for(int i =0; i < cantFilas; i++){
-            Fila f = new Fila(this, xInicial,yInicial+(i*tam),tam);
+            Fila f = new Fila(this, xIni,yIni+(i*sizeC),sizeC);
             tablero[i] = f;
         }
 
@@ -80,6 +88,7 @@ public class Logica {
         int posy;
         Fila filaActual;
         Rectangle hitbox;
+        ColumnaFinal fin = new ColumnaFinal(new Rectangle(xIni-sizeC,yIni,sizeC,sizeC*9));
 
         while(cantAlien1 > 0 && cantAlien2 > 0 && cantAlien3 > 0){
             filaElegida = rand.nextInt(cantFilas);
@@ -109,7 +118,7 @@ public class Logica {
         }
 
 
-        M_Aliens = new ManejadorAliens(aliens,this, tablero);
+        M_Aliens = new ManejadorAliens(aliens,this, tablero,fin);
 
         M_Naves = new ManejadorNaves();
 
