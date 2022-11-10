@@ -6,8 +6,8 @@ import Logica.Fila;
 import java.awt.*;
 
 public abstract class NaveSol extends Nave {
-    public NaveSol(Fila f, int x, int y, Rectangle h, String skin) {
-        super(f,x,y,h, skin);
+    public NaveSol(Fila f, int col, int x, int y, String skin) {
+        super(f,col,x,y, skin);
     }
 
     public void pasoXTiempo(){}

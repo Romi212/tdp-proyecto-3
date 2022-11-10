@@ -6,6 +6,7 @@ import Logica.Entidades.Factories.FactoryDia;
 import Logica.Entidades.Factories.FactoryNoche;
 import Logica.Entidades.Factories.ObjectsFactory;
 import Logica.Entidades.Naves.Nave;
+import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Entidades.ObjetoGrafico;
 import Logica.Manejadores.ManejadorAliens;
 import Logica.Manejadores.ManejadorNaves;
@@ -163,12 +164,12 @@ public class Logica {
 
         Nave n = null;
         switch (tipo){
-            case 1:   n = factory.createNaveA(tablero[fila], x, y); break;
-            case 2:   n = factory.createNaveB(tablero[fila], x, y); break;
-            case 3:   n = factory.createNaveC(tablero[fila], x, y); break;
-            case 4:   n = factory.createSatelite(tablero[fila], x, y); break;
+            case 1:   n = factory.createNaveA(tablero[fila], columna, x, y); break;
+            case 2:   n = factory.createNaveB(tablero[fila], columna, x, y); break;
+            case 3:   n = factory.createNaveC(tablero[fila], columna, x, y); break;
+            case 4:   n = factory.createSatelite(tablero[fila], columna, x, y); break;
         }
-        tablero[fila].agregarNave(n, columna);
+        tablero[fila].agregarNave(n);
         ventana.agregarObjeto(n.getNaveG());
         System.out.println(tablero[fila].estaOcupada(columna));
     }
@@ -182,5 +183,9 @@ public class Logica {
 
     public boolean isCeldaOcupada(int x, int y){
         return tablero[x].estaOcupada(y);
+    }
+
+    public void sacarObjeto(ObjetoGrafico o){
+        ventana.sacarObjeto(o);
     }
 }

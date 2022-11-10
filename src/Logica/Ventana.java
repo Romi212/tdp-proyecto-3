@@ -230,7 +230,9 @@ public class Ventana  {
 	}
 
 	public void sacarObjeto(ObjetoGrafico o){
+		System.out.println("Deberia haber removido");
 		panelObjetos.remove(o);
+		panelObjetos.revalidate();
 	}
 
 	/* Muestra un dialogo con una comboBox para elegir el modo de juego, inicializa la constante MODO.

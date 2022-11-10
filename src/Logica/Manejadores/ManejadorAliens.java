@@ -2,6 +2,7 @@ package Logica.Manejadores;
 
 import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.ColumnaFinal;
+import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Logica;
 import Logica.Fila;
@@ -69,12 +70,15 @@ public class ManejadorAliens extends Thread {
                         throw new RuntimeException(e);
                     }
 
-                    /*
-                    Iterable<ObjetoColisionable> objetos = f.getColisionables();
-                    for(ObjetoColisionable o : objetos){
-                        o.accept(a);
+                    if(f.hayNaveEnFila()) {
+                        Iterable<ObjetoColisionable> objetos = f.getColisionables();
+                        //Las filas vacias tiene como primer elemento a el null de la primera nave
+                        //System.out.println("Cantidad de objetos colisionables en fila: " + f.getColisionables().size());
+                        for (ObjetoColisionable o : objetos) {
+                            o.accept(a);
+                        }
+
                     }
-                     */
 
 
                 }

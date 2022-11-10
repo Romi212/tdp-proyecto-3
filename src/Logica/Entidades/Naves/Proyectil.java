@@ -12,10 +12,9 @@ public class Proyectil extends ObjetoColisionable {
 	
 	
 	public Proyectil(int x, int y) {
-		super( new Rectangle(x,y,32,14));
 		estaVivo = true;
 		proyectilGrafico = new ProyectilGrafico(x,y);
-
+		setHitbox(proyectilGrafico.getBounds());
 	}
 	
 	public Rectangle getHitBox() {
@@ -29,7 +28,8 @@ public class Proyectil extends ObjetoColisionable {
 		return danio;
 	}
 	public void accept(Visitor v) {
-		v.colisionProyectilAlien(this);
+		//Comento porque quiero probar las colisiones de alien-nave
+		//v.colisionProyectilAlien(this);
 	}
 	public void pasoXTiempo() {
 		proyectilGrafico.moverPixeles(10);

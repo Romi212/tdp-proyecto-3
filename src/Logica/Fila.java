@@ -35,11 +35,26 @@ public class Fila {
 		listaProyectiles = new LinkedList<>();
 	}
 
-	private void removerAlien(Alien z){
+	public void removerAlien(Alien z){
 		 listaAliens.remove(z);
 	}
 
-	private void removerProyectil(Proyectil p){
+	public void removerNave(Nave n){
+		logica.sacarObjeto(n.getNaveG());
+		listaNaves[n.getColumna()] = null;
+		primeraNave = obtenerPrimeraNave();
+	}
+
+	private Nave obtenerPrimeraNave(){
+		Nave res = null;
+		for(int i = listaNaves.length - 1; i >= 0 && res == null; i--){
+			if(listaNaves[i] != null)
+				res = listaNaves[i];
+		}
+		return res;
+	}
+
+	public void removerProyectil(Proyectil p){
 		listaProyectiles.remove(p);
 	}
 
@@ -51,9 +66,18 @@ public class Fila {
 		return listaProyectiles;
 	}
 
-	public Nave getPrimerNave(){ return primeraNave; }
-	public void agregarNave(Nave p, int posY){
-		listaNaves[posY] = p;
+	public Nave getPrimerNave(){
+		return primeraNave;
+	}
+	public void agregarNave(Nave p){
+		listaNaves[p.getColumna()] = p;
+		if(primeraNave == null)
+			primeraNave = p;
+		else{
+			if(primeraNave.getColumna() < p.getColumna())
+				primeraNave = p;
+		}
+
 	}
 
 	public void agregarAlien(Alien a){
@@ -86,6 +110,10 @@ public class Fila {
 			if(n != null) naves.add(n);
 		}
 		return naves;
+	}
+
+	public boolean hayNaveEnFila(){
+		return primeraNave != null;
 	}
 
 	public int getxIni(){

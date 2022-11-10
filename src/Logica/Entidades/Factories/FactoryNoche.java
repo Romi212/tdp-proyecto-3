@@ -27,18 +27,18 @@ public class FactoryNoche implements ObjectsFactory{
 		return new AlienNoche3(x, y);
 	} //Dragon
 
-	public Nave createNaveA(Fila f, int x, int y) {
-		return new NaveNocheA(f, x, y, new Rectangle(x,y,74,74));
+	public Nave createNaveA(Fila f, int col, int x, int y) {
+		return new NaveNocheA(f, col, x, y);
 	} //Disparo simple
 
-	public Nave createNaveB(Fila f, int x, int y) {
-		return new NaveNocheB(f, x, y, new Rectangle(x,y,74,74));
+	public Nave createNaveB(Fila f, int col, int x, int y) {
+		return new NaveNocheB(f, col, x, y);
 	} //Disparo doble
 
-	public Nave createNaveC(Fila f, int x, int y){ return new NaveNocheC(f, x, y, new Rectangle(x,y,74,74)); } //Congela todos los aliens de la fila
+	public Nave createNaveC(Fila f, int col, int x, int y){ return new NaveNocheC(f, col, x, y); } //Congela todos los aliens de la fila
 
-	public Nave createSatelite(Fila f, int x, int y) {
-		return new SateliteNoche(f,x,y,new Rectangle(x,y,74,74));
+	public Nave createSatelite(Fila f, int col, int x, int y) {
+		return new SateliteNoche(f,col,x,y);
 	}
 
 }

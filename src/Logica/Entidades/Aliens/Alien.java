@@ -16,6 +16,7 @@ public abstract class Alien implements Visitor{
 	protected Estado estado;
 	protected int fila;
 	protected int velocidad;
+	protected boolean estabaCaminando;
 
 	
 	public Alien(int x, int y, String c){
@@ -25,10 +26,12 @@ public abstract class Alien implements Visitor{
 		vida = 100;
 		fila = -1;
 		velocidad = 5;
+		danio = 10;
+		estabaCaminando = true;
 	}
 
-	public void daniar(int danio){
-		vida -= danio;
+	public void daniar(int d){
+		vida -= d;
 	}
 
 	public boolean estaViva(){
@@ -44,11 +47,15 @@ public abstract class Alien implements Visitor{
 	}
 
 	public void cambiarAAlienComiendo(Nave nave){
-		estado = new AlienComiendo(this, nave);
+		if(estabaCaminando) {
+			estado = new AlienComiendo(this, nave);
+			estabaCaminando = false;
+		}
 	}
 
 	public void cambiarAAlienCaminando(){
 		estado = new AlienCaminando(this);
+		estabaCaminando = true;
 	}
 
 	public void cambiarAAlienCongelado(){ estado = new AlienCongelado(this);
@@ -56,15 +63,18 @@ public abstract class Alien implements Visitor{
 
 	public void hacerAccion(){
 		estado.hacerAccion();
+		hitbox = alienG.getBounds();
 	}
 
-	public void chequearColision(ObjetoColisionable o){
-		if(o.getHitBox().intersects(hitbox))
-			o.accept(this);
+	private boolean chequearColision(ObjetoColisionable o){
+		return o.getHitBox().intersects(hitbox);
 	}
 
 	public void colisionNaveAlien(Nave n){
-		cambiarAAlienComiendo(n);
+		if(chequearColision(n)) {
+			System.out.println("Hubo Colision con NAVE, cambie de estado");
+			cambiarAAlienComiendo(n);
+		}
 	}
 
 	public void colisionProyectilAlien(Proyectil p){

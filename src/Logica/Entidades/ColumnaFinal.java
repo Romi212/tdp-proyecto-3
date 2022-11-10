@@ -9,7 +9,7 @@ public class ColumnaFinal extends ObjetoColisionable {
 
 
     public ColumnaFinal(Rectangle h) {
-        super(h);
+        setHitbox(h);
     }
 
     @Override

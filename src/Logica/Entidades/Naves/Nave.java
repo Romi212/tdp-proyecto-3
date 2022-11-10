@@ -18,15 +18,17 @@ public abstract class Nave extends ObjetoColisionable{
 	protected int posX;
 	protected int posY;
 	protected Fila fila;
+	protected int columna;
 
-	public Nave(Fila f, int x, int y, Rectangle h, String skin) {
-		super(h);
+	public Nave(Fila f, int col, int x, int y, String skin) {
 		fila = f;
-
+		columna = col;
 		//precio =
 		contadorC = 0;
 		//String s =
 		naveG = new NaveGrafica(x,y,skin);
+		setHitbox(naveG.getBounds());
+		vida = 100;
 
 	}
 
@@ -38,7 +40,10 @@ public abstract class Nave extends ObjetoColisionable{
 		return precio;
 	}
 	
-	public void destruir(){}
+	public void destruir(){
+		System.out.println("Destrui la nave");
+		fila.removerNave(this);
+	}
 
 	public abstract void pasoXTiempo();
 
@@ -60,6 +65,14 @@ public abstract class Nave extends ObjetoColisionable{
 
 	public NaveGrafica getNaveG(){
 		return naveG;
+	}
+
+	public int getColumna(){
+		return columna;
+	}
+
+	public int getVida(){
+		return vida;
 	}
 
 }

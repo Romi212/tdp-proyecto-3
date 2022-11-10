@@ -23,18 +23,18 @@ public class FactoryDia implements ObjectsFactory{
 		return new AlienDia3(x, y);
 	}
 
-	public Nave createNaveA(Fila f, int x, int y) {
-		return new NaveDiaA(f, x, y,new Rectangle(x,y,74,74));
+	public Nave createNaveA(Fila f, int col, int x, int y) {
+		return new NaveDiaA(f, col, x, y);
 	} //Dispara simple
 
-	public Nave createNaveB(Fila f, int x, int y) {
-		return new NaveDiaB(f, x, y,new Rectangle(x,y,74,74));
+	public Nave createNaveB(Fila f, int col, int x, int y) {
+		return new NaveDiaB(f, col, x, y);
 	} //Disparo doble
 
-	public Nave createNaveC(Fila f, int x, int y) { return new NaveDiaC(f, x, y,new Rectangle(x,y,74,74)); } //Afecta todos los aliens de la fila
+	public Nave createNaveC(Fila f, int col, int x, int y) { return new NaveDiaC(f, col,x, y); } //Afecta todos los aliens de la fila
 
-	public Nave createSatelite(Fila f, int x, int y) {
-		return new Satelite(f, x, y,new Rectangle(x,y,74,74));
+	public Nave createSatelite(Fila f, int col, int x, int y) {
+		return new Satelite(f,col, x, y);
 	}
 
 

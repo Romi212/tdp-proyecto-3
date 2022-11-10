@@ -8,8 +8,6 @@ public class NaveGrafica extends ObjetoGrafico {
     protected String skin;
 
     public NaveGrafica(int x, int y, String skin){
-        //this.setAlignmentX(x);
-        //this.setAlignmentY(y);
         this.skin = skin;
         this.setBounds(x, y, 70, 70);
     }
