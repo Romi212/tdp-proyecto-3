@@ -120,9 +120,11 @@ public class Logica {
 
         M_Aliens = new ManejadorAliens(aliens,this, tablero,fin);
 
-        M_Naves = new ManejadorNaves();
+        M_Naves = new ManejadorNaves(tablero);
 
         M_Aliens.start();
+
+        M_Naves.start();
 
     }
 
@@ -158,13 +160,13 @@ public class Logica {
     }
 
     public void agregarNave(int x, int y,int fila, int columna, int tipo){
-        Rectangle rect = null;
+
         Nave n = null;
         switch (tipo){
-            case 1:   n = factory.createNaveA(tablero[fila], x, y, rect); break;
-            case 2:   n = factory.createNaveB(tablero[fila], x, y, rect); break;
-            case 3:   n = factory.createNaveC(tablero[fila], x, y, rect); break;
-            case 4:   n = factory.createSatelite(tablero[fila], x, y, rect); break;
+            case 1:   n = factory.createNaveA(tablero[fila], x, y); break;
+            case 2:   n = factory.createNaveB(tablero[fila], x, y); break;
+            case 3:   n = factory.createNaveC(tablero[fila], x, y); break;
+            case 4:   n = factory.createSatelite(tablero[fila], x, y); break;
         }
         tablero[fila].agregarNave(n, columna);
         ventana.agregarObjeto(n.getNaveG());

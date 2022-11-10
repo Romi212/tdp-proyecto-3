@@ -32,6 +32,7 @@ public class Fila {
 		}
 
 		listaAliens = new LinkedList<>();
+		listaProyectiles = new LinkedList<>();
 	}
 
 	private void removerAlien(Alien z){
@@ -61,6 +62,7 @@ public class Fila {
 
 	public void agregarProyectil(Proyectil p){
 		listaProyectiles.addLast(p);
+		logica.agregarObjetoGrafico(p.getProyectilGrafico());
 	}
 	
 	public void agregarSol(Sol s){
@@ -76,6 +78,14 @@ public class Fila {
 		}
 		return l;
 		
+	}
+
+	public Iterable<Nave> getNaves(){
+		LinkedList<Nave> naves = new LinkedList<>();
+		for(Nave n: listaNaves){
+			if(n != null) naves.add(n);
+		}
+		return naves;
 	}
 
 	public int getxIni(){

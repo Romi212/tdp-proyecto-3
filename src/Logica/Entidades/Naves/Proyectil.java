@@ -11,8 +11,8 @@ public class Proyectil extends ObjetoColisionable {
 	
 	
 	
-	public Proyectil(int x, int y, Rectangle h) {
-		super(h);
+	public Proyectil(int x, int y) {
+		super( new Rectangle(x,y,32,14));
 		estaVivo = true;
 		proyectilGrafico = new ProyectilGrafico(x,y);
 
@@ -32,7 +32,7 @@ public class Proyectil extends ObjetoColisionable {
 		v.colisionProyectilAlien(this);
 	}
 	public void pasoXTiempo() {
-
+		proyectilGrafico.moverPixeles(10);
 	}
 	public ProyectilGrafico getProyectilGrafico() {
 		return proyectilGrafico;

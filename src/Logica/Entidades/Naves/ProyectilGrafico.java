@@ -12,12 +12,13 @@ public class ProyectilGrafico extends ObjetoGrafico {
     public ProyectilGrafico(int x, int y){
         this.setAlignmentX(x);
         this.setAlignmentY(y);
-        imagen = "";
+        imagen = "proyectil";
+        this.setBounds(x,y,32,14);
 
     }
 
     public void moverPixeles(int cant){
-        this.setAlignmentX(this.getAlignmentX()+cant);
+        this.setBounds(this.getX()+cant,this.getY(),32,14);
         this.repaint();
     }
 
