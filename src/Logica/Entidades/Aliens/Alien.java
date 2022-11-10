@@ -18,10 +18,10 @@ public abstract class Alien implements Visitor{
 	protected int velocidad;
 
 	
-	public Alien(int x, int y, Rectangle h, String c){
+	public Alien(int x, int y, String c){
 		alienG = new AlienGrafico(x, y, c);
 		estado = new AlienCaminando(this);
-		hitbox = h;
+		hitbox = alienG.getBounds();
 		vida = 100;
 		fila = -1;
 		velocidad = 5;

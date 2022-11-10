@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class AlienNoche3 extends Alien{
 
-	public AlienNoche3(int x, int y, Rectangle h) {
-		super(x, y, h, "alienCNocheImg");
+	public AlienNoche3(int x, int y) {
+		super(x, y, "alienCNocheImg");
 	}
 
 }

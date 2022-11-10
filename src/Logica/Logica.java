@@ -100,15 +100,15 @@ public class Logica {
             int tipo = rand.nextInt(3);
             switch(tipo){
                 case 0:
-                    a = factory.createAlien1(posx, posy, hitbox);
+                    a = factory.createAlien1(posx, posy);
                     cantAlien1--;
                     break;
                 case 1:
-                    a = factory.createAlien2(posx, posy, hitbox);
+                    a = factory.createAlien2(posx, posy);
                     cantAlien2--;
                     break;
                 case 2:
-                    a = factory.createAlien3(posx, posy, hitbox);
+                    a = factory.createAlien3(posx, posy);
                     cantAlien3--;
                     break;
             }

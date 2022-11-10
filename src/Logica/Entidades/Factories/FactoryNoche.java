@@ -15,16 +15,16 @@ import java.awt.*;
 
 public class FactoryNoche implements ObjectsFactory{
 
-	public Alien createAlien1(int x, int y, Rectangle h) {
-		return new AlienNoche1(x, y, h);
+	public Alien createAlien1(int x, int y) {
+		return new AlienNoche1(x, y);
 	} //Robot
 
-	public Alien createAlien2(int x, int y, Rectangle h) {
-		return new AlienNoche2(x, y, h);
+	public Alien createAlien2(int x, int y) {
+		return new AlienNoche2(x, y);
 	}  //Chubby verde
 
-	public Alien createAlien3(int x, int y, Rectangle h) {
-		return new AlienNoche3(x, y, h);
+	public Alien createAlien3(int x, int y) {
+		return new AlienNoche3(x, y);
 	} //Dragon
 
 	public Nave createNaveA(Fila f, int x, int y) {

@@ -58,7 +58,7 @@ public class Ventana  {
 		//Creamos properties para leer las path de las imagenes
 		p = new Properties();
 
-		InputStream input = getClass().getResourceAsStream("/archivos/configDia.properties");
+		InputStream input = getClass().getResourceAsStream("/resources/archivos/configDia.properties");
 
 
 		try {
@@ -275,11 +275,11 @@ public class Ventana  {
 	private void organizarVentana(int modo){
 		InputStream input;
 		if(modo == MODO_DIA){
-			input = getClass().getResourceAsStream("/archivos/configDia.properties");
+			input = getClass().getResourceAsStream("/resources/archivos/configDia.properties");
 
 
 		} else{
-			input = getClass().getResourceAsStream("/archivos/configNoche.properties");
+			input = getClass().getResourceAsStream("/resources/archivos/configNoche.properties");
 		}
 		try {
 			p.load(input);

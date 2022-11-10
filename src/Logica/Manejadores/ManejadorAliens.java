@@ -64,7 +64,7 @@ public class ManejadorAliens extends Thread {
 
                     a.hacerAccion();
                     try {
-                        sleep(50);
+                        sleep(20);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
