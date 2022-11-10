@@ -6,7 +6,6 @@ import Logica.Entidades.ObjetoGrafico;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
 //import java.net.URL;
@@ -59,14 +58,14 @@ public class Ventana  {
 		//Creamos properties para leer las path de las imagenes
 		p = new Properties();
 
-		InputStream input = getClass().getResourceAsStream("/resources/archivos/config.properties");
+		InputStream input = getClass().getResourceAsStream("/archivos/configDia.properties");
+
 
 		try {
 			p.load(input);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-
 		tablero = new Casilla[6][9];
 
 		botonera = new LinkedList<>();
@@ -254,25 +253,47 @@ public class Ventana  {
 		elegirModo.setSelectedIndex(0);
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
 		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {
+
+
 			toReturn=MODO_DIA;
-			player = new Musica(p.getProperty("musicaDia"));
-			//CAMBIAR BOTONES A FOTO Nave DIA
-			for(int i =0; i<botonera.size();i++){
-				ponerFotoNave(botonera.get(i), "botonNave"+(i+1));
-			}
+
 
 
 
 		}
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){
 			toReturn=MODO_NOCHE;
-			player = new Musica(p.getProperty("musicaNoche"));
+
 		}
 
-		player.play();
+
+		organizarVentana(toReturn);
 		return toReturn;
 	}
 
+
+	private void organizarVentana(int modo){
+		InputStream input;
+		if(modo == MODO_DIA){
+			input = getClass().getResourceAsStream("/archivos/configDia.properties");
+
+
+		} else{
+			input = getClass().getResourceAsStream("/archivos/configNoche.properties");
+		}
+		try {
+			p.load(input);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		player = new Musica(p.getProperty("musica"));
+		//CAMBIAR BOTONES A FOTO Nave DIA
+		for(int i =0; i<botonera.size();i++){
+			ponerFotoNave(botonera.get(i), "botonNave"+(i+1));
+		}
+		player.play();
+
+	}
 	private void ponerFotoNave(JToggleButton botonNave, String clave){
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(clave)));
 		Image img = ic.getImage();
