@@ -78,11 +78,15 @@ public abstract class Alien implements Visitor{
 	}
 
 	public void colisionProyectilAlien(Proyectil p){
-		if(vida - p.getDanio() > 0)
-			vida -= p.getDanio();
-		else
-			vida = 0;
-		p.destruir();
+		if(chequearColision(p) && p.estaVivo()){
+			if(vida - p.getDanio() > 0)
+				vida -= p.getDanio();
+			else
+				vida = 0;
+			p.destruir();
+			System.out.println("vida: "+vida);
+		}
+
 	}
 
 

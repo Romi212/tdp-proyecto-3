@@ -62,20 +62,23 @@ public class ManejadorAliens extends Thread {
                 Iterable<Alien> aliensFila= f.getAliens();
                 for(Alien a: aliensFila){
                     hayZombies = true;
+                    if(a.estaViva()==false) f.removerAlien(a);
+                    else{
+                        a.hacerAccion();
+                        try {
+                            sleep(20);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
 
-                    a.hacerAccion();
-                    try {
-                        sleep(20);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                        if(f.hayNaveEnFila()) {
+                            Iterable<ObjetoColisionable> objetos = f.getColisionables();
+                            //Las filas vacias tiene como primer elemento a el null de la primera nave
+                            //System.out.println("Cantidad de objetos colisionables en fila: " + f.getColisionables().size());
+                            for (ObjetoColisionable o : objetos) {
+                                o.accept(a);
+                            }
 
-                    if(f.hayNaveEnFila()) {
-                        Iterable<ObjetoColisionable> objetos = f.getColisionables();
-                        //Las filas vacias tiene como primer elemento a el null de la primera nave
-                        //System.out.println("Cantidad de objetos colisionables en fila: " + f.getColisionables().size());
-                        for (ObjetoColisionable o : objetos) {
-                            o.accept(a);
                         }
 
                     }

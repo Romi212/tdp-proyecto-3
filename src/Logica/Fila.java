@@ -37,6 +37,7 @@ public class Fila {
 
 	public void removerAlien(Alien z){
 		 listaAliens.remove(z);
+		 logica.sacarObjeto(z.getAlienG());
 	}
 
 	public void removerNave(Nave n){
@@ -56,13 +57,20 @@ public class Fila {
 
 	public void removerProyectil(Proyectil p){
 		listaProyectiles.remove(p);
+
 	}
 
 	public LinkedList<Alien> getAliens(){
 		return listaAliens;
 	}
 
-	public LinkedList<Proyectil> getProyectiles(){
+	synchronized public LinkedList<Proyectil> getProyectiles(){
+		for(Proyectil p : listaProyectiles){
+			if(!p.estaVivo()) {
+				//listaProyectiles.remove(p);
+				logica.sacarObjeto(p.getProyectilGrafico());
+			}
+		}
 		return listaProyectiles;
 	}
 
@@ -96,10 +104,17 @@ public class Fila {
 	public LinkedList<ObjetoColisionable> getColisionables() {
 		LinkedList<ObjetoColisionable> l = new LinkedList<ObjetoColisionable>();
 		l.addLast(primeraNave);
-		Iterator<Proyectil> lP = listaProyectiles.iterator();
-		while(lP.hasNext()) {
-			l.addLast(lP.next());
+
+		for(Proyectil p : getProyectiles()){
+			l.addLast(p);
+
 		}
+		//Iterator<Proyectil> lP = listaProyectiles.iterator();
+		//while(lP.hasNext()) {
+		//	Proyectil p = lP.next();
+		//	if(p.estaVivo()) l.addLast(p);
+		//	//else listaProyectiles.remove(p);
+		//}
 		return l;
 		
 	}
