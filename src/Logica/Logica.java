@@ -83,6 +83,7 @@ public class Logica {
         int cantAlien3 = Integer.parseInt(lineas.getItem(2));
         soles  = Integer.parseInt(lineas.getItem(3));
 
+        ventana.actualizarSoles(soles);
         Random rand = new Random();
         int filaElegida;
         int posx;
@@ -158,6 +159,7 @@ public class Logica {
 
     public void aumentarSoles(int cant){
         soles = soles+ cant;
+        ventana.actualizarSoles(soles);
     }
 
     public void agregarNave(int x, int y,int fila, int columna, int tipo){

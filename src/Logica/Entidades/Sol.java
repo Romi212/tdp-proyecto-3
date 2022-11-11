@@ -3,6 +3,14 @@ package Logica.Entidades;
 import javax.swing.*;
 
 public class Sol extends ObjetoGrafico {
+
+    private SolGrafico solG;
+    public Sol(int x, int y){
+        //solG = solG.getInstance();
+        this.setBounds(200,y,30,30);
+
+
+    }
 	public void actionPerformed(){
 
     }
@@ -10,6 +18,6 @@ public class Sol extends ObjetoGrafico {
 
     @Override
     public String getRefImagen() {
-        return null;
+        return "sol";
     }
 }

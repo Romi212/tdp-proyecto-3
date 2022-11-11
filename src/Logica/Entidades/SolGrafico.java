@@ -7,7 +7,7 @@ public class SolGrafico {
 	private String imagen;
 	
 	private SolGrafico() {
-		//imagen = 
+		imagen = "sol";
 	}
 	
 	public SolGrafico getInstance() {

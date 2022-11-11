@@ -5,6 +5,8 @@ import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.Proyectil;
 import Logica.Fila;
 
+import java.util.Iterator;
+
 public class ManejadorNaves extends Thread {
     private int contadorSoles;
 
@@ -24,9 +26,11 @@ public class ManejadorNaves extends Thread {
             }
 
             for(Fila f: tablero){
-                Iterable<Proyectil> proyectiles = f.getProyectiles();
-                for(Proyectil p : proyectiles){
-                    p.pasoXTiempo();
+                Iterator<Proyectil> proyectiles = f.getProyectiles();
+
+
+                while (proyectiles.hasNext()){
+                    proyectiles.next().pasoXTiempo();
                 }
                 Iterable<Nave> naves = f.getNaves();
 

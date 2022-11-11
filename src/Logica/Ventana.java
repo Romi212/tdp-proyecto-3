@@ -47,7 +47,7 @@ public class Ventana  {
 	private MouseListener mouseListener;
 	private Casilla[][] tablero;
 
-
+	private JLabel soles;
 
 	private JMenuBar menuBotonera;
 	/**
@@ -80,6 +80,7 @@ public class Ventana  {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frmLaHorda.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLaHorda.getContentPane().setLayout(null);
+		frmLaHorda.setBackground(Color.BLACK);
 
 		//Paneles
 		layeredPane = new JLayeredPane();
@@ -179,6 +180,11 @@ public class Ventana  {
 		fondo.setIcon(fondito);
 		
 		panelFondo.add(fondo);
+
+		soles = new JLabel("PRUEBA");
+		panelBotonera.add(soles);
+		soles.setBounds(100,20,100,20);
+		soles.setForeground(Color.white);
 
 
 
@@ -372,6 +378,10 @@ public class Ventana  {
 
 
 
+	}
+
+	public void actualizarSoles(int cant){
+		soles.setText(""+cant);
 	}
 }
 

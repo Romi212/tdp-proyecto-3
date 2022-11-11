@@ -10,10 +10,17 @@ public abstract class NaveSol extends Nave {
         super(f,col,x,y, skin);
     }
 
-    public void pasoXTiempo(){}
+    public void pasoXTiempo(){
+        contadorC ++;
+        if(contadorC >= 5){
+            contadorC = 0;
+            generarSol();
+        }
+
+    }
     
     public void generarSol(){
-        Sol s = new Sol();
+        Sol s = new Sol(naveG.getBounds().x,naveG.getBounds().y);
         fila.agregarSol(s);
     }
 }
