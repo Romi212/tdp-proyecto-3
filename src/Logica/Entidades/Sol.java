@@ -1,21 +1,34 @@
 package Logica.Entidades;
+import Logica.Entidades.Naves.Nave;
+import Logica.Entidades.Naves.Proyectil;
+import Logica.Fila;
+import Logica.Ventana;
+import Logica.Entidades.SolGrafico;
 
-import javax.swing.*;
+import java.util.Iterator;
 
-public class Sol extends ObjetoGrafico {
+public class Sol{
+    protected SolGrafico solG;
+    protected int solesDelJugador;
+    protected final int solesInicialesDelJugador = 300;
+    private final int aumento = 25;
+    private Ventana ventana;
+    private final int TIEMPO = 200;
 
-    private SolGrafico solG;
     public Sol(int x, int y){
-        //solG = solG.getInstance();
-        this.setBounds(200,y,30,30);
+        solG = new SolGrafico(x,y,this);
+        solesDelJugador = solesInicialesDelJugador;
     }
-	public void actionPerformed(){
+    public SolGrafico getSolGrafico(){ return solG; }
 
+    /* Actualiza los soles del jugador, tanto la variable como en pantalla */
+    public void aumentarSoles(){
+        solesDelJugador =+ aumento;
+        ventana.actualizarSoles(solesDelJugador);
     }
 
+    public void quitarSolG(){ ventana.sacarObjeto(solG); }
 
-    @Override
-    public String getRefImagen() {
-        return "sol";
-    }
+    public void mostrarEnPantalla(){ ventana.agregarObjeto(solG); }
+
 }

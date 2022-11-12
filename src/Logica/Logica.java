@@ -35,7 +35,6 @@ public class Logica {
 
     private Ventana ventana;
     private Properties p;
-
     private int xIni;
     private int yIni;
     private int sizeC;

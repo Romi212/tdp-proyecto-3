@@ -5,7 +5,7 @@ import Logica.Fila;
 import java.awt.*;
 
 public abstract class NaveDisparo extends Nave{
-
+    protected static final int MAXTIEMPO = 10;
     public NaveDisparo(Fila f, int col, int x, int y, String skin){
         super(f, col, x, y, skin);
     }
@@ -13,7 +13,7 @@ public abstract class NaveDisparo extends Nave{
     public void pasoXTiempo(){
         contadorC ++;
         System.out.println(contadorC);
-        if(contadorC == 10){
+        if(contadorC == MAXTIEMPO){
             contadorC = 0;
             generarProyectil((int)getHitBox().getCenterX(), (int)getHitBox().getCenterY());
         }

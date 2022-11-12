@@ -8,6 +8,7 @@ import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Entidades.Naves.Proyectil;
 import Logica.Entidades.Sol;
+import Logica.Entidades.SolGrafico;
 import Logica.Manejadores.ManejadorAliens;
 
 public class Fila {
@@ -19,7 +20,6 @@ public class Fila {
 	protected int xIni;
 	protected int yIni;
 	protected int tam;
-
 
 	public Fila(Logica l,int xinicial, int yInicial, int tam){
 		xIni = xinicial;
@@ -57,7 +57,6 @@ public class Fila {
 
 	public void removerProyectil(Proyectil p){
 		listaProyectiles.remove(p);
-
 	}
 
 	public LinkedList<Alien> getAliens(){
@@ -98,7 +97,7 @@ public class Fila {
 		logica.agregarObjetoGrafico(p.getProyectilGrafico());
 	}
 	
-	public void agregarSol(Sol s){
+	public void agregarSol(SolGrafico s){
 		logica.agregarObjetoGrafico(s);
 	}
 	
@@ -149,13 +148,8 @@ public class Fila {
 		return listaNaves.length;
 	}
 
-
 	public boolean estaOcupada(int col){
 		return listaNaves[col]!= null;
 	}
-
-
-
-
 
 }

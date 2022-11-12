@@ -7,11 +7,11 @@ import Logica.Fila;
 
 import java.util.Iterator;
 
+/* Cuando pasa una cantidad determinada de milisegundos recorre todos los proyectiles y naves de las filas notificando que paso el tiempo.
+*  Estos se mueven, disparan o generan soles segun se especifique en el metodo invocado */
 public class ManejadorNaves extends Thread {
-    private int contadorSoles;
-
     private Fila[] tablero;
-
+    private final int TIEMPO = 100;
     public ManejadorNaves(Fila[] filas){
         tablero = filas;
     }
@@ -19,15 +19,13 @@ public class ManejadorNaves extends Thread {
     public void run(){
         while (true){
             try {
-                sleep(100);
-                System.out.println("Paso X Tiempo");
+                sleep(TIEMPO);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
             for(Fila f: tablero){
                 Iterator<Proyectil> proyectiles = f.getProyectiles();
-
 
                 while (proyectiles.hasNext()){
                     proyectiles.next().pasoXTiempo();
@@ -39,9 +37,7 @@ public class ManejadorNaves extends Thread {
                 }
             }
 
-    }}
-
-
-
+        }
+    }
 
 }

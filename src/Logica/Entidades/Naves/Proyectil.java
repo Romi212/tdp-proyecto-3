@@ -9,8 +9,6 @@ public class Proyectil extends ObjetoColisionable {
 	protected boolean estaVivo;
 	protected ProyectilGrafico proyectilGrafico;
 	
-	
-	
 	public Proyectil(int x, int y) {
 		estaVivo = true;
 		proyectilGrafico = new ProyectilGrafico(x,y);

@@ -94,36 +94,7 @@ public class Ventana  {
 		panelBotonera.setLayout(null);
 		panelBotonera.setOpaque(false);
 		panelBotonera.setBackground(null);
-		//frmLaHorda.getContentPane().add(panelBotonera);
 		layeredPane.add(panelBotonera);
-
-
-
-		JScrollPane scrollBotonera = new JScrollPane();
-		scrollBotonera.setBorder(null);
-		scrollBotonera.setBounds(250, 11, 400, 60);
-		scrollBotonera.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER);
-		scrollBotonera.setBackground(Color.BLACK);
-		panelBotonera.add(scrollBotonera);
-
-		menuBotonera = new JMenuBar();
-		menuBotonera.setBackground(Color.BLACK);
-		GridBagConstraints  gbc = new GridBagConstraints ();
-		gbc.weightx = 0.005;
-		menuBotonera.setLayout(new GridBagLayout());
-		for(int i = 0; i<3; i++){
-			JToggleButton botonNave = new JToggleButton();
-			botonNave.setBounds(250,10, size,size);
-			botonNave.addActionListener(e -> elegirDondeNave(botonNave));
-			botonNave.setBorder(null);
-			menuBotonera.add(botonNave, gbc);
-			botonera.add(botonNave);
-		}
-
-
-		scrollBotonera.setViewportView(menuBotonera);
-		//panelBotonera.add(botonNave1);
-		//panelBotonera.add(botonNave2);
 
 		JButton Bmusica = new JButton();
 		Bmusica.setBackground(Color.green);
@@ -145,6 +116,33 @@ public class Ventana  {
 		});
 		panelBotonera.add(Bmusica);
 
+		JScrollPane scrollBotonera = new JScrollPane();
+		scrollBotonera.setBorder(null);
+		scrollBotonera.setBounds(250, 11, 400, 60);
+		scrollBotonera.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER);
+		scrollBotonera.setBackground(Color.BLACK);
+
+	    menuBotonera = new JMenuBar();
+		menuBotonera.setBackground(Color.BLACK);
+		GridBagConstraints  gbc = new GridBagConstraints ();
+		gbc.weightx = 0.005;
+		menuBotonera.setLayout(new GridBagLayout());
+
+		ButtonGroup bg = new ButtonGroup();
+		for(int i = 0; i<4; i++){
+			JToggleButton botonNave = new JToggleButton();
+			botonNave.setBounds(250,10, size,size);
+			botonNave.addActionListener(e -> elegirDondeNave(botonNave));
+			botonNave.setBorder(null);
+
+			bg.add(botonNave);
+			menuBotonera.add(botonNave);
+			botonera.add(botonNave);
+		}
+
+		scrollBotonera.setViewportView(menuBotonera);
+		panelBotonera.add(scrollBotonera);
+
 		//Panel de Objetos
 		panelObjetos = new JPanel();
 		
@@ -153,10 +151,6 @@ public class Ventana  {
 		panelObjetos.setLayout(null);
 		panelObjetos.setOpaque(false);
 		panelObjetos.setBackground(null);
-
-
-
-
 
 		JPanel panelFondo = new JPanel();
 		//panelFondo.setBackground(new Color(255, 102, 255));
@@ -181,15 +175,10 @@ public class Ventana  {
 		
 		panelFondo.add(fondo);
 
-		soles = new JLabel("PRUEBA");
+		soles = new JLabel(p.getProperty("labelRecolectados"));
 		panelBotonera.add(soles);
 		soles.setBounds(100,20,100,20);
 		soles.setForeground(Color.white);
-
-
-
-
-
 
 		for(int i = 0; i<6 ; i++){
 			for(int j = 0; j<9;j++){
@@ -199,7 +188,6 @@ public class Ventana  {
 				c.setEnabled(false);
 				c.setBounds( inicioTableroX+ (size*j),inicioTableroY+(size*i), size,size);
 				panelObjetos.add(c);
-				//Rectangle r = new Rectangle(344 + (size*j),230+(size*i), size,size);
 				tablero[i][j] = c;
 			}
 		}
@@ -274,7 +262,7 @@ public class Ventana  {
 
 		//CAMBIAR BOTONES A FOTO Nave DIA
 		for(int i =0; i<botonera.size();i++){
-			ponerFotoNave(botonera.get(i), "botonNave"+(i+1));
+			ponerFotoNave(botonera.get(i), i+1);
 		}
 
 		//Se inicializa el reproductor y comienza la musica
@@ -282,21 +270,22 @@ public class Ventana  {
 		player.play();
 
 	}
-	private void ponerFotoNave(JToggleButton botonNave, String clave){
-		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(clave)));
+	private void ponerFotoNave(JToggleButton botonNave, int nro){
+		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("botonNave"+nro)));
 		Image img = ic.getImage();
 
 		Image newImg = img.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
 		ic = new ImageIcon(newImg);
 
 		botonNave.setIcon(ic);
-		ImageIcon ic2 = new ImageIcon(getClass().getResource(p.getProperty(clave+"S")));
+		ImageIcon ic2 = new ImageIcon(getClass().getResource(p.getProperty("botonNave"+nro+"S")));
 		Image img2 = ic2.getImage();
 
 		Image newImg2 = img2.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
 		ic2 = new ImageIcon(newImg2);
 
 		botonNave.setSelectedIcon(ic2);
+		botonNave.setToolTipText(p.getProperty("tooltip"+nro));
 		//botonNave.setSelectedIcon(new ImageIcon(getClass().getResource(p.getProperty("botonNaveS"))));
 	}
 
