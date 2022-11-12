@@ -23,7 +23,6 @@ import java.util.stream.Stream;
 
 public class Logica {
 
-    private int soles;
     private int nivel;
     private ObjectsFactory factory;
     private String[] archivos;
@@ -81,9 +80,7 @@ public class Logica {
         int cantAlien1 = Integer.parseInt(lineas.getItem(0));
         int cantAlien2 = Integer.parseInt(lineas.getItem(1));
         int cantAlien3 = Integer.parseInt(lineas.getItem(2));
-        soles  = Integer.parseInt(lineas.getItem(3));
 
-        ventana.actualizarSoles(soles);
         Random rand = new Random();
         int filaElegida;
         int posx;
@@ -133,7 +130,7 @@ public class Logica {
 
     public void empezarJuego() {
         int modo = elegirModoDeJuego();
-        //Se crean las factoies correspondientes y los archivos
+        //Se crean las factories correspondientes y los archivos
         if (modo == 0) {
             archivos = new String[2];
             archivos[0] = "archivoD1";
@@ -153,13 +150,6 @@ public class Logica {
 
         crearNivel(0);
 
-
-
-    }
-
-    public void aumentarSoles(int cant){
-        soles = soles+ cant;
-        ventana.actualizarSoles(soles);
     }
 
     public void agregarNave(int x, int y,int fila, int columna, int tipo){

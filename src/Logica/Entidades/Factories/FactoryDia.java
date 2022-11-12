@@ -31,10 +31,10 @@ public class FactoryDia implements ObjectsFactory{
 		return new NaveDiaB(f, col, x, y);
 	} //Disparo doble
 
-	public Nave createNaveC(Fila f, int col, int x, int y) { return new NaveDiaC(f, col,x, y); } //Afecta todos los aliens de la fila
+	public Nave createNaveC(Fila f, int col, int x, int y) { return new NaveDiaC(f, col, x, y); } //Afecta todos los aliens de la fila
 
 	public Nave createSatelite(Fila f, int col, int x, int y) {
-		return new Satelite(f,col, x, y);
+		return new Satelite(f, col, x, y);
 	}
 
 

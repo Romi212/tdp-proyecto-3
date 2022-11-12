@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class NaveNocheA extends NaveDisparo{
 	
 	 public NaveNocheA(Fila f, int col, int x, int y){
-		 super(f, col, x, y,"naveAbImg");
+		 super(f, col, x, y,"naveAImg");
 	 }
 
 }

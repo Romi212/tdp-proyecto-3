@@ -9,7 +9,7 @@ public class Musica {
     protected boolean reproduciendo;
     protected long posicionPausa;
     protected Clip clip;
-    public Musica(String path){ System.out.println(path); this.archivo = path; }
+    public Musica(String path){ this.archivo = path; }
 
     //inicia el hilo
     public void play(){

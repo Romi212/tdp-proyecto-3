@@ -213,23 +213,12 @@ public class Ventana  {
 
 	public void agregarObjeto(ObjetoGrafico o){
 		String ref = o.getRefImagen();
-	 //	System.out.println("La referencia es: " + ref);
-		//String ref = "naveAImg";
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
 		Image img = ic.getImage();
 
 		Image newImg = img.getScaledInstance(o.getBounds().width, o.getBounds().height, Image.SCALE_DEFAULT);
 		ic = new ImageIcon(newImg);
 		o.setIcon(ic);
-
-		//Image image = ic.getImage();
-
-		//Image newimg = image.getScaledInstance(size, size,  java.awt.Image.SCALE_SMOOTH);
-		//ic = new ImageIcon(newimg);
-
-		//o.setIcon(ic);
-
-
 
 		panelObjetos.add(o);
 		o.repaint();
@@ -261,32 +250,19 @@ public class Ventana  {
 		ventanaModo.add(elegirModo);
 		elegirModo.setSelectedIndex(0);
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
-		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {
 
-
-			toReturn=MODO_DIA;
-
-
-
-
-		}
-		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){
-			toReturn=MODO_NOCHE;
-
-		}
-
+		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {  toReturn=MODO_DIA;  }
+		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){  toReturn=MODO_NOCHE; }
 
 		organizarVentana(toReturn);
 		return toReturn;
 	}
 
-
+    /* Inicializa Properties segun el modo que elige el usuario, inserta las imagenes de los botones e inicia el reoductor de musica */
 	private void organizarVentana(int modo){
 		InputStream input;
 		if(modo == MODO_DIA){
 			input = getClass().getResourceAsStream("/resources/archivos/configDia.properties");
-
-
 		} else{
 			input = getClass().getResourceAsStream("/resources/archivos/configNoche.properties");
 		}
@@ -295,11 +271,14 @@ public class Ventana  {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		player = new Musica(p.getProperty("musica"));
+
 		//CAMBIAR BOTONES A FOTO Nave DIA
 		for(int i =0; i<botonera.size();i++){
 			ponerFotoNave(botonera.get(i), "botonNave"+(i+1));
 		}
+
+		//Se inicializa el reproductor y comienza la musica
+		player = new Musica(p.getProperty("musica"));
 		player.play();
 
 	}
@@ -322,9 +301,6 @@ public class Ventana  {
 	}
 
 	private void elegirDondeNave(JToggleButton b){
-
-
-
 
 		if(b.isSelected()){
 			for(int i = 0; i<6 ; i++){
@@ -375,8 +351,6 @@ public class Ventana  {
 			panelObjetos.removeMouseListener(mouseListener);
 		}
 	//	System.out.println("Tipo: " + tipo);
-
-
 
 	}
 

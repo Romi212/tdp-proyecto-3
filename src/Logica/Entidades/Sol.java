@@ -8,8 +8,6 @@ public class Sol extends ObjetoGrafico {
     public Sol(int x, int y){
         //solG = solG.getInstance();
         this.setBounds(200,y,30,30);
-
-
     }
 	public void actionPerformed(){
 
