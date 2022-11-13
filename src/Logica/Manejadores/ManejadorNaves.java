@@ -3,9 +3,12 @@ package Logica.Manejadores;
 
 import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.Proyectil;
+import Logica.Entidades.Sol;
+import Logica.Entidades.SolGrafico;
 import Logica.Fila;
 
 import java.util.Iterator;
+import java.util.Random;
 
 /* Cuando pasa una cantidad determinada de milisegundos recorre todos los proyectiles y naves de las filas notificando que paso el tiempo.
 *  Estos se mueven, disparan o generan soles segun se especifique en el metodo invocado */
@@ -15,6 +18,8 @@ public class ManejadorNaves extends Thread {
     public ManejadorNaves(Fila[] filas){
         tablero = filas;
     }
+
+    private int contador;
 
     public void run(){
         while (true){
@@ -36,7 +41,13 @@ public class ManejadorNaves extends Thread {
                     n.pasoXTiempo();
                 }
             }
-
+            contador++;
+            if(contador == 30){
+                Random rand = new Random();
+                int posy = rand.nextInt(600) +300;
+                tablero[0].agregarSol(new Sol(posy,10).getSolGrafico());
+                contador = 0;
+            }
         }
     }
 

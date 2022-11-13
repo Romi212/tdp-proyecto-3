@@ -329,7 +329,8 @@ public class Ventana  {
 
 			int precio = 0;
 			if (botonera.get(0).isSelected()) {
-				botonera.get(0).setSelected(false);
+				botonera.get(0).setSelected(true);
+				botonera.get(0).repaint();
 				tipo = 4;
 				precio = 50;
 				//Precio = ALGO
