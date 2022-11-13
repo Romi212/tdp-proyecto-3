@@ -59,25 +59,20 @@ public class ManejadorAliens extends Thread {
                 Iterable<Alien> aliensFila= f.getAliens();
                 for(Alien a: aliensFila){
                     hayZombies = true;
-                    if(a.estaViva()==false) f.removerAlien(a);
-                    else{
-                        a.hacerAccion();
-                        try {
-                            sleep(20);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+                    a.hacerAccion();
+                    try {
+                        sleep(20);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
 
-                        if(f.hayNaveEnFila()) {
-                            Iterable<ObjetoColisionable> objetos = f.getColisionables();
-                            for (ObjetoColisionable o : objetos) {
-                                o.accept(a);
-                            }
-
+                    if(f.hayNaveEnFila()) {
+                        Iterable<ObjetoColisionable> objetos = f.getColisionables();
+                        for (ObjetoColisionable o : objetos) {
+                            o.accept(a);
                         }
 
                     }
-
 
                 }
             }

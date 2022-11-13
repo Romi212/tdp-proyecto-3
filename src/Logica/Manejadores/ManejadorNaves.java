@@ -25,10 +25,10 @@ public class ManejadorNaves extends Thread {
             }
 
             for(Fila f: tablero){
-                Iterator<Proyectil> proyectiles = f.getProyectiles();
+                Iterable<Proyectil> proyectiles = f.getProyectiles();
 
-                while (proyectiles.hasNext()){
-                    proyectiles.next().pasoXTiempo();
+                for(Proyectil p: proyectiles){
+                    p.pasoXTiempo();
                 }
                 Iterable<Nave> naves = f.getNaves();
 

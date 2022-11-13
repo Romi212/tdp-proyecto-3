@@ -1,7 +1,9 @@
 package Logica;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.Naves.Nave;
@@ -35,10 +37,6 @@ public class Fila {
 		listaProyectiles = new LinkedList<>();
 	}
 
-	public void removerAlien(Alien z){
-		 listaAliens.remove(z);
-		 logica.sacarObjeto(z.getAlienG());
-	}
 
 	public void removerNave(Nave n){
 		logica.sacarObjeto(n.getNaveG());
@@ -60,18 +58,30 @@ public class Fila {
 	}
 
 	public LinkedList<Alien> getAliens(){
+		List<Alien> eliminados = new ArrayList<Alien>();
+		for(Alien a : listaAliens){
+			if(!a.estaViva()){
+				eliminados.add(a);
+				logica.sacarObjeto(a.getAlienG());
+			}
+		}
+
+		listaAliens.removeAll(eliminados);
+
 		return listaAliens;
 	}
 
-	synchronized public Iterator<Proyectil> getProyectiles(){
-		LinkedList<Proyectil> lista = new LinkedList<>();
+	public LinkedList<Proyectil> getProyectiles(){
+		List<Proyectil> eliminados = new ArrayList<Proyectil>();
 		for(Proyectil p : listaProyectiles){
 			if(!p.estaVivo()) {
-				//listaProyectiles.remove(p);
+				eliminados.add(p);
 				logica.sacarObjeto(p.getProyectilGrafico());
-			}else 	lista.add(p);
+			}
+
 		}
-		return lista.iterator();
+		listaProyectiles.removeAll(eliminados);
+		return listaProyectiles;
 	}
 
 	public Nave getPrimerNave(){
@@ -104,9 +114,9 @@ public class Fila {
 	public LinkedList<ObjetoColisionable> getColisionables() {
 		LinkedList<ObjetoColisionable> l = new LinkedList<ObjetoColisionable>();
 		l.addLast(primeraNave);
-		Iterator<Proyectil> it = getProyectiles();
-		while (it.hasNext()){
-			l.addLast(it.next());
+		Iterable<Proyectil> it = getProyectiles();
+		for(Proyectil p: it){
+			l.addLast(p);
 		}
 
 
