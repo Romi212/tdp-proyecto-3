@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SolGrafico extends ObjetoGrafico implements ActionListener {
+public class SolGrafico extends ObjetoGrafico  {
 
 	protected Sol sol;
 	public SolGrafico(int x, int y, Sol s) {
@@ -14,9 +14,10 @@ public class SolGrafico extends ObjetoGrafico implements ActionListener {
 	@Override
 	public String getRefImagen() { return "sol"; }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		sol.aumentarSoles();
-		sol.quitarSolG();
+	public int getCantSol(){
+		return  sol.getSoles();
 	}
+
+
+
 }

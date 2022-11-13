@@ -108,7 +108,7 @@ public class Fila {
 	}
 	
 	public void agregarSol(SolGrafico s){
-		logica.agregarObjetoGrafico(s);
+		logica.agregarSol(s);
 	}
 	
 	public LinkedList<ObjetoColisionable> getColisionables() {

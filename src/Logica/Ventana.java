@@ -2,11 +2,10 @@ package Logica;
 
 //import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.ObjetoGrafico;
+import Logica.Entidades.SolGrafico;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.*;
 //import java.net.URL;
 //import java.util.LinkedList;
@@ -331,15 +330,24 @@ public class Ventana  {
 			int precio = 0;
 			if (botonera.get(0).isSelected()) {
 				botonera.get(0).setSelected(false);
-				tipo = 1;
+				tipo = 4;
+				precio = 50;
 				//Precio = ALGO
 			}else if ((botonera.get(1).isSelected())) {
 				tipo = 2;
 				botonera.get(1).setSelected(false);
+				precio = 100;
 			} else if ((botonera.get(2).isSelected())) {
-				tipo = 4;
+				tipo = 1;
 				botonera.get(2).setSelected(false);
+				precio = 200;
 			}
+			else if ((botonera.get(3).isSelected())) {
+				tipo = 3;
+				botonera.get(3).setSelected(false);
+				precio = 300;
+			}
+			actualizarSoles((-1)*precio);
 			//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
 			logica.agregarNave(realX, realY, fila, columna, tipo);
 			panelObjetos.removeMouseListener(mouseListener);
@@ -348,8 +356,31 @@ public class Ventana  {
 
 	}
 
-	public void actualizarSoles(int cant){
+	public void actualizarSoles(int c){
+
+		int cant =  Integer.parseInt(soles.getText());
+		cant+= c;
 		soles.setText(""+cant);
+
+		botonera.get(0).setEnabled(cant>=50);
+		botonera.get(1).setEnabled(cant>=100);
+		botonera.get(2).setEnabled(cant>=200);
+		botonera.get(3).setEnabled(cant>=300);
+
+
+	}
+
+	public void agregarSol(SolGrafico s){
+		agregarObjeto(s);
+		s.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				actualizarSoles(s.getCantSol());
+				sacarObjeto(s);
+			}
+
+		});
+		panelObjetos.setComponentZOrder(s,0);
 	}
 
 	public void cartelHorda(){

@@ -8,6 +8,7 @@ import Logica.Entidades.Factories.ObjectsFactory;
 import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Entidades.ObjetoGrafico;
+import Logica.Entidades.SolGrafico;
 import Logica.Manejadores.ManejadorAliens;
 import Logica.Manejadores.ManejadorNaves;
 
@@ -182,5 +183,9 @@ public class Logica {
 
     public void mostrarCartelHorda(){
         ventana.cartelHorda();
+    }
+
+    public void agregarSol(SolGrafico s){
+        ventana.agregarSol(s);
     }
 }
