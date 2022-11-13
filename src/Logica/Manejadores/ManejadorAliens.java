@@ -46,6 +46,7 @@ public class ManejadorAliens extends Thread {
                     tablero[a.getFila()].agregarAlien(a);
                 } else quedan = false;
             }
+            logica.mostrarCartelHorda();
         }
     }
 

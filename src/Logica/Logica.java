@@ -179,4 +179,8 @@ public class Logica {
     public void sacarObjeto(ObjetoGrafico o){
         ventana.sacarObjeto(o);
     }
+
+    public void mostrarCartelHorda(){
+        ventana.cartelHorda();
+    }
 }

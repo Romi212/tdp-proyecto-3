@@ -50,6 +50,8 @@ public class Ventana  {
 	private JLabel soles;
 
 	private JMenuBar menuBotonera;
+
+	private JPanel panelFondo;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -152,10 +154,13 @@ public class Ventana  {
 		panelObjetos.setOpaque(false);
 		panelObjetos.setBackground(null);
 
-		JPanel panelFondo = new JPanel();
+		panelFondo = new JPanel();
+
 		//panelFondo.setBackground(new Color(255, 102, 255));
 		panelFondo.setBounds(0, 0, 1016,623);
+
 		layeredPane.add(panelFondo);
+		//cartelHorda();
 		panelFondo.setBackground(null);
 		panelFondo.setOpaque(false);
 		panelFondo.setLayout(null);
@@ -174,6 +179,7 @@ public class Ventana  {
 		fondo.setIcon(fondito);
 		
 		panelFondo.add(fondo);
+
 
 		soles = new JLabel(p.getProperty("labelRecolectados"));
 		panelBotonera.add(soles);
@@ -344,6 +350,31 @@ public class Ventana  {
 
 	public void actualizarSoles(int cant){
 		soles.setText(""+cant);
+	}
+
+	public void cartelHorda(){
+		JLabel cartel = new JLabel();
+		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("cartel")));
+		cartel.setIcon(ic);
+		cartel.setBounds(frmLaHorda.getBounds().x+300,250,216,108);
+		panelFondo.add(cartel);
+		panelFondo.setComponentZOrder(cartel,0);
+		cartel.repaint();
+		long start_time = System.currentTimeMillis();
+		long current_time = System.currentTimeMillis();
+		long time_limit = 1500;
+		while (current_time-start_time<time_limit){
+			cartel.setVisible(true);
+			current_time = System.currentTimeMillis();
+		}
+		cartel.setVisible(false);
+		panelFondo.remove(cartel);
+
+
+
+
+
+
 	}
 }
 
