@@ -213,7 +213,6 @@ public class Ventana  {
 	}
 
 	public void sacarObjeto(ObjetoGrafico o){
-		System.out.println("Deberia haber removido");
 		panelObjetos.remove(o);
 		panelObjetos.revalidate();
 		panelObjetos.repaint();

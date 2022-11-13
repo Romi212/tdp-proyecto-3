@@ -41,7 +41,6 @@ public abstract class Nave extends ObjetoColisionable{
 	}
 	
 	public void destruir(){
-		System.out.println("Destrui la nave");
 		fila.removerNave(this);
 
 	}

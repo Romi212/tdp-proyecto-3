@@ -40,8 +40,6 @@ public class ManejadorAliens extends Thread {
             logica.terminoNivel(true);
         }else {
 
-
-            Random rand = new Random(); //instance of random class
             for (int i = 0; i < aliensPorHorda && quedan; i++) {
                 if (proximosAliens.size() > 0) {
                     Alien a = proximosAliens.removeFirst();
@@ -54,9 +52,8 @@ public class ManejadorAliens extends Thread {
 
     @Override
     public void run() {
-        boolean hayZombies = false;
         while(noTerminoJuego){
-
+            boolean hayZombies = false;
 
             for(Fila f : tablero){
                 Iterable<Alien> aliensFila= f.getAliens();
@@ -73,8 +70,6 @@ public class ManejadorAliens extends Thread {
 
                         if(f.hayNaveEnFila()) {
                             Iterable<ObjetoColisionable> objetos = f.getColisionables();
-                            //Las filas vacias tiene como primer elemento a el null de la primera nave
-                            //System.out.println("Cantidad de objetos colisionables en fila: " + f.getColisionables().size());
                             for (ObjetoColisionable o : objetos) {
                                 o.accept(a);
                             }
@@ -87,6 +82,7 @@ public class ManejadorAliens extends Thread {
                 }
             }
             if(!hayZombies) generarHorda();
+
 
 
         }

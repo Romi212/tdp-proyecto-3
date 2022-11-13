@@ -72,7 +72,6 @@ public abstract class Alien implements Visitor{
 
 	public void colisionNaveAlien(Nave n){
 		if(chequearColision(n)) {
-			System.out.println("Hubo Colision con NAVE, cambie de estado");
 			cambiarAAlienComiendo(n);
 		}
 	}
@@ -84,7 +83,6 @@ public abstract class Alien implements Visitor{
 			else
 				vida = 0;
 			p.destruir();
-			System.out.println("vida: "+vida);
 		}
 
 	}

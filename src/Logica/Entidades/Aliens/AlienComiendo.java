@@ -21,7 +21,6 @@ public class AlienComiendo implements Estado{
     @Override
     public void hacerAccion() {
         pasoXTiempo++;
-        System.out.println("PasoXTiempo: " + pasoXTiempo);
         if (pasoXTiempo == tiempoDeAccion){
             nave.bajarVida(alien.getDanio());
             pasoXTiempo = 0;
