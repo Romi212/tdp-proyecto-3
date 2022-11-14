@@ -9,6 +9,8 @@ import java.awt.event.*;
 import java.io.*;
 //import java.net.URL;
 //import java.util.LinkedList;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.Properties;
 
@@ -289,8 +291,8 @@ public class Ventana  {
 		ic2 = new ImageIcon(newImg2);
 
 		botonNave.setSelectedIcon(ic2);
-		botonNave.setToolTipText(p.getProperty("tooltip"+nro));
-		//botonNave.setSelectedIcon(new ImageIcon(getClass().getResource(p.getProperty("botonNaveS"))));
+		String tooltip = p.getProperty("tooltip" + nro);
+		botonNave.setToolTipText(tooltip);
 	}
 
 	private void elegirDondeNave(JToggleButton b){
@@ -384,6 +386,33 @@ public class Ventana  {
 		panelObjetos.setComponentZOrder(s,0);
 	}
 
+	public void splashInicial(){
+		//Inicializamos el panel
+		JPanel content = new JPanel();
+		content.setBackground(Color.BLACK);
+		content.setVisible(true);
+
+		//Obtenemos la imagen que corresponde, calculamos la posicion y la insertamos en el panel
+		ImageIcon imagen = new ImageIcon(p.getProperty("inicial"));
+		content.add(new JLabel(imagen));
+
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (screen.width-imagen.getIconWidth())/2;
+		int y = (screen.height-imagen.getIconHeight())/2;
+
+		JWindow splash = new JWindow();
+		splash.add(content);
+		splash.setSize(imagen.getIconWidth(), imagen.getIconHeight());
+		splash.setLocation(x, y);
+		splash.setVisible(true);
+
+    /*    setSize(imagen.getIconWidth(), imagen.getIconHeight());
+        setLocationRelativeTo(null); */
+
+		System.out.println("llega aca");
+		//  try { Thread.sleep(tiempoVisible); } catch (Exception e) {}
+		//    dispose();
+	}
 	public void cartelHorda(){
 		JLabel cartel = new JLabel();
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("cartel")));
@@ -401,12 +430,6 @@ public class Ventana  {
 		}
 		cartel.setVisible(false);
 		panelFondo.remove(cartel);
-
-
-
-
-
-
 	}
 }
 
