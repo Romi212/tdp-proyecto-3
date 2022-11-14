@@ -9,8 +9,8 @@ public class Main {
             public void run() {
                 try {
                     Ventana window = new Ventana();
-                    window.splashInicial();
-                  //  window.initialize();
+                    //window.splashInicial();
+                  window.initialize();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

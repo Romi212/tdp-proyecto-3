@@ -20,7 +20,7 @@ public class AlienGrafico extends ObjetoGrafico {
 	public void moverPixeles(int cant){
 		x = (int) super.getBounds().getX();
 		super.setBounds(x-cant, y, 50, 50);
-		super.repaint();
+		//super.repaint();
 	}
 
 	public void caminando(){

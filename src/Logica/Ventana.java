@@ -431,6 +431,10 @@ public class Ventana  {
 		cartel.setVisible(false);
 		panelFondo.remove(cartel);
 	}
+
+	public void actualizarGrafico(ObjetoGrafico o){
+		o.repaint();
+	}
 }
 
 

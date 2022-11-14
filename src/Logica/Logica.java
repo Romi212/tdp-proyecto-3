@@ -41,6 +41,7 @@ public class Logica {
     private int sizeC;
 
 
+
     public Logica(Ventana v,Properties p,int xInicial, int yInicial, int tam){
         this.p = p;
         ventana = v;
@@ -119,7 +120,7 @@ public class Logica {
 
         M_Aliens = new ManejadorAliens(aliens,this, tablero,fin);
 
-        M_Naves = new ManejadorNaves(tablero);
+        M_Naves = new ManejadorNaves(tablero, this);
 
         M_Aliens.start();
 
@@ -188,4 +189,6 @@ public class Logica {
     public void agregarSol(SolGrafico s){
         ventana.agregarSol(s);
     }
+
+    public void actualizarGrafico(ObjetoGrafico o){ventana.actualizarGrafico(o);}
 }

@@ -23,6 +23,8 @@ public class ManejadorAliens extends Thread {
 
     private ColumnaFinal fin;
 
+    private final int TIEMPO = 20;
+
     public ManejadorAliens(LinkedList<Alien> aliens, Logica logica, Fila[] tablero, ColumnaFinal f){
         proximosAliens = aliens;
         aliensPorHorda = aliens.size()/3;
@@ -61,8 +63,9 @@ public class ManejadorAliens extends Thread {
                 for(Alien a: aliensFila){
                     hayZombies = true;
                     a.hacerAccion();
+                    logica.actualizarGrafico(a.getAlienG());
                     try {
-                        sleep(20);
+                        sleep(TIEMPO);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }

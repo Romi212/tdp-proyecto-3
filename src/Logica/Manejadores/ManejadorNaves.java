@@ -6,6 +6,7 @@ import Logica.Entidades.Naves.Proyectil;
 import Logica.Entidades.Sol;
 import Logica.Entidades.SolGrafico;
 import Logica.Fila;
+import Logica.Logica;
 
 import java.util.Iterator;
 import java.util.Random;
@@ -15,8 +16,11 @@ import java.util.Random;
 public class ManejadorNaves extends Thread {
     private Fila[] tablero;
     private final int TIEMPO = 100;
-    public ManejadorNaves(Fila[] filas){
+
+    private Logica logica;
+    public ManejadorNaves(Fila[] filas, Logica log){
         tablero = filas;
+        logica = log;
     }
 
     private int contador;
@@ -30,10 +34,12 @@ public class ManejadorNaves extends Thread {
             }
 
             for(Fila f: tablero){
-                Iterable<Proyectil> proyectiles = f.getProyectiles();
+                Iterator<Proyectil> it = f.getProyectiles();
 
-                for(Proyectil p: proyectiles){
+                while(it.hasNext()){
+                    Proyectil p = it.next();
                     p.pasoXTiempo();
+                    logica.actualizarGrafico(p.getProyectilGrafico());
                 }
                 Iterable<Nave> naves = f.getNaves();
 

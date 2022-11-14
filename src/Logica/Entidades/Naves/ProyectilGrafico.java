@@ -19,7 +19,7 @@ public class ProyectilGrafico extends ObjetoGrafico {
 
     public void moverPixeles(int cant){
         this.setBounds(this.getX()+cant,this.getY(),32,14);
-        this.repaint();
+        //this.repaint();
     }
 
 
