@@ -31,6 +31,9 @@ public class Proyectil extends ObjetoColisionable {
 		v.colisionProyectilAlien(this);
 	}
 	public void pasoXTiempo() {
+		if(proyectilGrafico.getBounds().getX()>870){
+			destruir();
+		}
 		proyectilGrafico.moverPixeles(10);
 	}
 	public ProyectilGrafico getProyectilGrafico() {

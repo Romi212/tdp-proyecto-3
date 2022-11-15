@@ -165,4 +165,10 @@ public class Fila {
 		return listaNaves[col]!= null;
 	}
 
+	public boolean hayAliens(){
+		return listaAliens.size()>0;
+	}
+
+
+
 }

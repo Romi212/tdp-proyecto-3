@@ -321,29 +321,34 @@ public class Ventana  {
 
 			int precio = 0;
 			if (botonera.get(0).isSelected()) {
-				botonera.get(0).setSelected(true);
-				botonera.get(0).repaint();
+				botonera.get(1).setSelected(true);
+				botonera.get(0).setSelected(false);
+
 				tipo = 4;
 				precio = 50;
 				//Precio = ALGO
 			}else if ((botonera.get(1).isSelected())) {
 				tipo = 2;
 				botonera.get(1).setSelected(false);
+				//botonera.get(1).repaint();
 				precio = 100;
 			} else if ((botonera.get(2).isSelected())) {
 				tipo = 1;
 				botonera.get(2).setSelected(false);
+				//botonera.get(2).repaint();
 				precio = 200;
 			}
 			else if ((botonera.get(3).isSelected())) {
 				tipo = 3;
 				botonera.get(3).setSelected(false);
+				//botonera.get(3).repaint();
 				precio = 300;
 			}
 			actualizarSoles((-1)*precio);
 			//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
 			logica.agregarNave(realX, realY, fila, columna, tipo);
 			panelObjetos.removeMouseListener(mouseListener);
+
 		}
 	//	System.out.println("Tipo: " + tipo);
 
@@ -388,8 +393,8 @@ public class Ventana  {
 		long start_time = System.currentTimeMillis();
 		long current_time = System.currentTimeMillis();
 		long time_limit = 1500;
+		cartel.setVisible(true);
 		while (current_time-start_time<time_limit){
-			cartel.setVisible(true);
 			current_time = System.currentTimeMillis();
 		}
 		cartel.setVisible(false);

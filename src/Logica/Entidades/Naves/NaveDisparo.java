@@ -11,13 +11,14 @@ public abstract class NaveDisparo extends Nave{
     }
 
     public void pasoXTiempo(){
-        contadorC ++;
-        System.out.println(contadorC);
-        if(contadorC == MAXTIEMPO){
-            contadorC = 0;
-            generarProyectil((int)getHitBox().getCenterX(), (int)getHitBox().getCenterY());
-        }
+        if(fila.hayAliens()) {
+            contadorC++;
 
+            if (contadorC == MAXTIEMPO) {
+                contadorC = 0;
+                generarProyectil((int) getHitBox().getCenterX(), (int) getHitBox().getCenterY());
+            }
+        }
     }
 
     public void generarProyectil(int x, int y){
