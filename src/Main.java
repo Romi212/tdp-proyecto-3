@@ -1,5 +1,7 @@
+import Logica.SplashScreen;
 import Logica.Ventana;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Main {
@@ -8,9 +10,12 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+                   SplashScreen splash = new SplashScreen(1500);
+                    splash.showSplashHorda();
+
                     Ventana window = new Ventana();
-                    //window.splashInicial();
-                  window.initialize();
+                    window.initialize();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

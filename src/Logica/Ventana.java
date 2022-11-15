@@ -1,30 +1,21 @@
 package Logica;
 
-//import Logica.Entidades.Aliens.Alien;
 import Logica.Entidades.ObjetoGrafico;
 import Logica.Entidades.SolGrafico;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-//import java.net.URL;
-//import java.util.LinkedList;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.Properties;
 
 import javax.swing.*;
-//import javax.swing.border.EmptyBorder;
-//import javax.swing.table.DefaultTableModel;
-
-//import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 public class Ventana  {
 
-	//private int largoVentana = 700;
-	//private int anchoVentana = 700;
+	private int width = 1016;
+	private int height = 623;
 	private Logica logica;
 	private JFrame frmLaHorda;
 	private JLayeredPane layeredPane;
@@ -63,7 +54,6 @@ public class Ventana  {
 
 		InputStream input = getClass().getResourceAsStream("/resources/archivos/configDia.properties");
 
-
 		try {
 			p.load(input);
 		} catch (IOException e) {
@@ -75,12 +65,13 @@ public class Ventana  {
 
 	}
 	public void initialize() {
-		
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+
 		frmLaHorda = new JFrame();
 		frmLaHorda.setResizable(false);
-		frmLaHorda.setBounds(100, 80, 1016, 623);
+		frmLaHorda.setSize(width, height);
+		frmLaHorda.setLocationRelativeTo(null);  //Centra la ventana en la pantalla
 		frmLaHorda.getContentPane().setBackground(new Color(0,0,0,0));
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frmLaHorda.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLaHorda.getContentPane().setLayout(null);
 		frmLaHorda.setBackground(Color.BLACK);
@@ -156,12 +147,8 @@ public class Ventana  {
 		panelObjetos.setBackground(null);
 
 		panelFondo = new JPanel();
-
-		//panelFondo.setBackground(new Color(255, 102, 255));
 		panelFondo.setBounds(0, 0, 1016,623);
-
 		layeredPane.add(panelFondo);
-		//cartelHorda();
 		panelFondo.setBackground(null);
 		panelFondo.setOpaque(false);
 		panelFondo.setLayout(null);
@@ -171,7 +158,7 @@ public class Ventana  {
 		//Panel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 600);
-		//Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("fondo"));
+
 		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("fondo")));
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
@@ -181,11 +168,14 @@ public class Ventana  {
 		
 		panelFondo.add(fondo);
 
-
-		soles = new JLabel(p.getProperty("labelRecolectados"));
-		panelBotonera.add(soles);
-		soles.setBounds(100,20,100,20);
+		JLabel solesText = new JLabel(p.getProperty("labelRecolectados"));
+		solesText.setForeground(Color.white);
+		solesText.setBounds(150, 20, 100, 20);
+		panelBotonera.add(solesText);
+		soles = new JLabel(p.getProperty("recolectadosInicial"));
+		soles.setBounds(200,20,100,20);
 		soles.setForeground(Color.white);
+		panelBotonera.add(soles);
 
 		for(int i = 0; i<6 ; i++){
 			for(int j = 0; j<9;j++){
@@ -386,34 +376,8 @@ public class Ventana  {
 		panelObjetos.setComponentZOrder(s,0);
 	}
 
-	public void splashInicial(){
-		//Inicializamos el panel
-		JPanel content = new JPanel();
-		content.setBackground(Color.BLACK);
-		content.setVisible(true);
 
-		//Obtenemos la imagen que corresponde, calculamos la posicion y la insertamos en el panel
-		ImageIcon imagen = new ImageIcon(p.getProperty("inicial"));
-		content.add(new JLabel(imagen));
-
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = (screen.width-imagen.getIconWidth())/2;
-		int y = (screen.height-imagen.getIconHeight())/2;
-
-		JWindow splash = new JWindow();
-		splash.add(content);
-		splash.setSize(imagen.getIconWidth(), imagen.getIconHeight());
-		splash.setLocation(x, y);
-		splash.setVisible(true);
-
-    /*    setSize(imagen.getIconWidth(), imagen.getIconHeight());
-        setLocationRelativeTo(null); */
-
-		System.out.println("llega aca");
-		//  try { Thread.sleep(tiempoVisible); } catch (Exception e) {}
-		//    dispose();
-	}
-	public void cartelHorda(){
+	/*public void cartelHorda(){
 		JLabel cartel = new JLabel();
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("cartel")));
 		cartel.setIcon(ic);
@@ -430,7 +394,7 @@ public class Ventana  {
 		}
 		cartel.setVisible(false);
 		panelFondo.remove(cartel);
-	}
+	} */
 
 	public void actualizarGrafico(ObjetoGrafico o){
 		o.repaint();
