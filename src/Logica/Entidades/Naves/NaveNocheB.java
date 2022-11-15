@@ -11,6 +11,7 @@ public class NaveNocheB extends NaveDisparo {
 	 public NaveNocheB(Fila f, int col, int x, int y){
 		 super(f, col, x, y,"naveBImg");
 		 tiempoCongelar = 1000;
+		 vida = 300;
 	 }
 
 	//Redefine el metodo para generar dos proyectiles en lugar de uno

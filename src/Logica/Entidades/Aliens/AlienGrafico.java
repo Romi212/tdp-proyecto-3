@@ -9,17 +9,18 @@ public class AlienGrafico extends ObjetoGrafico {
 	protected String clave;
 	protected int x;
 	protected int y;
+	protected static final int TAM = 50;
 
 	public AlienGrafico(int px, int py, String c) {
 		clave = c;
 		x = px;
 		y = py;
-		super.setBounds(px, py, 50, 50);
+		super.setBounds(px, py, TAM, TAM);
 	}
 
 	public void moverPixeles(int cant){
 		x = (int) super.getBounds().getX();
-		super.setBounds(x-cant, y, 50, 50);
+		super.setBounds(x-cant, y, TAM, TAM);
 		//super.repaint();
 	}
 

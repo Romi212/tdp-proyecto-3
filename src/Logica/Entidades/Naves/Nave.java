@@ -28,7 +28,6 @@ public abstract class Nave extends ObjetoColisionable{
 		//String s =
 		naveG = new NaveGrafica(x,y,skin);
 		setHitbox(naveG.getBounds());
-		vida = 100;
 
 	}
 

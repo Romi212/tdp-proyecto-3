@@ -10,6 +10,7 @@ public class NaveNocheA extends NaveDisparo{
 	
 	 public NaveNocheA(Fila f, int col, int x, int y){
 		 super(f, col, x, y,"naveAImg");
+		 vida = 200;
 	 }
 
 }

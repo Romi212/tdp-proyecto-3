@@ -23,10 +23,8 @@ public abstract class Alien implements Visitor{
 		alienG = new AlienGrafico(x, y, c);
 		estado = new AlienCaminando(this);
 		hitbox = alienG.getBounds();
-		vida = 100;
 		fila = -1;
 		velocidad = 5;
-		danio = 10;
 		estabaCaminando = true;
 	}
 

@@ -8,5 +8,6 @@ public class SateliteNoche extends NaveSol{
 	
 	public SateliteNoche(Fila f, int col, int x, int y) {
 		super(f, col, x, y,"naveDImg");
+		vida = 100;
 	}
 }

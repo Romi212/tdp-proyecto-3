@@ -95,22 +95,19 @@ public class Logica {
             filaActual = tablero[filaElegida];
             posx = filaActual.getxIni() + (filaActual.cantCeldas()+2)*filaActual.getTam();
             posy = filaActual.getyIni();
-            hitbox = new Rectangle();
             Alien a = null;
             int tipo = rand.nextInt(3);
-            switch(tipo){
-                case 0:
-                    a = factory.createAlien1(posx, posy);
-                    cantAlien1--;
-                    break;
-                case 1:
-                    a = factory.createAlien2(posx, posy);
-                    cantAlien2--;
-                    break;
-                case 2:
-                    a = factory.createAlien3(posx, posy);
-                    cantAlien3--;
-                    break;
+            if(tipo == 0 && cantAlien1 > 0){
+                a = factory.createAlien1(posx, posy);
+                cantAlien1--;
+            }
+            else if(tipo == 1 && cantAlien2 > 0){
+                a = factory.createAlien2(posx, posy);
+                cantAlien2--;
+            }
+            else if(tipo == 2 && cantAlien3 > 0){
+                a = factory.createAlien3(posx, posy);
+                cantAlien3--;
             }
             a.setFila(filaElegida);
             aliens.add(a);
@@ -131,6 +128,7 @@ public class Logica {
 
     public void empezarJuego() {
         int modo = elegirModoDeJuego();
+        System.out.println("Modo: " + modo);
         //Se crean las factories correspondientes y los archivos
         if (modo == 0) {
             archivos = new String[2];

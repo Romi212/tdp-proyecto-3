@@ -198,6 +198,7 @@ public class Ventana  {
 
 	public void agregarObjeto(ObjetoGrafico o){
 		String ref = o.getRefImagen();
+		System.out.println(ref);
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
 		Image img = ic.getImage();
 

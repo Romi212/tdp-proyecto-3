@@ -8,6 +8,10 @@ public class Proyectil extends ObjetoColisionable {
 
 	protected boolean estaVivo;
 	protected ProyectilGrafico proyectilGrafico;
+
+	protected static final int MOV = 10;
+
+	protected static final int FIN_TABLERO = 870;
 	
 	public Proyectil(int x, int y) {
 		estaVivo = true;
@@ -31,10 +35,10 @@ public class Proyectil extends ObjetoColisionable {
 		v.colisionProyectilAlien(this);
 	}
 	public void pasoXTiempo() {
-		if(proyectilGrafico.getBounds().getX()>870){
+		if(proyectilGrafico.getBounds().getX()>FIN_TABLERO){
 			destruir();
 		}
-		proyectilGrafico.moverPixeles(10);
+		proyectilGrafico.moverPixeles(MOV);
 	}
 	public ProyectilGrafico getProyectilGrafico() {
 		return proyectilGrafico;

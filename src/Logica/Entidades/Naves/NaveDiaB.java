@@ -8,6 +8,7 @@ public class NaveDiaB extends NaveDisparo{
 	
 	 public NaveDiaB(Fila f, int col, int x, int y){
 		 super(f, col, x, y, "naveBImg");
+		 vida = 300;
 	 }
 	 
 	 //Redefine el metodo para generar dos proyectiles en lugar de uno
