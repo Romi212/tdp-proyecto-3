@@ -377,13 +377,13 @@ public class Ventana  {
 	}
 
 
-	/*public void cartelHorda(){
+	public void cartelHorda(){
 		JLabel cartel = new JLabel();
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("cartel")));
 		cartel.setIcon(ic);
-		cartel.setBounds(frmLaHorda.getBounds().x+300,250,216,108);
-		panelFondo.add(cartel);
-		panelFondo.setComponentZOrder(cartel,0);
+		cartel.setBounds(frmLaHorda.getBounds().x+220,150,288,144);
+		panelObjetos.add(cartel);
+		panelObjetos.setComponentZOrder(cartel,0);
 		cartel.repaint();
 		long start_time = System.currentTimeMillis();
 		long current_time = System.currentTimeMillis();
@@ -393,8 +393,8 @@ public class Ventana  {
 			current_time = System.currentTimeMillis();
 		}
 		cartel.setVisible(false);
-		panelFondo.remove(cartel);
-	} */
+		panelObjetos.remove(cartel);
+	}
 
 	public void actualizarGrafico(ObjetoGrafico o){
 		o.repaint();

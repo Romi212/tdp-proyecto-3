@@ -10,8 +10,8 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                   SplashScreen splash = new SplashScreen(1500);
-                    splash.showSplashHorda();
+                   //SplashScreen splash = new SplashScreen(1500);
+                    //splash.showSplashHorda();
 
                     Ventana window = new Ventana();
                     window.initialize();
