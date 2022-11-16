@@ -35,7 +35,7 @@ public class SplashScreen extends Thread{
 
         //Cargamos la fuente para el tecto
         try {
-            String path = getClass().getResource(p.getProperty("fuente")).toString();
+            String path = p.getProperty("fuente");
             fuente = Font.createFont(Font.TRUETYPE_FONT, new File(path));
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(fuente);

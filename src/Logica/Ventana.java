@@ -9,12 +9,14 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.*;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 public class Ventana  {
 
+	private  JLabel fondo;
 	private int width = 1016;
 	private int height = 623;
 	private Logica logica;
@@ -69,7 +71,7 @@ public class Ventana  {
 
 		//Cargamos la fuente para el tecto
 		try {
-			String path = getClass().getResource(p.getProperty("fuente")).toString();
+			String path = p.getProperty("fuente");
 			fuente = Font.createFont(Font.TRUETYPE_FONT, new File(path));
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(fuente);
@@ -172,10 +174,10 @@ public class Ventana  {
 
 
 		//Panel de fondo
-		JLabel fondo = new JLabel();
+		fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 600);
 
-		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("fondo")));
+		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("inicioFondo")));
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
 		panelFondo.setLayout(null);
@@ -246,7 +248,6 @@ public class Ventana  {
 		elegirModo.setBounds(179, 183, 133, 22);
 		
 		JPanel ventanaModo = new JPanel(new FlowLayout());
-		ventanaModo.setBackground(Color.BLACK);
 		JLabel mensaje = new JLabel("Elija el modo de juego");
 		mensaje.setFont(fuente);
 		mensaje.setForeground(Color.WHITE);
@@ -258,9 +259,15 @@ public class Ventana  {
 		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {  toReturn=MODO_DIA;  }
 		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){  toReturn=MODO_NOCHE; }
 
+		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("fondo")));
+		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
+		ImageIcon fondito = new ImageIcon(dimg);
+		fondo.setIcon(fondito);
 		organizarVentana(toReturn);
+
 		return toReturn;
 	}
+
 
     /* Inicializa Properties segun el modo que elige el usuario, inserta las imagenes de los botones e inicia el reoductor de musica */
 	private void organizarVentana(int modo){
@@ -437,6 +444,8 @@ public class Ventana  {
 	public void actualizarGrafico(ObjetoGrafico o){
 		o.repaint();
 	}
+
+
 }
 
 
