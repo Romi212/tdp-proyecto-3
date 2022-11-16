@@ -8,6 +8,8 @@ import java.awt.*;
 public class ProyectilGrafico extends ObjetoGrafico {
     protected String imagen;
 
+    public static final int DESINTEGRA = 1;
+    public static final int STUN = 2;
 
     public ProyectilGrafico(int x, int y){
         this.setAlignmentX(x);
@@ -27,4 +29,14 @@ public class ProyectilGrafico extends ObjetoGrafico {
     public String getRefImagen() {
         return imagen;
     }
+
+    public void setEstadoSuper(){
+
+
+                imagen = "superProyectil";
+                this.setBounds(this.getX(),this.getY(),600,73);
+
+
+    }
+
 }

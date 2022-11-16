@@ -1,5 +1,6 @@
 package Logica;
 
+
 import Logica.Entidades.ObjetoGrafico;
 import Logica.Entidades.SolGrafico;
 
@@ -76,6 +77,8 @@ public class Ventana  {
 		frmLaHorda.getContentPane().setLayout(null);
 		frmLaHorda.setBackground(Color.BLACK);
 
+
+
 		//Paneles
 		layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 0, frmLaHorda.getBounds().width,  frmLaHorda.getBounds().height);
@@ -122,14 +125,14 @@ public class Ventana  {
 		gbc.weightx = 0.005;
 		menuBotonera.setLayout(new GridBagLayout());
 
-		ButtonGroup bg = new ButtonGroup();
+		//ButtonGroup bg = new ButtonGroup();
 		for(int i = 0; i<4; i++){
 			JToggleButton botonNave = new JToggleButton();
 			botonNave.setBounds(250,10, size,size);
 			botonNave.addActionListener(e -> elegirDondeNave(botonNave));
 			botonNave.setBorder(null);
 
-			bg.add(botonNave);
+			//bg.add(botonNave);
 			menuBotonera.add(botonNave);
 			botonera.add(botonNave);
 		}
@@ -298,16 +301,12 @@ public class Ventana  {
 
 				}
 			}
+			for(JToggleButton bot : botonera){
+				if(bot != b) bot.setEnabled(false);
+			}
 		}
 		else {
-			for(int i = 0; i<6 ; i++){
-				for(int j = 0; j<9;j++){
-
-
-					tablero[i][j].setEnabled(false);
-
-				}
-			}
+			terminoModoPonerPlanta();
 		}
 	}
 	private void agregarNave(Casilla c) {
@@ -322,7 +321,7 @@ public class Ventana  {
 
 			int precio = 0;
 			if (botonera.get(0).isSelected()) {
-				botonera.get(1).setSelected(true);
+
 				botonera.get(0).setSelected(false);
 
 				tipo = 4;
@@ -348,11 +347,23 @@ public class Ventana  {
 			actualizarSoles((-1)*precio);
 			//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
 			logica.agregarNave(realX, realY, fila, columna, tipo);
-			panelObjetos.removeMouseListener(mouseListener);
+			terminoModoPonerPlanta();
 
 		}
 	//	System.out.println("Tipo: " + tipo);
 
+	}
+
+	private void terminoModoPonerPlanta(){
+		for(int i = 0; i<6 ; i++){
+			for(int j = 0; j<9;j++){
+
+
+				tablero[i][j].setEnabled(false);
+
+			}
+		}
+		habilitarBotones();
 	}
 
 	public void actualizarSoles(int c){
@@ -361,12 +372,17 @@ public class Ventana  {
 		cant+= c;
 		soles.setText(""+cant);
 
+		habilitarBotones();
+
+
+	}
+
+	private void habilitarBotones(){
+		int cant =  Integer.parseInt(soles.getText());
 		botonera.get(0).setEnabled(cant>=50);
 		botonera.get(1).setEnabled(cant>=100);
 		botonera.get(2).setEnabled(cant>=200);
 		botonera.get(3).setEnabled(cant>=300);
-
-
 	}
 
 	public void agregarSol(SolGrafico s){

@@ -22,7 +22,7 @@ public abstract class NaveDisparo extends Nave{
     }
 
     public void generarProyectil(int x, int y){
-       Proyectil p = new Proyectil(x, y);
+        Proyectil p = new Proyectil(x, y);
         fila.agregarProyectil(p);
         System.out.println("SeGeneroP" );
     }

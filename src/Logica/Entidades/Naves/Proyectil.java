@@ -16,9 +16,12 @@ public class Proyectil extends ObjetoColisionable {
 	public Proyectil(int x, int y) {
 		estaVivo = true;
 		proyectilGrafico = new ProyectilGrafico(x,y);
+
 		setHitbox(proyectilGrafico.getBounds());
 		danio = 50;
 	}
+
+
 	
 	public Rectangle getHitBox() {
 		int x = proyectilGrafico.getX();
@@ -51,4 +54,6 @@ public class Proyectil extends ObjetoColisionable {
 	public boolean estaVivo(){
 		return estaVivo;
 	}
+
+
 }
