@@ -45,6 +45,9 @@ public class Ventana  {
 	private JMenuBar menuBotonera;
 
 	private JPanel panelFondo;
+
+	private Font fuente;
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -63,6 +66,16 @@ public class Ventana  {
 		tablero = new Casilla[6][9];
 
 		botonera = new LinkedList<>();
+
+		//Cargamos la fuente para el tecto
+		try {
+			String path = getClass().getResource(p.getProperty("fuente")).toString();
+			fuente = Font.createFont(Font.TRUETYPE_FONT, new File(path));
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(fuente);
+		} catch (IOException|FontFormatException e) {
+			e.printStackTrace();
+		}
 
 	}
 	public void initialize() {
@@ -172,12 +185,14 @@ public class Ventana  {
 		panelFondo.add(fondo);
 
 		JLabel solesText = new JLabel(p.getProperty("labelRecolectados"));
+		solesText.setFont(fuente);
 		solesText.setForeground(Color.white);
 		solesText.setBounds(150, 20, 100, 20);
 		panelBotonera.add(solesText);
 		soles = new JLabel(p.getProperty("recolectadosInicial"));
 		soles.setBounds(200,20,100,20);
 		soles.setForeground(Color.white);
+		soles.setFont(fuente);
 		panelBotonera.add(soles);
 
 		for(int i = 0; i<6 ; i++){
@@ -233,6 +248,7 @@ public class Ventana  {
 		JPanel ventanaModo = new JPanel(new FlowLayout());
 		ventanaModo.setBackground(Color.BLACK);
 		JLabel mensaje = new JLabel("Elija el modo de juego");
+		mensaje.setFont(fuente);
 		mensaje.setForeground(Color.WHITE);
 		ventanaModo.add(mensaje);
 		ventanaModo.add(elegirModo);

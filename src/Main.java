@@ -10,12 +10,12 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                   //SplashScreen splash = new SplashScreen(1500);
-                    //splash.showSplashHorda();
+               /* SplashScreen splash = new SplashScreen(1500);
+                  splash.showSplashHorda();
+                  splash.showSplashNivel(666, "TEST"); */
 
-                    Ventana window = new Ventana();
-                    window.initialize();
-
+                  Ventana window = new Ventana();
+                  window.initialize();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
