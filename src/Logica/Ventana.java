@@ -328,12 +328,12 @@ public class Ventana  {
 				precio = 50;
 				//Precio = ALGO
 			}else if ((botonera.get(1).isSelected())) {
-				tipo = 2;
+				tipo = 1;
 				botonera.get(1).setSelected(false);
 				//botonera.get(1).repaint();
 				precio = 100;
 			} else if ((botonera.get(2).isSelected())) {
-				tipo = 1;
+				tipo = 2;
 				botonera.get(2).setSelected(false);
 				//botonera.get(2).repaint();
 				precio = 200;

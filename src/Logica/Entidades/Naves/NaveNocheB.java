@@ -16,7 +16,7 @@ public class NaveNocheB extends NaveDisparo {
 
 	//Redefine el metodo para generar dos proyectiles en lugar de uno
 	public void generarProyectil(int x, int y){
-		super.generarProyectil(x, y);
-		// super.generarProyectil(x, y + ??? );
+		super.generarProyectil(x, y-20);
+		super.generarProyectil(x, y + 10 );
 	}
 }
