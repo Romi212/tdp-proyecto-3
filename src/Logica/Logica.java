@@ -196,5 +196,11 @@ public class Logica {
 
     public void terminoJuego(){
         System.out.println("PERDISTE JAJAJJA");
+        ventana.finDelJuego();
+    }
+
+    public void detenerHilos(){
+        M_Aliens.detener();
+        M_Naves.detener();
     }
 }

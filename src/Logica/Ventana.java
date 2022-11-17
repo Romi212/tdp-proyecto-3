@@ -46,6 +46,8 @@ public class Ventana  {
 
 	private JMenuBar menuBotonera;
 
+	private JPanel panelBotonera;
+
 	private JPanel panelFondo;
 
 	private Font fuente;
@@ -67,7 +69,7 @@ public class Ventana  {
 		}
 		tablero = new Casilla[6][9];
 
-		botonera = new LinkedList<>();
+
 
 		//Cargamos la fuente para el tecto
 		try {
@@ -94,19 +96,33 @@ public class Ventana  {
 
 
 
+
+
+
+
+		iniciarJuego(0);
+
+
+	}
+
+	public void iniciarJuego(int estado){
+		botonera = new LinkedList<>();
+
 		//Paneles
 		layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 0, frmLaHorda.getBounds().width,  frmLaHorda.getBounds().height);
 		frmLaHorda.getContentPane().add(layeredPane);
+		layeredPane.setVisible(true);
 
 		//Panel de la botonera
-		JPanel panelBotonera = new JPanel();
+		panelBotonera = new JPanel();
 		panelBotonera.setBackground(Color.BLACK);
 		panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, alturaBotonera);
 		panelBotonera.setLayout(null);
 		panelBotonera.setOpaque(false);
 		panelBotonera.setBackground(null);
 		layeredPane.add(panelBotonera);
+		panelBotonera.setVisible(false);
 
 		JButton Bmusica = new JButton();
 		Bmusica.setBackground(Color.green);
@@ -134,7 +150,7 @@ public class Ventana  {
 		scrollBotonera.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER);
 		scrollBotonera.setBackground(Color.BLACK);
 
-	    menuBotonera = new JMenuBar();
+		menuBotonera = new JMenuBar();
 		menuBotonera.setBackground(Color.BLACK);
 		GridBagConstraints  gbc = new GridBagConstraints ();
 		gbc.weightx = 0.005;
@@ -157,7 +173,7 @@ public class Ventana  {
 
 		//Panel de Objetos
 		panelObjetos = new JPanel();
-		
+
 		panelObjetos.setBounds(0, alturaBotonera, frmLaHorda.getBounds().width, frmLaHorda.getBounds().height-alturaBotonera);
 		layeredPane.add(panelObjetos);
 		panelObjetos.setLayout(null);
@@ -165,7 +181,7 @@ public class Ventana  {
 		panelObjetos.setBackground(null);
 
 		panelFondo = new JPanel();
-		panelFondo.setBounds(0, 0, 1016,623);
+		panelFondo.setBounds(0, 0, width,height);
 		layeredPane.add(panelFondo);
 		panelFondo.setBackground(null);
 		panelFondo.setOpaque(false);
@@ -175,15 +191,10 @@ public class Ventana  {
 
 		//Panel de fondo
 		fondo = new JLabel();
-		fondo.setBounds(0, 0, 1000, 600);
+		fondo.setBounds(0, 0, width, height);
 
-		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("inicioFondo")));
-		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
-		ImageIcon fondito = new ImageIcon(dimg);
-		panelFondo.setLayout(null);
-		panelFondo.setBackground(null);
-		fondo.setIcon(fondito);
-		
+		ponerFondo(estado);
+
 		panelFondo.add(fondo);
 		/*JLabel prueba = new JLabel("HOLAAAAAA");
 		prueba.setBounds(alturaBotonera+size+15,alturaBotonera+55,size,size*6);
@@ -221,7 +232,7 @@ public class Ventana  {
 		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
 
 		logica.empezarJuego();
-
+		panelBotonera.setVisible(true);
 	}
 
 	public void agregarObjeto(ObjetoGrafico o){
@@ -236,6 +247,22 @@ public class Ventana  {
 
 		panelObjetos.add(o);
 		o.repaint();
+	}
+
+	public void ponerFondo(int estado){
+		String clave = switch (estado) {
+			case 0 -> "inicioFondo";
+			case 1 -> "ganasteFondo";
+			case 2 -> "perdisteFondo";
+			default -> null;
+		};
+
+		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty(clave)));
+		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
+		ImageIcon fondito = new ImageIcon(dimg);
+		panelFondo.setLayout(null);
+		panelFondo.setBackground(null);
+		fondo.setIcon(fondito);
 	}
 
 	public void sacarObjeto(ObjetoGrafico o){
@@ -253,7 +280,7 @@ public class Ventana  {
 		UIManager.put("Button.background", Color.LIGHT_GRAY);
 		elegirModo = new JComboBox();
 		elegirModo.setModel(new DefaultComboBoxModel(new String[] {"ModoDia", "ModoNoche"}));
-		elegirModo.setBounds(179, 183, 133, 22);
+		elegirModo.setBounds(179, 250, 133, 22);
 		
 		JPanel ventanaModo = new JPanel(new FlowLayout());
 		JLabel mensaje = new JLabel("Elija el modo de juego");
@@ -453,6 +480,14 @@ public class Ventana  {
 		o.repaint();
 	}
 
+
+	public void finDelJuego(){
+		frmLaHorda.remove(layeredPane);
+		layeredPane = null;
+		logica.detenerHilos();
+		player.pausar();
+		iniciarJuego(2);
+	}
 
 }
 

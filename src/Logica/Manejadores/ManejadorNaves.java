@@ -17,16 +17,19 @@ public class ManejadorNaves extends Thread {
     private Fila[] tablero;
     private final int TIEMPO = 100;
 
+    private boolean noTerminoJuego;
+
     private Logica logica;
     public ManejadorNaves(Fila[] filas, Logica log){
         tablero = filas;
         logica = log;
+        noTerminoJuego = true;
     }
 
     private int contador;
 
     public void run(){
-        while (true){
+        while (noTerminoJuego){
             try {
                 sleep(TIEMPO);
             } catch (InterruptedException e) {
@@ -55,6 +58,10 @@ public class ManejadorNaves extends Thread {
                 contador = 0;
             }
         }
+    }
+
+    public void detener(){
+        noTerminoJuego = false;
     }
 
 }
