@@ -54,7 +54,7 @@ public class ManejadorNaves extends Thread {
             if(contador == 150){
                 Random rand = new Random();
                 int posy = rand.nextInt(600) +300;
-                tablero[0].agregarSol(new Sol(posy,10).getSolGrafico());
+                tablero[0].agregarSol(Sol.getInstancia(posy,10).getSolGrafico());
                 contador = 0;
             }
         }

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class SolGrafico extends ObjetoGrafico  {
 
 	protected Sol sol;
+	protected int x, y;
 	public SolGrafico(int x, int y, Sol s) {
 		sol = s;
 		this.setBounds(x, y,30,30);
@@ -18,6 +19,6 @@ public class SolGrafico extends ObjetoGrafico  {
 		return  sol.getSoles();
 	}
 
-
-
+	public int getX(){ return x; }
+	public int getY(){ return y; }
 }

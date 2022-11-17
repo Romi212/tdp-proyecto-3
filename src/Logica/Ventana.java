@@ -82,8 +82,8 @@ public class Ventana  {
 		}
 
 	}
+
 	public void initialize() {
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
 		frmLaHorda = new JFrame();
 		frmLaHorda.setResizable(false);
@@ -94,14 +94,7 @@ public class Ventana  {
 		frmLaHorda.getContentPane().setLayout(null);
 		frmLaHorda.setBackground(Color.BLACK);
 
-
-
-
-
-
-
 		iniciarJuego(0);
-
 
 	}
 
@@ -199,14 +192,16 @@ public class Ventana  {
 
 
 		JLabel solesText = new JLabel(p.getProperty("labelRecolectados"));
-		solesText.setFont(fuente);
+		solesText.setFont(fuente.deriveFont(15f));
 		solesText.setForeground(Color.white);
-		solesText.setBounds(150, 20, 100, 20);
+		solesText.setBounds(100, 20, 100, 20);
+
 		panelBotonera.add(solesText);
 		soles = new JLabel(p.getProperty("recolectadosInicial"));
-		soles.setBounds(200,20,100,20);
+		soles.setFont(fuente.deriveFont(15f));
+		soles.setBounds(190,20,100,20);
 		soles.setForeground(Color.white);
-		soles.setFont(fuente);
+
 		panelBotonera.add(soles);
 
 		for(int i = 0; i<6 ; i++){
@@ -265,8 +260,6 @@ public class Ventana  {
 		panelObjetos.repaint();
 	}
 
-	/* Muestra un dialogo con una comboBox para elegir el modo de juego, inicializa la constante MODO.
-	 incializa el reproductor segun corresponda y reproduce la musica */
 	public int elegirModoDeJuego() {
 		int toReturn = 0;
 		UIManager.put("OptionPane.background", Color.BLACK);
