@@ -7,5 +7,5 @@ import Logica.Entidades.Naves.Proyectil;
 public interface Visitor {
     public void colisionProyectilAlien(Proyectil p);
     public void colisionNaveAlien(Nave nave);
-    public void colisionColumnaFinal();
+    public void colisionColumnaFinal(ColumnaFinal f);
 }

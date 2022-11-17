@@ -185,6 +185,13 @@ public class Ventana  {
 		fondo.setIcon(fondito);
 		
 		panelFondo.add(fondo);
+		JLabel prueba = new JLabel("HOLAAAAAA");
+		prueba.setBounds(alturaBotonera+size+15,alturaBotonera+55,size,size*6);
+		prueba.setBackground(Color.RED);
+		prueba.setForeground(Color.RED);
+		prueba.setIcon(fondito);
+		panelFondo.add(prueba);
+		panelFondo.setComponentZOrder(prueba,0);
 
 		JLabel solesText = new JLabel(p.getProperty("labelRecolectados"));
 		solesText.setFont(fuente);
@@ -212,6 +219,7 @@ public class Ventana  {
 		frmLaHorda.setVisible(true);
 
 		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
+
 		logica.empezarJuego();
 
 	}

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Logica.Entidades.Aliens.Alien;
+import Logica.Entidades.ColumnaFinal;
 import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Entidades.Naves.Proyectil;
@@ -22,6 +23,7 @@ public class Fila {
 	protected int xIni;
 	protected int yIni;
 	protected int tam;
+	protected ColumnaFinal fin;
 
 	public Fila(Logica l,int xinicial, int yInicial, int tam){
 		xIni = xinicial;
@@ -37,6 +39,9 @@ public class Fila {
 		listaProyectiles = new LinkedList<>();
 	}
 
+	public void setColumna(ColumnaFinal f){
+		this.fin = f;
+	}
 
 	public void removerNave(Nave n){
 		logica.sacarObjeto(n.getNaveG());
@@ -112,10 +117,17 @@ public class Fila {
 	public void agregarSol(SolGrafico s){
 		logica.agregarSol(s);
 	}
+
+	public ColumnaFinal getColumna(){
+		return fin;
+	}
 	
 	synchronized public LinkedList<ObjetoColisionable> getColisionables() {
+
 		LinkedList<ObjetoColisionable> l = new LinkedList<ObjetoColisionable>();
 		l.addLast(primeraNave);
+		//l.addLast(fin);
+
 		Iterator<Proyectil> it = getProyectiles();
 		while(it.hasNext()){
 			Proyectil p = it.next();

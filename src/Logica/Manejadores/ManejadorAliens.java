@@ -21,18 +21,18 @@ public class ManejadorAliens extends Thread {
 
     boolean noTerminoJuego;
 
-    private ColumnaFinal fin;
+   // private ColumnaFinal fin;
 
     private final int TIEMPO = 50;
 
-    public ManejadorAliens(LinkedList<Alien> aliens, Logica logica, Fila[] tablero, ColumnaFinal f){
+    public ManejadorAliens(LinkedList<Alien> aliens, Logica logica, Fila[] tablero){
         proximosAliens = aliens;
         aliensPorHorda = aliens.size()/3;
 
         this.logica = logica;
         this.tablero = tablero;
         noTerminoJuego = true;
-        this.fin = f;
+       // this.fin = f;
     }
 
     private void generarHorda(){
@@ -69,8 +69,8 @@ public class ManejadorAliens extends Thread {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-
-                    if(f.hayNaveEnFila()) {
+                    f.getColumna().accept(a);
+                    if(f.hayNaveEnFila() ) {
                         Iterable<ObjetoColisionable> objetos = f.getColisionables();
                         for (ObjetoColisionable o : objetos) {
                             o.accept(a);

@@ -87,8 +87,11 @@ public abstract class Alien implements Visitor{
 
 
 	@Override
-	public void colisionColumnaFinal() {
+	public void colisionColumnaFinal(ColumnaFinal f) {
 
+		if(chequearColision(f)){
+			f.avistoTerminoJuego();
+		}
 	}
 
 	public AlienGrafico getAlienG(){

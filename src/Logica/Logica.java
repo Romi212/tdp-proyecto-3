@@ -87,12 +87,16 @@ public class Logica {
         int posx;
         int posy;
         Fila filaActual;
-        Rectangle hitbox;
-        ColumnaFinal fin = new ColumnaFinal(new Rectangle(xIni-sizeC,yIni,sizeC,sizeC*9));
+        ColumnaFinal fin = new ColumnaFinal(new Rectangle(xIni+sizeC+15,yIni+55,sizeC,sizeC*6),this);
+        for(int i = 0; i<cantFilas;i++){
+            tablero[i].setColumna(fin);
+        }
+
 
         while(cantAlien1 > 0 && cantAlien2 > 0 && cantAlien3 > 0){
             filaElegida = rand.nextInt(cantFilas);
             filaActual = tablero[filaElegida];
+
             posx = filaActual.getxIni() + (filaActual.cantCeldas()+2)*filaActual.getTam();
             posy = filaActual.getyIni();
             Alien a = null;
@@ -115,7 +119,7 @@ public class Logica {
         }
 
 
-        M_Aliens = new ManejadorAliens(aliens,this, tablero,fin);
+        M_Aliens = new ManejadorAliens(aliens,this, tablero);
 
         M_Naves = new ManejadorNaves(tablero, this);
 
@@ -189,4 +193,8 @@ public class Logica {
     }
 
     public void actualizarGrafico(ObjetoGrafico o){ventana.actualizarGrafico(o);}
+
+    public void terminoJuego(){
+        System.out.println("PERDISTE JAJAJJA");
+    }
 }
