@@ -184,7 +184,7 @@ public class Ventana  {
 
 		//Panel de fondo
 		fondo = new JLabel();
-		fondo.setBounds(0, 0, width, height);
+		fondo.setBounds(0, 0, 1000, 600);
 
 		ponerFondo(estado);
 
@@ -250,7 +250,12 @@ public class Ventana  {
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
 		panelFondo.setLayout(null);
-		panelFondo.setBackground(null);
+		panelFondo.setBackground( Color.BLACK);
+		JLabel tapa = new JLabel();
+		tapa.setBounds(0,-20,width,40);
+		tapa.setBackground(Color.BLACK);
+		tapa.setOpaque(true);
+		panelFondo.add(tapa);
 		fondo.setIcon(fondito);
 	}
 

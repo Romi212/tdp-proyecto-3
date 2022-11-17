@@ -1,6 +1,7 @@
 package Logica.Entidades.Naves;
 
 import Logica.Entidades.Sol;
+import Logica.Entidades.SolGrafico;
 import Logica.Fila;
 
 import java.awt.*;
@@ -21,7 +22,8 @@ public abstract class NaveSol extends Nave {
     }
     
     public void generarSol(){
-        Sol s = Sol.getInstancia(naveG.getBounds().x,naveG.getBounds().y);
-        fila.agregarSol(s.getSolGrafico());
+        SolGrafico s = new SolGrafico(naveG.getBounds().x,naveG.getBounds().y);
+        fila.agregarSol(s);
+        System.out.println("AGREGO SOL:");
     }
 }
