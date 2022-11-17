@@ -89,7 +89,11 @@ public class ManejadorAliens extends Thread {
     }
 
     public void detener(){
+        for(Alien a : proximosAliens){
+            a.destruir();
+        }
         noTerminoJuego = false;
+
     }
 
 }

@@ -114,4 +114,8 @@ public abstract class Alien implements Visitor{
 		return velocidad;
 	}
 
+	public void destruir(){
+		vida = 0;
+	}
+
 }

@@ -126,7 +126,6 @@ public class Fila {
 
 		LinkedList<ObjetoColisionable> l = new LinkedList<ObjetoColisionable>();
 		l.addLast(primeraNave);
-		//l.addLast(fin);
 
 		Iterator<Proyectil> it = getProyectiles();
 		while(it.hasNext()){
@@ -179,6 +178,20 @@ public class Fila {
 
 	public boolean hayAliens(){
 		return listaAliens.size()>0;
+	}
+
+	public void limpiar(){
+		for(Alien a: listaAliens){
+			a.destruir();
+		}
+		for(Proyectil p: listaProyectiles){
+			p.destruir();
+		}
+		for(int i = 0; i < listaNaves.length; i++){
+			if(listaNaves[i] != null){
+				listaNaves[i].destruir();
+			}
+		}
 	}
 
 

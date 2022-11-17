@@ -61,6 +61,9 @@ public class ManejadorNaves extends Thread {
     }
 
     public void detener(){
+        for(Fila f: tablero){
+            f.limpiar();
+        }
         noTerminoJuego = false;
     }
 

@@ -87,7 +87,7 @@ public class Logica {
         int posx;
         int posy;
         Fila filaActual;
-        ColumnaFinal fin = new ColumnaFinal(new Rectangle(xIni+sizeC+15,yIni+55,sizeC,sizeC*6),this);
+        ColumnaFinal fin = new ColumnaFinal(new Rectangle(xIni+sizeC+15,0,sizeC,sizeC*10),this);
         for(int i = 0; i<cantFilas;i++){
             tablero[i].setColumna(fin);
         }

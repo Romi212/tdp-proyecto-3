@@ -196,13 +196,7 @@ public class Ventana  {
 		ponerFondo(estado);
 
 		panelFondo.add(fondo);
-		/*JLabel prueba = new JLabel("HOLAAAAAA");
-		prueba.setBounds(alturaBotonera+size+15,alturaBotonera+55,size,size*6);
-		prueba.setBackground(Color.RED);
-		prueba.setForeground(Color.RED);
-		prueba.setIcon(fondito);
-		panelFondo.add(prueba);
-		panelFondo.setComponentZOrder(prueba,0);*/
+
 
 		JLabel solesText = new JLabel(p.getProperty("labelRecolectados"));
 		solesText.setFont(fuente);
@@ -274,7 +268,7 @@ public class Ventana  {
 	/* Muestra un dialogo con una comboBox para elegir el modo de juego, inicializa la constante MODO.
 	 incializa el reproductor segun corresponda y reproduce la musica */
 	public int elegirModoDeJuego() {
-		int toReturn = -1;
+		int toReturn = 0;
 		UIManager.put("OptionPane.background", Color.BLACK);
 		UIManager.put("Panel.background", Color.BLACK); 
 		UIManager.put("Button.background", Color.LIGHT_GRAY);
