@@ -25,13 +25,13 @@ public class AlienGrafico extends ObjetoGrafico {
 	}
 
 	public void caminando(){
-		//this.setIcon(skin1);
+		clave = clave.replace("Freeze","");
 	}
 	public void comiendo(){
 		//this.setIcon(skin1);
 	}
 	public void congelado(){
-		//this.setIcon(skin1);
+		clave+="Freeze";
 	}
 
 	public int getPX(){
