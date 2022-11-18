@@ -9,7 +9,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
+import Logica.SplashScreen;
 
 import javax.swing.*;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
@@ -26,8 +26,8 @@ public class Ventana  {
 	private JPanel panelObjetos;
 	private JComboBox elegirModo;
 
-	private static final int MODO_DIA = 0;
-	private static final int MODO_COLUMNA = 1;
+	private static final int MODO_NORMAL = 0;
+	private static final int MODO_EXPERTO = 1;
 	private int alturaBotonera = 70;
 
 	private int inicioTableroX = 238;
@@ -62,7 +62,7 @@ public class Ventana  {
 		//Creamos properties para leer las path de las imagenes
 		p = new Properties();
 
-		InputStream input = getClass().getResourceAsStream("/resources/archivos/configDia.properties");
+		InputStream input = getClass().getResourceAsStream("/resources/archivos/configNormal.properties");
 
 		try {
 			p.load(input);
@@ -97,7 +97,6 @@ public class Ventana  {
 		frmLaHorda.setBackground(Color.BLACK);
 
 		iniciarJuego(0);
-
 	}
 
 	public void iniciarJuego(int estado){
@@ -268,7 +267,7 @@ public class Ventana  {
 	}
 
 	public int elegirModoDeJuego() {
-		int toReturn = MODO_DIA;
+		int toReturn = MODO_NORMAL;
 		UIManager.put("OptionPane.background", Color.BLACK);
 		UIManager.put("Panel.background", Color.BLACK); 
 		UIManager.put("Button.background", Color.LIGHT_GRAY);
@@ -285,12 +284,12 @@ public class Ventana  {
 		modo.setBounds(179,250,133,22);
 		ButtonGroup group = new ButtonGroup();
 
-		JRadioButton dia = new JRadioButton("Modo dia");
+		JRadioButton dia = new JRadioButton("Modo normal");
 		dia.setBackground(Color.BLACK);
 		dia.setForeground(Color.WHITE);
 		dia.setFont(fuente.deriveFont(8f));
 		dia.setSelected(true);
-		JRadioButton colum = new JRadioButton("Modo Columna");
+		JRadioButton colum = new JRadioButton("Modo experto");
 		colum.setBackground(Color.BLACK);
 		colum.setForeground(Color.WHITE);
 		colum.setFont(fuente.deriveFont(8f));
@@ -304,7 +303,7 @@ public class Ventana  {
 
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.DEFAULT_OPTION);
 
-		if(opcionElegida==0 && colum.isSelected()) {  toReturn=MODO_COLUMNA;  }
+		if(opcionElegida==0 && colum.isSelected()) {  toReturn=MODO_EXPERTO;  }
 
 
 		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("fondo")));
@@ -321,10 +320,10 @@ public class Ventana  {
     /* Inicializa Properties segun el modo que elige el usuario, inserta las imagenes de los botones e inicia el reoductor de musica */
 	private void organizarVentana(int modo){
 		InputStream input;
-		if(modo == MODO_DIA){
-			input = getClass().getResourceAsStream("/resources/archivos/configDia.properties");
+		if(modo == MODO_NORMAL){
+			input = getClass().getResourceAsStream("/resources/archivos/configNormal.properties");
 		} else{
-			input = getClass().getResourceAsStream("/resources/archivos/configNoche.properties");
+			input = getClass().getResourceAsStream("/resources/archivos/configExperto.properties");
 		}
 		try {
 			p.load(input);
@@ -483,22 +482,21 @@ public class Ventana  {
 
 
 	public void cartelHorda(){
-		JLabel cartel = new JLabel();
-		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("cartel")));
-		cartel.setIcon(ic);
-		cartel.setBounds(frmLaHorda.getBounds().x+220,150,288,144);
-		panelObjetos.add(cartel);
-		panelObjetos.setComponentZOrder(cartel,0);
-		cartel.repaint();
-		long start_time = System.currentTimeMillis();
-		long current_time = System.currentTimeMillis();
-		long time_limit = 1500;
-		cartel.setVisible(true);
-		while (current_time-start_time<time_limit){
-			current_time = System.currentTimeMillis();
-		}
-		cartel.setVisible(false);
-		panelObjetos.remove(cartel);
+		SplashScreen s = new SplashScreen(1500);
+		s.setOperacion(2);
+	}
+
+	public void cartelNivel(int nivel){
+
+		//Inicializamos el archivo de propiedades de splash para sobreescribir nivel y modo
+		Properties splashP = new Properties();
+		InputStream input = getClass().getResourceAsStream("/resources/archivos/configSplash.properties");
+		try { splashP.load(input); } catch (IOException e) {  throw new RuntimeException(e);  }
+		splashP.setProperty("modo", p.getProperty("modo"));
+		splashP.setProperty("nivel", Integer.toString(nivel));
+
+		SplashScreen s = new SplashScreen(1500);
+		s.setOperacion(1);
 	}
 
 	public void actualizarGrafico(ObjetoGrafico o){

@@ -8,25 +8,23 @@ import java.net.URL;
 import java.util.Properties;
 import javax.swing.*;
 
-public class SplashScreen extends Thread{
+public class SplashScreen extends JFrame implements Runnable{
 
     protected Properties p;
     protected int tiempoVisible;
     protected int ancho = 288;
     protected int alto = 144;
-    protected JFrame splash;
     protected Font fuente;
+    protected Thread hilo;
+    protected int operacion;
 
     public SplashScreen(int tiempo) {
         tiempoVisible = tiempo;
-
-        //Inicializamos el JFrame
-        splash = new JFrame();
-        splash.setUndecorated(true); //Deshabilita la barra superior
-        splash.setSize(ancho, alto);
-        splash.setLocationRelativeTo(null);
-        splash.setAlwaysOnTop(true);
-        splash.setVisible(true);
+        setLocationRelativeTo(null);
+        setUndecorated(true); //Deshabilita la barra superior
+        setSize(ancho, alto);
+        setLocationRelativeTo(null);
+        setAlwaysOnTop(true);
 
         //Inicializamos el archivo de propiedades
         p = new Properties();
@@ -42,70 +40,95 @@ public class SplashScreen extends Thread{
         } catch (IOException|FontFormatException e) {
             e.printStackTrace();
         }
+
+        //Inicializamos el hilo
+        hilo = new Thread(this);
+        hilo.start();
     }
 
+
+    /*    Invoca a las operaciones segun la variable operacion
+     *           0 Splash inicial
+     *           1 Splash de trancision entre niveles
+     *           2 Splash que notifica que se acerca una horda
+     *           3 Splash de perder el juego
+     *           4 Splash de ganar el juego  */
+    @Override
+    public void run() {
+
+        switch(operacion){
+            case 0:
+                agregarFondo("inicial");
+                setVisible(true);
+                esperarYcerrar();
+
+                Ventana window = new Ventana();
+                window.initialize();
+                break;
+            case 1:
+                showSplashNivel(p.getProperty("nivel"), p.getProperty("modo"));
+                esperarYcerrar();
+            break;
+            case 2:
+                agregarFondo("notificarHorda");
+                setVisible(true);
+                esperarYcerrar();
+                break;
+            case 3:
+                agregarFondo("notificarPerdio");
+                setVisible(true);
+                esperarYcerrar();
+                break;
+            case 4:
+                agregarFondo("notificarGano");
+                setVisible(true);
+                esperarYcerrar();
+                break;
+        }
+
+    }
+
+    /* Inicializa la variable utilizada en el metodo run para decidir que pantalla se debe mostrar */
+    public void setOperacion(int operacion){ this.operacion = operacion; }
     private void esperarYcerrar(){
-        try{ this.sleep(tiempoVisible); } catch (InterruptedException e) {}
-        splash.setVisible(false);
-        splash.removeAll();             //Elimina todos los componentes para la siguiente llamada
+        try{ hilo.sleep(tiempoVisible); } catch (InterruptedException e) {}
+        setVisible(false);
+      //  hilo.stop();
+        removeAll();             //Elimina todos los componentes para la siguiente llamada
     }
 
     /* Escala la imagen del URL pasado por parametro segun los atributos de clase alto y ancho, retorna un icono con la imagen */
-    private void agregarFondo(URL path){
-        ImageIcon icono = new ImageIcon(path);
+    private void agregarFondo(String clave){
+        ImageIcon icono = new ImageIcon(getClass().getResource(p.getProperty(clave)));
         Image img = icono.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         ImageIcon iconoFondo = new ImageIcon(img);
 
         JLabel Lfondo = new JLabel(iconoFondo);
         Lfondo.setSize(ancho, alto);
-        splash.add(Lfondo);
-    }
-    public void showSplashInicial() {
-        agregarFondo(getClass().getResource(p.getProperty("inicial")));
-      //  esperarYcerrar();
+        add(Lfondo);
     }
 
-    public void showSplashNivel(int nivel, String modo){
-        agregarFondo(getClass().getResource(p.getProperty("notificarNivel")));
+    private void showSplashNivel(String nivel, String modo){
+        agregarFondo("notificarNivel");
 
         //Creamos las etiquetas con el texto y las agregamos a la splash
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screen.width-ancho)/2;
-        int y = (screen.height-alto)/2;
 
-        //System.out.println(splash.getBounds());
         JLabel Lmodo = new JLabel("MODO "+ modo);
-        Lmodo.setBounds( x+alto/3, y+10, ancho, alto/3);
-        Lmodo.setFont(fuente);
-        //System.out.println(Lmodo.getBounds());
+        int x = (int) Math.round(this.getBounds().getX());
+        int y = (int) Math.round(this.getBounds().getY());
+        Lmodo.setBounds( x + 10, y + 10, ancho, alto/3);
+        Lmodo.setFont(fuente.deriveFont(15f));
         Lmodo.setForeground(Color.white);
-        Lmodo.setVisible(true);
 
         JLabel Lnivel = new JLabel("NIVEL: "+ nivel);
         Lnivel.setBounds( x+alto/3, y+10, ancho, alto/3);
-        Lnivel.setFont(fuente);
+        Lnivel.setFont(fuente.deriveFont(15f));
         Lnivel.setForeground(Color.white);
 
-        splash.getContentPane().setLayout(new BorderLayout());
-        splash.add(Lmodo, "North");
-        splash.add(Lnivel, "South");
+        getContentPane().setLayout(new BorderLayout());
+        add(Lmodo, "North");
+        add(Lnivel, "South");
 
-      //  esperarYcerrar();
-    }
-
-    public void showSplashHorda(){ //VER PORQUE NO CARGA ESTA
-        agregarFondo(getClass().getResource(p.getProperty("notificarHorda")));
-        //esperarYcerrar();
-    }
-
-    public void showSplashPerdio(){
-        agregarFondo(getClass().getResource(p.getProperty("notificarPerdio")));
-       //esperarYcerrar()
-    }
-
-    public void showSplashGano(){
-        agregarFondo(getClass().getResource(p.getProperty("notificarGano")));
-        //esperarYcerrar()
     }
 
 }

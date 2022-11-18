@@ -194,6 +194,10 @@ public class Logica {
         ventana.cartelHorda();
     }
 
+    public void mostrarCartelNivel(){
+        ventana.cartelNivel(nivel);
+    }
+
     public void agregarSol(SolGrafico s){
         ventana.agregarSol(s);
     }
@@ -201,7 +205,6 @@ public class Logica {
     public void actualizarGrafico(ObjetoGrafico o){ventana.actualizarGrafico(o);}
 
     public void terminoJuego(){
-        System.out.println("PERDISTE JAJAJJA");
         ventana.finDelJuego();
     }
 
