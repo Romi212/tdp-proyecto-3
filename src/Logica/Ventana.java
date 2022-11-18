@@ -266,25 +266,44 @@ public class Ventana  {
 	}
 
 	public int elegirModoDeJuego() {
-		int toReturn = 0;
+		int toReturn = MODO_DIA;
 		UIManager.put("OptionPane.background", Color.BLACK);
 		UIManager.put("Panel.background", Color.BLACK); 
 		UIManager.put("Button.background", Color.LIGHT_GRAY);
-		elegirModo = new JComboBox();
-		elegirModo.setModel(new DefaultComboBoxModel(new String[] {"ModoDia", "ModoNoche"}));
-		elegirModo.setBounds(179, 250, 133, 22);
-		
+
 		JPanel ventanaModo = new JPanel(new FlowLayout());
-		JLabel mensaje = new JLabel("Elija el modo de juego");
-		mensaje.setFont(fuente);
+		JLabel mensaje = new JLabel("Elija el modo de juego\n");
+		mensaje.setFont(fuente.deriveFont(10f));
 		mensaje.setForeground(Color.WHITE);
 		ventanaModo.add(mensaje);
-		ventanaModo.add(elegirModo);
-		elegirModo.setSelectedIndex(0);
-		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.OK_CANCEL_OPTION);
 
-		if(opcionElegida==0 && elegirModo.getSelectedIndex()==0) {  toReturn=MODO_DIA;  }
-		else if(opcionElegida==0 && elegirModo.getSelectedIndex()==1){  toReturn=MODO_NOCHE; }
+
+		JPanel modo = new JPanel();
+		modo.setBackground(Color.BLACK);
+		modo.setBounds(179,250,133,22);
+		ButtonGroup group = new ButtonGroup();
+
+		JRadioButton dia = new JRadioButton("Modo dia");
+		dia.setBackground(Color.BLACK);
+		dia.setForeground(Color.WHITE);
+		dia.setFont(fuente.deriveFont(8f));
+		dia.setSelected(true);
+		JRadioButton noche = new JRadioButton("Modo noche");
+		noche.setBackground(Color.BLACK);
+		noche.setForeground(Color.WHITE);
+		noche.setFont(fuente.deriveFont(8f));
+		group.add(dia);
+		group.add(noche);
+
+		modo.add(dia);
+		modo.add(noche);
+
+		ventanaModo.add(modo);
+
+		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.DEFAULT_OPTION);
+
+		if(opcionElegida==0 && noche.isSelected()) {  toReturn=MODO_NOCHE;  }
+
 
 		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("fondo")));
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
