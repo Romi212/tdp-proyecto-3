@@ -11,7 +11,7 @@ public class NaveDiaB extends NaveDisparo{
 		 vida = 300;
 	 }
 	 
-	 //Redefine el metodo para generar dos proyectiles en lugar de uno
+	 //Redefine el metodo para generar 4 proyectiles en lugar de uno
 	 public void generarProyectil(int x, int y){
 		 super.generarProyectil(x, y-20);
 		 super.generarProyectil(x, y + 10 );

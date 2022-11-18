@@ -18,5 +18,8 @@ public class NaveNocheB extends NaveDisparo {
 	public void generarProyectil(int x, int y){
 		super.generarProyectil(x, y-20);
 		super.generarProyectil(x, y + 10 );
+
+		super.generarProyectil(x-5, y-20);
+		super.generarProyectil(x-5, y + 10 );
 	}
 }

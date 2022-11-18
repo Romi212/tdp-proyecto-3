@@ -27,7 +27,7 @@ public class Ventana  {
 	private JComboBox elegirModo;
 
 	private static final int MODO_DIA = 0;
-	private static final int MODO_NOCHE = 1;
+	private static final int MODO_COLUMNA = 1;
 	private int alturaBotonera = 70;
 
 	private int inicioTableroX = 238;
@@ -51,6 +51,8 @@ public class Ventana  {
 	private JPanel panelFondo;
 
 	private Font fuente;
+
+	private int modoDeJuego;
 
 	/**
 	 * @wbp.parser.entryPoint
@@ -288,21 +290,21 @@ public class Ventana  {
 		dia.setForeground(Color.WHITE);
 		dia.setFont(fuente.deriveFont(8f));
 		dia.setSelected(true);
-		JRadioButton noche = new JRadioButton("Modo noche");
-		noche.setBackground(Color.BLACK);
-		noche.setForeground(Color.WHITE);
-		noche.setFont(fuente.deriveFont(8f));
+		JRadioButton colum = new JRadioButton("Modo Columna");
+		colum.setBackground(Color.BLACK);
+		colum.setForeground(Color.WHITE);
+		colum.setFont(fuente.deriveFont(8f));
 		group.add(dia);
-		group.add(noche);
+		group.add(colum);
 
 		modo.add(dia);
-		modo.add(noche);
+		modo.add(colum);
 
 		ventanaModo.add(modo);
 
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.DEFAULT_OPTION);
 
-		if(opcionElegida==0 && noche.isSelected()) {  toReturn=MODO_NOCHE;  }
+		if(opcionElegida==0 && colum.isSelected()) {  toReturn=MODO_COLUMNA;  }
 
 
 		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("fondo")));
@@ -310,6 +312,7 @@ public class Ventana  {
 		ImageIcon fondito = new ImageIcon(dimg);
 		fondo.setIcon(fondito);
 		organizarVentana(toReturn);
+		modoDeJuego = toReturn;
 
 		return toReturn;
 	}
@@ -361,13 +364,24 @@ public class Ventana  {
 	private void elegirDondeNave(JToggleButton b){
 
 		if(b.isSelected()){
-			for(int i = 0; i<6 ; i++){
-				for(int j = 0; j<9;j++){
+			if(modoDeJuego == 0){
+				for(int i = 0; i<6 ; i++){
+					for(int j = 0; j<9;j++){
 
+						tablero[i][j].setEnabled(true);
+						tablero[i][j].setBackground(Color.BLACK);
 
-					tablero[i][j].setEnabled(true);
-					tablero[i][j].setBackground(Color.BLACK);
+					}
+				}
+			}
+			else{
+				for(int i = 0; i<6 ; i++){
+					for(int j = 2; j<9;j++){
 
+						tablero[i][j].setEnabled(true);
+						tablero[i][j].setBackground(Color.BLACK);
+
+					}
 				}
 			}
 			for(JToggleButton bot : botonera){
@@ -488,6 +502,17 @@ public class Ventana  {
 	}
 
 	public void actualizarGrafico(ObjetoGrafico o){
+		if(o.getCambio()){
+			String ref = o.getRefImagen();
+			System.out.println(ref);
+			ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
+			Image img = ic.getImage();
+
+			Image newImg = img.getScaledInstance(o.getBounds().width, o.getBounds().height, Image.SCALE_DEFAULT);
+			ic = new ImageIcon(newImg);
+			o.setIcon(ic);
+			o.setCambio(false);
+		}
 		o.repaint();
 	}
 

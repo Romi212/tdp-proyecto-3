@@ -8,6 +8,7 @@ public class AlienNoche3 extends Alien{
 		super(x, y, "alienCImg");
 		vida = 400;
 		danio = 15;
+		alienG = new AlienGraficoD(x, y, "alienCImg");
 	}
 
 }

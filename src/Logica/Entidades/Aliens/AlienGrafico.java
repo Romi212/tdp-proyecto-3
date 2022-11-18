@@ -20,18 +20,20 @@ public class AlienGrafico extends ObjetoGrafico {
 
 	public void moverPixeles(int cant){
 		x = (int) super.getBounds().getX();
-		super.setBounds(x-cant, y, TAM, TAM);
+		super.setBounds(x-cant, y, (int) getBounds().getWidth(), (int) getBounds().getHeight());
 		//super.repaint();
 	}
 
 	public void caminando(){
 		clave = clave.replace("Freeze","");
+		cambio = true;
 	}
 	public void comiendo(){
 		//this.setIcon(skin1);
 	}
 	public void congelado(){
 		clave+="Freeze";
+		cambio = true;
 	}
 
 	public int getPX(){

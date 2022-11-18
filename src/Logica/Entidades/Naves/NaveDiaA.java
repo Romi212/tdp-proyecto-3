@@ -10,4 +10,6 @@ public class NaveDiaA extends NaveDisparo{
 		 super(f, col, x, y, "naveAImg");
 		 vida = 200;
 	 }
+
+
 }

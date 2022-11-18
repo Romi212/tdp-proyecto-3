@@ -40,6 +40,8 @@ public class Logica {
     private int yIni;
     private int sizeC;
 
+    private int modo;
+
 
 
     public Logica(Ventana v,Properties p,int xInicial, int yInicial, int tam){
@@ -87,7 +89,11 @@ public class Logica {
         int posx;
         int posy;
         Fila filaActual;
-        ColumnaFinal fin = new ColumnaFinal(new Rectangle(xIni+sizeC+15,0,sizeC,sizeC*10),this);
+        ColumnaFinal fin;
+        if(modo == 0)
+            fin = new ColumnaFinal(new Rectangle(xIni+sizeC+15,0,sizeC,sizeC*10),this);
+        else
+            fin = new ColumnaFinal(new Rectangle(xIni+3*sizeC+15,0,sizeC,sizeC*10),this);
         for(int i = 0; i<cantFilas;i++){
             tablero[i].setColumna(fin);
         }
@@ -131,7 +137,7 @@ public class Logica {
 
 
     public void empezarJuego() {
-        int modo = elegirModoDeJuego();
+        modo = elegirModoDeJuego();
         System.out.println("Modo: " + modo);
         //Se crean las factories correspondientes y los archivos
         if (modo == 0) {
