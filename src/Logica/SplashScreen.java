@@ -25,6 +25,7 @@ public class SplashScreen extends JFrame implements Runnable{
         setSize(ancho, alto);
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
+        this.setLayout(new FlowLayout());
 
         //Inicializamos el archivo de propiedades
         p = new Properties();
@@ -105,6 +106,7 @@ public class SplashScreen extends JFrame implements Runnable{
 
         JLabel Lfondo = new JLabel(iconoFondo);
         Lfondo.setSize(ancho, alto);
+        //Lfondo.setBounds(0,0,ancho,alto);
         add(Lfondo);
     }
 

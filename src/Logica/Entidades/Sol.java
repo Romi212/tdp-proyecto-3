@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class Sol{
 
-    protected final int solesInicialesDelJugador = 300;
+    //protected final int solesInicialesDelJugador = 300;
     protected final int aumento = 25;
     protected final String skin = "sol";
     protected static Sol instancia;

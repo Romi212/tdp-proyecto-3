@@ -459,6 +459,11 @@ public class Ventana  {
 
 	}
 
+	public void solesIniciales(int cant){
+		soles.setText(""+cant);
+		habilitarBotones();
+	}
+
 	private void habilitarBotones(){
 		int cant =  Integer.parseInt(soles.getText());
 		botonera.get(0).setEnabled(cant>=50);
@@ -515,12 +520,13 @@ public class Ventana  {
 	}
 
 
-	public void finDelJuego(){
+	public void finDelJuego(int gane){
+		logica.detenerHilos();
 		frmLaHorda.remove(layeredPane);
 		layeredPane = null;
-		logica.detenerHilos();
 		player.pausar();
-		iniciarJuego(2);
+		logica = null;
+		iniciarJuego(gane);
 	}
 
 }

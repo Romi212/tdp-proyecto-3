@@ -24,6 +24,9 @@ import java.util.stream.Stream;
 
 public class Logica {
 
+    private final int GANE = 1;
+    private final int PERDI = 2;
+
     private int nivel;
     private ObjectsFactory factory;
     private String[] archivos;
@@ -63,6 +66,7 @@ public class Logica {
     }
 
     private void crearNivel(int nivel){
+        ventana.solesIniciales(Integer.parseInt(p.getProperty("recolectadosInicial")));
         InputStream input = getClass().getResourceAsStream(p.getProperty(archivos[nivel]));
 
         BufferedReader br = null;
@@ -157,7 +161,9 @@ public class Logica {
             case 1 -> factory = new FactoryNoche();
         }
 
-        crearNivel(0);
+        nivel = 0;
+        crearNivel(nivel);
+
 
     }
 
@@ -178,8 +184,15 @@ public class Logica {
         ventana.agregarObjeto(o);
     }
 
-    public void terminoNivel(boolean seGano){
-
+    public void terminoNivel(){
+        M_Aliens.detener();
+        M_Naves.detener();
+        nivel++;
+        if(nivel == 2){
+            ventana.finDelJuego(GANE);
+        }
+        else
+            crearNivel(nivel);
     }
 
     public boolean isCeldaOcupada(int x, int y){
@@ -205,7 +218,7 @@ public class Logica {
     public void actualizarGrafico(ObjetoGrafico o){ventana.actualizarGrafico(o);}
 
     public void terminoJuego(){
-        ventana.finDelJuego();
+        ventana.finDelJuego(PERDI);
     }
 
     public void detenerHilos(){

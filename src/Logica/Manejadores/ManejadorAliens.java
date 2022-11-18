@@ -23,7 +23,7 @@ public class ManejadorAliens extends Thread {
 
    // private ColumnaFinal fin
 
-    private final int TIEMPO = 10;
+    private final int TIEMPO = 70;
 
     public ManejadorAliens(LinkedList<Alien> aliens, Logica logica, Fila[] tablero){
         proximosAliens = aliens;
@@ -39,7 +39,7 @@ public class ManejadorAliens extends Thread {
         boolean quedan = proximosAliens.size()>0;
 
         if(!quedan){
-            logica.terminoNivel(true);
+            logica.terminoNivel();
         }else {
             int resto = proximosAliens.size() % 3;
             for (int i = 0; i < aliensPorHorda  + resto && quedan; i++) {
