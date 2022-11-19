@@ -487,8 +487,24 @@ public class Ventana  {
 
 
 	public void cartelHorda(){
-		SplashScreen s = new SplashScreen(1500);
-		s.setOperacion(2);
+		/*SplashScreen s = new SplashScreen(1500);
+		s.setOperacion(2);*/
+		JLabel cartel = new JLabel();
+		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("notificarHorda")));
+		cartel.setIcon(ic);
+		cartel.setBounds(frmLaHorda.getBounds().x+280,150,288,144);
+		panelObjetos.add(cartel);
+		panelObjetos.setComponentZOrder(cartel,0);
+		cartel.repaint();
+		long start_time = System.currentTimeMillis();
+		long current_time = System.currentTimeMillis();
+		long time_limit = 1500;
+		cartel.setVisible(true);
+		while (current_time-start_time<time_limit){
+			current_time = System.currentTimeMillis();
+		}
+		cartel.setVisible(false);
+		panelObjetos.remove(cartel);
 	}
 
 	public void cartelNivel(int nivel){
