@@ -11,6 +11,7 @@ public class Main {
             public void run() {
                 try {
                   SplashScreen splash = new SplashScreen(3000);
+                  splash.setOperacion(0);
 
                 } catch (Exception e) {
                     e.printStackTrace();
