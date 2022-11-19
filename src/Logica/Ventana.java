@@ -97,7 +97,7 @@ public class Ventana  {
 	private void iniciarJuego(int estado){
 		int alturaBotonera = 70;
 		int inicioTableroX = 238;
-		int inicioTableroY = 52;
+		int inicioTableroY = 42;
 
 		botonera = new LinkedList<>();
 
@@ -109,6 +109,7 @@ public class Ventana  {
 
 		//Panel de la botonera
 		panelBotonera = new JPanel();
+
 		panelBotonera.setBackground(Color.BLACK);
 		//panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, alturaBotonera);
 		panelBotonera.setBounds(0, -10, frmLaHorda.getBounds().width, size*2-60);
@@ -184,7 +185,7 @@ public class Ventana  {
 
 		//Panel de fondo
 		fondo = new JLabel();
-		fondo.setBounds(0, 0, 1000, 600);
+		fondo.setBounds(0, -10, 1000, 600);
 
 		ponerFondo(estado);
 

@@ -103,7 +103,7 @@ public class Logica {
             filaActual = tablero[filaElegida];
 
             posx = filaActual.getxIni() + (filaActual.cantCeldas()+2)*filaActual.getTam();
-            posy = filaActual.getyIni();
+            posy = filaActual.getyIni()-10;
             Alien a = null;
             int tipo = rand.nextInt(3);
             if(tipo == 0 && cantAlien1 > 0){
