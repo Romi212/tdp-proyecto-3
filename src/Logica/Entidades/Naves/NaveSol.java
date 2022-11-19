@@ -24,6 +24,6 @@ public abstract class NaveSol extends Nave {
     public void generarSol(){
         SolGrafico s = new SolGrafico(naveG.getBounds().x,naveG.getBounds().y);
         fila.agregarSol(s);
-        System.out.println("AGREGO SOL:");
+
     }
 }

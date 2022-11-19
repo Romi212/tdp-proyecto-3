@@ -28,6 +28,10 @@ public class Ventana  {
 
 	private static final int MODO_NORMAL = 0;
 	private static final int MODO_EXPERTO = 1;
+
+	private static final int NIVEL_0 = 0;
+
+	private static final int NIVEL_1 = 1;
 	private int alturaBotonera = 70;
 
 	private int inicioTableroX = 238;
@@ -101,6 +105,7 @@ public class Ventana  {
 
 	public void iniciarJuego(int estado){
 		botonera = new LinkedList<>();
+		frmLaHorda.repaint();
 
 		//Paneles
 		layeredPane = new JLayeredPane();
@@ -227,7 +232,7 @@ public class Ventana  {
 
 	public void agregarObjeto(ObjetoGrafico o){
 		String ref = o.getRefImagen();
-		System.out.println(ref);
+
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
 		Image img = ic.getImage();
 
@@ -239,7 +244,7 @@ public class Ventana  {
 		o.repaint();
 	}
 
-	public void ponerFondo(int estado){
+	synchronized public void ponerFondo(int estado){
 		String clave = switch (estado) {
 			case 0 -> "inicioFondo";
 			case 1 -> "ganasteFondo";
@@ -310,7 +315,7 @@ public class Ventana  {
 		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
 		ImageIcon fondito = new ImageIcon(dimg);
 		fondo.setIcon(fondito);
-		organizarVentana(toReturn);
+		organizarVentana(NIVEL_0);
 		modoDeJuego = toReturn;
 
 		return toReturn;
@@ -318,9 +323,9 @@ public class Ventana  {
 
 
     /* Inicializa Properties segun el modo que elige el usuario, inserta las imagenes de los botones e inicia el reoductor de musica */
-	private void organizarVentana(int modo){
+	public void organizarVentana(int nivel){
 		InputStream input;
-		if(modo == MODO_NORMAL){
+		if(nivel == NIVEL_0){
 			input = getClass().getResourceAsStream("/resources/archivos/configNormal.properties");
 		} else{
 			input = getClass().getResourceAsStream("/resources/archivos/configExperto.properties");
@@ -341,6 +346,11 @@ public class Ventana  {
 		player.play();
 
 	}
+
+	public void pausar(){
+		player.pausar();
+	}
+
 	private void ponerFotoNave(JToggleButton botonNave, int nro){
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("botonNave"+nro)));
 		Image img = ic.getImage();
@@ -363,7 +373,7 @@ public class Ventana  {
 	private void elegirDondeNave(JToggleButton b){
 
 		if(b.isSelected()){
-			if(modoDeJuego == 0){
+			if(modoDeJuego == MODO_NORMAL){
 				for(int i = 0; i<6 ; i++){
 					for(int j = 0; j<9;j++){
 
@@ -492,10 +502,11 @@ public class Ventana  {
 		JLabel cartel = new JLabel();
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("notificarHorda")));
 		cartel.setIcon(ic);
-		cartel.setBounds(frmLaHorda.getBounds().x+280,150,288,144);
+		cartel.setSize(288,144);
 		panelObjetos.add(cartel);
+		cartel.setLocation(frmLaHorda.getContentPane().getX()+350,frmLaHorda.getContentPane().getY()+150);
 		panelObjetos.setComponentZOrder(cartel,0);
-		cartel.repaint();
+
 		long start_time = System.currentTimeMillis();
 		long current_time = System.currentTimeMillis();
 		long time_limit = 1500;
@@ -523,7 +534,7 @@ public class Ventana  {
 	public void actualizarGrafico(ObjetoGrafico o){
 		if(o.getCambio()){
 			String ref = o.getRefImagen();
-			System.out.println(ref);
+
 			ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
 			Image img = ic.getImage();
 
@@ -541,7 +552,7 @@ public class Ventana  {
 		frmLaHorda.remove(layeredPane);
 		layeredPane = null;
 		player.pausar();
-		logica = null;
+
 		iniciarJuego(gane);
 	}
 

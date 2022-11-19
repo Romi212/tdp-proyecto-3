@@ -142,7 +142,7 @@ public class Logica {
 
     public void empezarJuego() {
         modo = elegirModoDeJuego();
-        System.out.println("Modo: " + modo);
+
         //Se crean las factories correspondientes y los archivos
         if (modo == 0) {
             archivos = new String[2];
@@ -151,17 +151,13 @@ public class Logica {
 
         } else {
             archivos = new String[2];
-            archivos[0] = "archivoN1";
-            archivos[1] = "archivoN2";
+            archivos[0] = "archivoD1";
+            archivos[1] = "archivoD2";
         }
 
-        //Creo la factory de aliens de acuerdo al modo de juego
-        switch (modo) {
-            case 0 -> factory = new FactoryDia();
-            case 1 -> factory = new FactoryNoche();
-        }
-
+        //Creo la factory de aliens de acuerdo al nivel de juego
         nivel = 0;
+        factory = new FactoryDia();
         crearNivel(nivel);
 
 
@@ -178,7 +174,7 @@ public class Logica {
         }
         tablero[fila].agregarNave(n);
         ventana.agregarObjeto(n.getNaveG());
-        System.out.println(tablero[fila].estaOcupada(columna));
+
     }
     public void agregarObjetoGrafico(ObjetoGrafico o){
         ventana.agregarObjeto(o);
@@ -191,8 +187,12 @@ public class Logica {
         if(nivel == 2){
             ventana.finDelJuego(GANE);
         }
-        else
+        else {
+            ventana.pausar();
+            ventana.organizarVentana(nivel);
+            factory = new FactoryNoche();
             crearNivel(nivel);
+        }
     }
 
     public boolean isCeldaOcupada(int x, int y){
