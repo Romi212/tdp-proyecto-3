@@ -1,6 +1,5 @@
 package Logica;
 
-
 import Logica.Entidades.ObjetoGrafico;
 import Logica.Entidades.SolGrafico;
 
@@ -9,13 +8,11 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Properties;
-import Logica.SplashScreen;
 
 import javax.swing.*;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 public class Ventana  {
-
 	private  JLabel fondo;
 	private int width = 1016;
 	private int height = 623;
@@ -24,7 +21,6 @@ public class Ventana  {
 	private JLayeredPane layeredPane;
 	private Properties p;
 	private JPanel panelObjetos;
-	private JComboBox elegirModo;
 
 	private static final int MODO_NORMAL = 0;
 	private static final int MODO_EXPERTO = 1;
@@ -32,10 +28,6 @@ public class Ventana  {
 	private static final int NIVEL_0 = 0;
 
 	private static final int NIVEL_1 = 1;
-	private int alturaBotonera = 70;
-
-	private int inicioTableroX = 238;
-	private int inicioTableroY = 52;
 
 	private int size = 74;
 
@@ -43,12 +35,9 @@ public class Ventana  {
 
 	private LinkedList<JToggleButton> botonera;
 
-	private MouseListener mouseListener;
 	private Casilla[][] tablero;
 
 	private JLabel soles;
-
-	private JMenuBar menuBotonera;
 
 	private JPanel panelBotonera;
 
@@ -66,7 +55,7 @@ public class Ventana  {
 		//Creamos properties para leer las path de las imagenes
 		p = new Properties();
 
-		InputStream input = getClass().getResourceAsStream("/resources/archivos/configNormal.properties");
+		InputStream input = getClass().getResourceAsStream("/resources/archivos/configNivel1.properties");
 
 		try {
 			p.load(input);
@@ -74,8 +63,6 @@ public class Ventana  {
 			throw new RuntimeException(e);
 		}
 		tablero = new Casilla[6][9];
-
-
 
 		//Cargamos la fuente para el tecto
 		try {
@@ -89,6 +76,7 @@ public class Ventana  {
 
 	}
 
+	/* Inicializa el frame principal del juego de modo que sea independiente al reinicio del juego */
 	public void initialize() {
 
 		frmLaHorda = new JFrame();
@@ -103,9 +91,15 @@ public class Ventana  {
 		iniciarJuego(0);
 	}
 
-	public void iniciarJuego(int estado){
+	/* Inicializa los paneles asi como tambien los componentes de los mismos.
+	*  Crea el tablero que permite al usuario colocar una nave desde la botonera.
+	*  Inicializa logica y comienza el juego. */
+	private void iniciarJuego(int estado){
+		int alturaBotonera = 70;
+		int inicioTableroX = 238;
+		int inicioTableroY = 52;
+
 		botonera = new LinkedList<>();
-		frmLaHorda.repaint();
 
 		//Paneles
 		layeredPane = new JLayeredPane();
@@ -116,7 +110,8 @@ public class Ventana  {
 		//Panel de la botonera
 		panelBotonera = new JPanel();
 		panelBotonera.setBackground(Color.BLACK);
-		panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, alturaBotonera);
+		//panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, alturaBotonera);
+		panelBotonera.setBounds(0, -10, frmLaHorda.getBounds().width, size*2);
 		panelBotonera.setLayout(null);
 		panelBotonera.setOpaque(false);
 		panelBotonera.setBackground(null);
@@ -127,7 +122,7 @@ public class Ventana  {
 		Bmusica.setBackground(Color.green);
 		Bmusica.setOpaque(true);
 		Bmusica.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("iconoPlay"))));
-		Bmusica.setBounds(0,0,50,50);
+		Bmusica.setBounds(0,5,50,50);
 		Bmusica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -145,29 +140,28 @@ public class Ventana  {
 
 		JScrollPane scrollBotonera = new JScrollPane();
 		scrollBotonera.setBorder(null);
-		scrollBotonera.setBounds(250, 11, 400, 60);
+		scrollBotonera.setBounds(250, 11, 400, size*4);
 		scrollBotonera.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER);
 		scrollBotonera.setBackground(Color.BLACK);
 
-		menuBotonera = new JMenuBar();
+		JMenuBar menuBotonera = new JMenuBar();
 		menuBotonera.setBackground(Color.BLACK);
 		GridBagConstraints  gbc = new GridBagConstraints ();
 		gbc.weightx = 0.005;
 		menuBotonera.setLayout(new GridBagLayout());
 
-		//ButtonGroup bg = new ButtonGroup();
 		for(int i = 0; i<4; i++){
 			JToggleButton botonNave = new JToggleButton();
-			botonNave.setBounds(250,10, size,size);
+			botonNave.setBounds(250,10, size, size);
 			botonNave.addActionListener(e -> elegirDondeNave(botonNave));
 			botonNave.setBorder(null);
 
-			//bg.add(botonNave);
 			menuBotonera.add(botonNave);
 			botonera.add(botonNave);
 		}
 
 		scrollBotonera.setViewportView(menuBotonera);
+		scrollBotonera.setBounds(300,10, size*5, size+10);
 		panelBotonera.add(scrollBotonera);
 
 		//Panel de Objetos
@@ -210,9 +204,9 @@ public class Ventana  {
 
 		panelBotonera.add(soles);
 
+		//Tablero de casillas
 		for(int i = 0; i<6 ; i++){
 			for(int j = 0; j<9;j++){
-
 				Casilla c = new Casilla(i,j);
 				c.addActionListener(e -> agregarNave(c));
 				c.setEnabled(false);
@@ -230,6 +224,7 @@ public class Ventana  {
 		panelBotonera.setVisible(true);
 	}
 
+	/* Permite agregar un objeto grafico a la pantalla */
 	public void agregarObjeto(ObjetoGrafico o){
 		String ref = o.getRefImagen();
 
@@ -244,7 +239,32 @@ public class Ventana  {
 		o.repaint();
 	}
 
-	synchronized public void ponerFondo(int estado){
+	/* Permite eliminar un objeto grafico de la pantalla */
+	public void sacarObjeto(ObjetoGrafico o){
+		panelObjetos.remove(o);
+		panelObjetos.revalidate();
+		panelObjetos.repaint();
+	}
+
+	/* Actualiza el objeto grafico en pantalla pasado por parametro.
+	* Se utiliza cuando un proyectil se mueve, un alien se mueve o cambia de estado */
+	public void actualizarGrafico(ObjetoGrafico o){
+		if(o.getCambio()){
+			String ref = o.getRefImagen();
+
+			ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
+			Image img = ic.getImage();
+
+			Image newImg = img.getScaledInstance(o.getBounds().width, o.getBounds().height, Image.SCALE_DEFAULT);
+			ic = new ImageIcon(newImg);
+			o.setIcon(ic);
+			o.setCambio(false);
+		}
+		o.repaint();
+	}
+
+	/* Cambia la imagen de fondo del panel del fondo segun el estado pasado por parametro (0 fondo inicial, 1 se gano el juego o 2 se perdio el juego). */
+	synchronized private void ponerFondo(int estado){
 		String clave = switch (estado) {
 			case 0 -> "inicioFondo";
 			case 1 -> "ganasteFondo";
@@ -257,20 +277,15 @@ public class Ventana  {
 		ImageIcon fondito = new ImageIcon(dimg);
 		panelFondo.setLayout(null);
 		panelFondo.setBackground( Color.BLACK);
-		JLabel tapa = new JLabel();
+	/*	JLabel tapa = new JLabel();
 		tapa.setBounds(0,-20,width,40);
 		tapa.setBackground(Color.BLACK);
 		tapa.setOpaque(true);
-		panelFondo.add(tapa);
+		panelFondo.add(tapa); */
 		fondo.setIcon(fondito);
 	}
 
-	public void sacarObjeto(ObjetoGrafico o){
-		panelObjetos.remove(o);
-		panelObjetos.revalidate();
-		panelObjetos.repaint();
-	}
-
+	/* Muestra una pantalla inicial de tal forma que el usuario pueda elegir el modo que desea jugar, retorna dicho modo. */
 	public int elegirModoDeJuego() {
 		int toReturn = MODO_NORMAL;
 		UIManager.put("OptionPane.background", Color.BLACK);
@@ -322,13 +337,13 @@ public class Ventana  {
 	}
 
 
-    /* Inicializa Properties segun el modo que elige el usuario, inserta las imagenes de los botones e inicia el reoductor de musica */
+    /* Inicializa Properties segun el nivel actual, inserta las imagenes de los botones e inicia el reoductor de musica */
 	public void organizarVentana(int nivel){
 		InputStream input;
 		if(nivel == NIVEL_0){
-			input = getClass().getResourceAsStream("/resources/archivos/configNormal.properties");
+			input = getClass().getResourceAsStream("/resources/archivos/configNivel1.properties");
 		} else{
-			input = getClass().getResourceAsStream("/resources/archivos/configExperto.properties");
+			input = getClass().getResourceAsStream("/resources/archivos/configNivel2.properties");
 		}
 		try {
 			p.load(input);
@@ -336,7 +351,7 @@ public class Ventana  {
 			throw new RuntimeException(e);
 		}
 
-		//CAMBIAR BOTONES A FOTO Nave DIA
+		//Muestra las naves en la botonera
 		for(int i =0; i<botonera.size();i++){
 			ponerFotoNave(botonera.get(i), i+1);
 		}
@@ -347,22 +362,25 @@ public class Ventana  {
 
 	}
 
-	public void pausar(){
+	public void pausarMusica(){
 		player.pausar();
 	}
 
+	/* Recupera las imagenes del archivo de configuracion para cuando los botones estan seleccionados o no, agrega los tooltip */
 	private void ponerFotoNave(JToggleButton botonNave, int nro){
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("botonNave"+nro)));
 		Image img = ic.getImage();
 
-		Image newImg = img.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
+		//Image newImg = img.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
 		ic = new ImageIcon(newImg);
 
 		botonNave.setIcon(ic);
 		ImageIcon ic2 = new ImageIcon(getClass().getResource(p.getProperty("botonNave"+nro+"S")));
 		Image img2 = ic2.getImage();
 
-		Image newImg2 = img2.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
+		//Image newImg2 = img2.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg2 = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
 		ic2 = new ImageIcon(newImg2);
 
 		botonNave.setSelectedIcon(ic2);
@@ -370,6 +388,7 @@ public class Ventana  {
 		botonNave.setToolTipText(tooltip);
 	}
 
+	/* Activa el tablero que permite al usuario colocar la nave desde la botonera */
 	private void elegirDondeNave(JToggleButton b){
 
 		if(b.isSelected()){
@@ -401,6 +420,9 @@ public class Ventana  {
 			terminoModoPonerPlanta();
 		}
 	}
+
+	/* Segun la nave que selecciona el usuario escoge el tipo y su precio, que resta los soles acumulados por el jugador.
+	*  Le comunica a la logica que cree la nave y la agregue a su fila correspondiente. */
 	private void agregarNave(Casilla c) {
 
 		int fila = c.getFila();
@@ -415,65 +437,60 @@ public class Ventana  {
 			if (botonera.get(0).isSelected()) {
 
 				botonera.get(0).setSelected(false);
-
 				tipo = 4;
 				precio = 50;
-				//Precio = ALGO
+
 			}else if ((botonera.get(1).isSelected())) {
 				tipo = 1;
 				botonera.get(1).setSelected(false);
-				//botonera.get(1).repaint();
 				precio = 100;
 			} else if ((botonera.get(2).isSelected())) {
 				tipo = 2;
 				botonera.get(2).setSelected(false);
-				//botonera.get(2).repaint();
 				precio = 200;
 			}
 			else if ((botonera.get(3).isSelected())) {
 				tipo = 3;
 				botonera.get(3).setSelected(false);
-				//botonera.get(3).repaint();
 				precio = 300;
 			}
 			actualizarSoles((-1)*precio);
-			//FIJARSE SI ALCANZA LA PLATA Y RESTARLA
+
 			logica.agregarNave(realX, realY, fila, columna, tipo);
 			terminoModoPonerPlanta();
 
 		}
-	//	System.out.println("Tipo: " + tipo);
 
 	}
 
+	/* Establece que el tablero en el que el usuario selecciona la posicion de la nave en el juego ya no se pueda utilizar */
 	private void terminoModoPonerPlanta(){
 		for(int i = 0; i<6 ; i++){
 			for(int j = 0; j<9;j++){
-
-
 				tablero[i][j].setEnabled(false);
-
 			}
 		}
 		habilitarBotones();
 	}
 
-	public void actualizarSoles(int c){
+	/* Actualiza en la pantalla la cantidad de soles que recolecto el jugador */
+	private void actualizarSoles(int cant){
 
-		int cant =  Integer.parseInt(soles.getText());
-		cant+= c;
-		soles.setText(""+cant);
+		int cantActual =  Integer.parseInt(soles.getText());
+		cantActual+= cant;
+		soles.setText(""+cantActual);
 
 		habilitarBotones();
 
-
 	}
 
+	/* Muestra en pantalla los soles con los que comienza el juegador */
 	public void solesIniciales(int cant){
 		soles.setText(""+cant);
 		habilitarBotones();
 	}
 
+	/* Habilita la botonera segun la cantidad de soles con la que cuente el usuario */
 	private void habilitarBotones(){
 		int cant =  Integer.parseInt(soles.getText());
 		botonera.get(0).setEnabled(cant>=50);
@@ -482,6 +499,8 @@ public class Ventana  {
 		botonera.get(3).setEnabled(cant>=300);
 	}
 
+	/* Agrega un sol en la pantalla, se utiliza un metodo particular ya que se debe utilizar un actionListener para que el sol se elimine de la pantalla
+	* y se sume la cantidad de soles del jugador. */
 	public void agregarSol(SolGrafico s){
 		agregarObjeto(s);
 		s.addMouseListener(new MouseAdapter() {
@@ -495,10 +514,8 @@ public class Ventana  {
 		panelObjetos.setComponentZOrder(s,0);
 	}
 
-
+	/* Notifica al usuario que se acerca una horda de aliens */
 	public void cartelHorda(){
-		/*SplashScreen s = new SplashScreen(1500);
-		s.setOperacion(2);*/
 		JLabel cartel = new JLabel();
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("notificarHorda")));
 		cartel.setIcon(ic);
@@ -518,40 +535,20 @@ public class Ventana  {
 		panelObjetos.remove(cartel);
 	}
 
+	/* Notifica al usuario que paso de nivel */
+															//CUANDO SE IMPLEMENTE ESTO AGREGARLO AL DIAGRAMA
 	public void cartelNivel(int nivel){
 
-		//Inicializamos el archivo de propiedades de splash para sobreescribir nivel y modo
-		Properties splashP = new Properties();
-		InputStream input = getClass().getResourceAsStream("/resources/archivos/configSplash.properties");
-		try { splashP.load(input); } catch (IOException e) {  throw new RuntimeException(e);  }
-		splashP.setProperty("modo", p.getProperty("modo"));
-		splashP.setProperty("nivel", Integer.toString(nivel));
-
-		SplashScreen s = new SplashScreen(1500);
-		s.setOperacion(1);
-	}
-
-	public void actualizarGrafico(ObjetoGrafico o){
-		if(o.getCambio()){
-			String ref = o.getRefImagen();
-
-			ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
-			Image img = ic.getImage();
-
-			Image newImg = img.getScaledInstance(o.getBounds().width, o.getBounds().height, Image.SCALE_DEFAULT);
-			ic = new ImageIcon(newImg);
-			o.setIcon(ic);
-			o.setCambio(false);
-		}
-		o.repaint();
 	}
 
 
+	/* Remueve todos los componentes del frame principal, detiene los hilos de ejecucion y reinicia el juego */
 	public void finDelJuego(int gane){
 		logica.detenerHilos();
 		frmLaHorda.remove(layeredPane);
 		layeredPane = null;
 		player.pausar();
+		frmLaHorda.repaint();
 
 		iniciarJuego(gane);
 	}

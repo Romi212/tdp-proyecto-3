@@ -6,21 +6,16 @@ import Logica.Entidades.Factories.FactoryDia;
 import Logica.Entidades.Factories.FactoryNoche;
 import Logica.Entidades.Factories.ObjectsFactory;
 import Logica.Entidades.Naves.Nave;
-import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Entidades.ObjetoGrafico;
 import Logica.Entidades.SolGrafico;
 import Logica.Manejadores.ManejadorAliens;
 import Logica.Manejadores.ManejadorNaves;
 
-import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Properties;
 import java.awt.*;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Logica {
 
@@ -188,7 +183,7 @@ public class Logica {
             ventana.finDelJuego(GANE);
         }
         else {
-            ventana.pausar();
+            ventana.pausarMusica();
             ventana.organizarVentana(nivel);
             factory = new FactoryNoche();
             crearNivel(nivel);
@@ -205,10 +200,6 @@ public class Logica {
 
     public void mostrarCartelHorda(){
         ventana.cartelHorda();
-    }
-
-    public void mostrarCartelNivel(){
-        ventana.cartelNivel(nivel);
     }
 
     public void agregarSol(SolGrafico s){

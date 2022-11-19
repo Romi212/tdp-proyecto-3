@@ -21,9 +21,7 @@ public class ManejadorAliens extends Thread {
 
     boolean noTerminoJuego;
 
-   // private ColumnaFinal fin
-
-    private final int TIEMPO = 70;
+    private final int TIEMPO = 50; //70
 
     public ManejadorAliens(LinkedList<Alien> aliens, Logica logica, Fila[] tablero){
         proximosAliens = aliens;

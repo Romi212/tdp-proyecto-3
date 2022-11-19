@@ -38,12 +38,14 @@ public class Musica {
         }
     }
 
+    /* Pausa la musica y guarda la posicion en la que esta la pista en caso de que se reinicie */
     public void pausar(){
         reproduciendo = false;
         posicionPausa = clip.getMicrosecondPosition(); //Se guarda la posicion en la pista en caso de que se reinicie
         clip.stop();
     }
 
+    /* Reinicia la musica en la posicion en la que quedo cuando se pauso */
     public void restart(){
         reproduciendo = true;
         clip.setMicrosecondPosition(posicionPausa);
