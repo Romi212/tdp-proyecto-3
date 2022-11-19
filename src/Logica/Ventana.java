@@ -111,7 +111,7 @@ public class Ventana  {
 		panelBotonera = new JPanel();
 		panelBotonera.setBackground(Color.BLACK);
 		//panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, alturaBotonera);
-		panelBotonera.setBounds(0, -10, frmLaHorda.getBounds().width, size*2);
+		panelBotonera.setBounds(0, -10, frmLaHorda.getBounds().width, size*2-60);
 		panelBotonera.setLayout(null);
 		panelBotonera.setOpaque(false);
 		panelBotonera.setBackground(null);
@@ -215,6 +215,7 @@ public class Ventana  {
 				tablero[i][j] = c;
 			}
 		}
+
 
 		frmLaHorda.setVisible(true);
 
@@ -326,10 +327,7 @@ public class Ventana  {
 		if(opcionElegida==0 && colum.isSelected()) {  toReturn=MODO_EXPERTO;  }
 
 
-		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("fondo")));
-		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
-		ImageIcon fondito = new ImageIcon(dimg);
-		fondo.setIcon(fondito);
+
 		organizarVentana(NIVEL_0);
 		modoDeJuego = toReturn;
 
@@ -351,6 +349,10 @@ public class Ventana  {
 			throw new RuntimeException(e);
 		}
 
+		Image image = Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(p.getProperty("fondo")));
+		Image dimg = image.getScaledInstance(fondo.getBounds().width, fondo.getBounds().height-15, Image.SCALE_SMOOTH);
+		ImageIcon fondito = new ImageIcon(dimg);
+		fondo.setIcon(fondito);
 		//Muestra las naves en la botonera
 		for(int i =0; i<botonera.size();i++){
 			ponerFotoNave(botonera.get(i), i+1);
