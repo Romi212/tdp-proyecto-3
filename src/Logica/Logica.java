@@ -142,7 +142,7 @@ public class Logica {
 
     public void empezarJuego() {
         modo = elegirModoDeJuego();
-        System.out.println("Modo: " + modo);
+
         //Se crean las factories correspondientes y los archivos
         if (modo == 0) {
             archivos = new String[2];
@@ -178,7 +178,7 @@ public class Logica {
         }
         tablero[fila].agregarNave(n);
         ventana.agregarObjeto(n.getNaveG());
-        System.out.println(tablero[fila].estaOcupada(columna));
+
     }
     public void agregarObjetoGrafico(ObjetoGrafico o){
         ventana.agregarObjeto(o);

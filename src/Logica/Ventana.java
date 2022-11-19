@@ -227,7 +227,7 @@ public class Ventana  {
 
 	public void agregarObjeto(ObjetoGrafico o){
 		String ref = o.getRefImagen();
-		System.out.println(ref);
+
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
 		Image img = ic.getImage();
 
@@ -492,10 +492,11 @@ public class Ventana  {
 		JLabel cartel = new JLabel();
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("notificarHorda")));
 		cartel.setIcon(ic);
-		cartel.setBounds(frmLaHorda.getBounds().x+280,150,288,144);
+		cartel.setSize(288,144);
 		panelObjetos.add(cartel);
+		cartel.setLocation(frmLaHorda.getContentPane().getX()+350,frmLaHorda.getContentPane().getY()+150);
 		panelObjetos.setComponentZOrder(cartel,0);
-		cartel.repaint();
+
 		long start_time = System.currentTimeMillis();
 		long current_time = System.currentTimeMillis();
 		long time_limit = 1500;
@@ -523,7 +524,7 @@ public class Ventana  {
 	public void actualizarGrafico(ObjetoGrafico o){
 		if(o.getCambio()){
 			String ref = o.getRefImagen();
-			System.out.println(ref);
+
 			ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty(ref)));
 			Image img = ic.getImage();
 
