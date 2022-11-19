@@ -6,9 +6,11 @@ import Logica.Entidades.SolGrafico;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.Properties;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
@@ -218,6 +220,8 @@ public class Ventana  {
 		}
 
 
+
+
 		frmLaHorda.setVisible(true);
 
 		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
@@ -362,6 +366,7 @@ public class Ventana  {
 		//Se inicializa el reproductor y comienza la musica
 		player = new Musica(p.getProperty("musica"));
 		player.play();
+
 
 	}
 
@@ -511,6 +516,32 @@ public class Ventana  {
 			public void mouseClicked(MouseEvent e) {
 				actualizarSoles(s.getCantSol());
 				sacarObjeto(s);
+
+
+				String soundName = "yourSound.wav";
+				AudioInputStream audioInputStream = null;
+				File m = new File(p.getProperty("ruidito"));
+				try {
+					audioInputStream = AudioSystem.getAudioInputStream(m);
+				} catch (UnsupportedAudioFileException ex) {
+					throw new RuntimeException(ex);
+				} catch (IOException ex) {
+					throw new RuntimeException(ex);
+				}
+				Clip clip = null;
+				try {
+					clip = AudioSystem.getClip();
+				} catch (LineUnavailableException ex) {
+					throw new RuntimeException(ex);
+				}
+				try {
+					clip.open(audioInputStream);
+				} catch (LineUnavailableException ex) {
+					throw new RuntimeException(ex);
+				} catch (IOException ex) {
+					throw new RuntimeException(ex);
+				}
+				clip.start();
 			}
 
 		});
