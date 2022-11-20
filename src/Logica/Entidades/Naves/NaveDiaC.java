@@ -11,18 +11,23 @@ public class NaveDiaC extends NaveDisparo {
     }
 
     public void pasoXTiempo(){
-        if(fila.hayAliens()) {
-            contadorC++;
+        if(vida>0){
+            if(fila.hayAliens()) {
+                contadorC++;
 
-            if (vida > 0 && contadorC == MAXTIEMPO) {
+                if ( contadorC == MAXTIEMPO) {
 
-                contadorC = 0;
-                generarProyectil((int) getHitBox().getCenterX(), (int) getHitBox().getCenterY());
+                    contadorC = 0;
+                    generarProyectil((int) getHitBox().getCenterX(), (int) getHitBox().getCenterY());
+
+                }
 
             }
-
-            if(vida <= 0 && contadorC>= MAXTIEMPO/2)  fila.removerNave(this);
+        }else {
+            contadorC++;
+            if( contadorC>= MAXTIEMPO/2)  fila.removerNave(this);
         }
+
     }
 
     /*Redefine el metodo para generar un laser que afecta a todos los aliens de su fila. Muere luego de causar el daño */
