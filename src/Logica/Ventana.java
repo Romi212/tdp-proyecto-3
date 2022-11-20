@@ -66,7 +66,7 @@ public class Ventana  {
 		}
 		tablero = new Casilla[6][9];
 
-		//Cargamos la fuente para el tecto
+		//Cargamos la fuente para el texto
 		try {
 			String path = p.getProperty("fuente");
 			fuente = Font.createFont(Font.TRUETYPE_FONT, new File(path));
@@ -113,7 +113,6 @@ public class Ventana  {
 		panelBotonera = new JPanel();
 
 		panelBotonera.setBackground(Color.BLACK);
-		//panelBotonera.setBounds(0, 0, frmLaHorda.getBounds().width, alturaBotonera);
 		panelBotonera.setBounds(0, -10, frmLaHorda.getBounds().width, size*2-60);
 		panelBotonera.setLayout(null);
 		panelBotonera.setOpaque(false);
@@ -330,8 +329,6 @@ public class Ventana  {
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.DEFAULT_OPTION);
 
 		if(opcionElegida==0 && colum.isSelected()) {  toReturn=MODO_EXPERTO;  }
-
-
 
 		organizarVentana(NIVEL_0);
 		modoDeJuego = toReturn;

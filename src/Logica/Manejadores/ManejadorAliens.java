@@ -1,27 +1,24 @@
 package Logica.Manejadores;
 
 import Logica.Entidades.Aliens.Alien;
-import Logica.Entidades.ColumnaFinal;
-import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Logica;
 import Logica.Fila;
 
 import java.util.LinkedList;
-import java.util.Random;
 
 public class ManejadorAliens extends Thread {
 
     private LinkedList<Alien> proximosAliens;
-    int aliensPorHorda;
+    private int aliensPorHorda;
 
     private Fila[] tablero;
 
     private Logica logica;
 
-    boolean noTerminoJuego;
+    private boolean noTerminoJuego;
 
-    private final int TIEMPO = 50; //70
+    private final int TIEMPO = 50;
 
     public ManejadorAliens(LinkedList<Alien> aliens, Logica logica, Fila[] tablero){
         proximosAliens = aliens;
@@ -30,9 +27,10 @@ public class ManejadorAliens extends Thread {
         this.logica = logica;
         this.tablero = tablero;
         noTerminoJuego = true;
-       // this.fin = f;
     }
 
+    /* Remueve los aliens de la lista de proximos aliens, los agrega a su fila correspondiente y le informa a logica que muestre el cartel de la horda.
+    Si ya se generaron todos los aliens de la lista le informa a logica que termino el nivel.*/
     private void generarHorda(){
         boolean quedan = proximosAliens.size()>0;
 
@@ -50,7 +48,8 @@ public class ManejadorAliens extends Thread {
         }
     }
 
-
+    /* Por cada fila del tablero les informa a los aliens que realicen una accion (segun su estado sera caminar, comer una nave, permanecer congelado o cambiar de estado).
+    *  Checkea las colisiones con la columna final y, si hay naves en la fila, las colisiones de los aliens con los proyectiles ambos mediante el patron visitor */
     @Override
     public void run() {
         while(noTerminoJuego){
@@ -80,12 +79,11 @@ public class ManejadorAliens extends Thread {
             }
             if(!hayZombies) generarHorda();
 
-
-
         }
 
     }
 
+    /* Destruye todos los aliens de la lista, se utiliza cuando termina el juego */
     public void detener(){
         for(Alien a : proximosAliens){
             a.destruir();

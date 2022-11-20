@@ -19,12 +19,12 @@ import java.util.Random;
 
 public class Logica {
 
+    private int nivel;
+    private String[] archivos;
     private final int GANE = 1;
     private final int PERDI = 2;
 
-    private int nivel;
     private ObjectsFactory factory;
-    private String[] archivos;
     private Fila[] tablero;
 
     private int cantFilas = 6;
@@ -56,18 +56,20 @@ public class Logica {
 
     }
 
+    /* Delega la operacion a ventana, que se lo solicita al jugador y retorna el modo elegido */
     private int elegirModoDeJuego(){
         return ventana.elegirModoDeJuego();
     }
 
+    /* Crea el nivel leyendo del archivo correspondiente la cantidad de cada uno de los tipos de aliens. Inicia los manejaadores */
     private void crearNivel(int nivel){
         ventana.solesIniciales(Integer.parseInt(p.getProperty("recolectadosInicial")));
-        InputStream input = getClass().getResourceAsStream(p.getProperty(archivos[nivel]));
 
+        //Leemos el archivo del nivel linea por linea
+        InputStream input = getClass().getResourceAsStream(p.getProperty(archivos[nivel]));
         BufferedReader br = null;
         br = new BufferedReader(new InputStreamReader(input));
         List lineas = new List();
-        //Leo el archivo del nivel
         try {
             String linea = br.readLine();
 
@@ -79,15 +81,13 @@ public class Logica {
             e.printStackTrace();
         }
         LinkedList<Alien> aliens = new LinkedList<>();
+        //Recuperamos las tres primeras lineas como la cantidad de aliens de cada tipo que deben aparecer a lo largo del nivel
         int cantAlien1 = Integer.parseInt(lineas.getItem(0));
         int cantAlien2 = Integer.parseInt(lineas.getItem(1));
         int cantAlien3 = Integer.parseInt(lineas.getItem(2));
 
-        Random rand = new Random();
-        int filaElegida;
-        int posx;
-        int posy;
-        Fila filaActual;
+        //Se inicializa la columna final segun el modo,
+        //si es el normal esta se situa en el extremo izquierdo del tablero, si es el experto se situa dentro del tablero impidiendo al jugador colocar naves en algunas columnas
         ColumnaFinal fin;
         if(modo == 0)
             fin = new ColumnaFinal(new Rectangle(xIni+sizeC+15,0,sizeC,sizeC*10),this);
@@ -97,7 +97,12 @@ public class Logica {
             tablero[i].setColumna(fin);
         }
 
-
+        //Se distribuyen los aliens por cada una de las filas aleatoriamente
+        Random rand = new Random();
+        int filaElegida;
+        int posx;
+        int posy;
+        Fila filaActual;
         while(cantAlien1 > 0 && cantAlien2 > 0 && cantAlien3 > 0){
             filaElegida = rand.nextInt(cantFilas);
             filaActual = tablero[filaElegida];
@@ -123,18 +128,15 @@ public class Logica {
             ventana.agregarObjeto(a.getAlienG());
         }
 
-
+        //Se inicializan y comienzan los manejadores
         M_Aliens = new ManejadorAliens(aliens,this, tablero);
-
         M_Naves = new ManejadorNaves(tablero, this);
-
         M_Aliens.start();
-
         M_Naves.start();
 
     }
 
-
+    /* Se inicializa las factories de acuerdo alnivel*/
     public void empezarJuego() {
         modo = elegirModoDeJuego();
 
@@ -158,6 +160,7 @@ public class Logica {
 
     }
 
+    /* Crea una nave del tipo especificado en el parametro, lo agrega a su fila correspondiente asi como tambien en la pantalla */
     public void agregarNave(int x, int y,int fila, int columna, int tipo){
 
         Nave n = null;
@@ -171,10 +174,14 @@ public class Logica {
         ventana.agregarObjeto(n.getNaveG());
 
     }
+
+    /* Delega la operacion a ventana, que agrega el objeto grafico a la pantalla */
     public void agregarObjetoGrafico(ObjetoGrafico o){
         ventana.agregarObjeto(o);
     }
 
+    /* Detiene los manejadores, si se completo el ultimo nivel se lo informa a ventana. En caso contrario le informa a ventana que actualice la pantalla y pause la musica,
+    * cambia la factory (para modificar los tipos de naves y aliens que aparecen en el nivel) y crea el nuevo nivel */
     public void terminoNivel(){
         M_Aliens.detener();
         M_Naves.detener();
@@ -190,28 +197,35 @@ public class Logica {
         }
     }
 
+
     public boolean isCeldaOcupada(int x, int y){
         return tablero[x].estaOcupada(y);
     }
 
+    /* Delega la operacion a ventana, que elimina el objeto grafico de la pantalla */
     public void sacarObjeto(ObjetoGrafico o){
         ventana.sacarObjeto(o);
     }
 
+    /* Delega la operacion a ventana, que le informa al jugador que se aproxima una horda */
     public void mostrarCartelHorda(){
         ventana.cartelHorda();
     }
 
+    /* Delega la operacion a ventana que agrega soles, independientes de las naves que los generan, para que los recolecte el jugador */
     public void agregarSol(SolGrafico s){
         ventana.agregarSol(s);
     }
 
+    /* Delega la operacion a ventana, que actualiza el estado en pantalla del objeto grafico */
     public void actualizarGrafico(ObjetoGrafico o){ventana.actualizarGrafico(o);}
 
+    /* Delega la operacion a ventana, que informa al jugador que perdio */
     public void terminoJuego(){
         ventana.finDelJuego(PERDI);
     }
 
+    /* Detiene los manejadores */
     public void detenerHilos(){
         M_Aliens.detener();
         M_Naves.detener();

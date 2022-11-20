@@ -3,7 +3,6 @@ package Logica.Manejadores;
 
 import Logica.Entidades.Naves.Nave;
 import Logica.Entidades.Naves.Proyectil;
-import Logica.Entidades.Sol;
 import Logica.Entidades.SolGrafico;
 import Logica.Fila;
 import Logica.Logica;
@@ -20,14 +19,17 @@ public class ManejadorNaves extends Thread {
     private boolean noTerminoJuego;
 
     private Logica logica;
+
+    private int contador;
     public ManejadorNaves(Fila[] filas, Logica log){
         tablero = filas;
         logica = log;
         noTerminoJuego = true;
     }
 
-    private int contador;
-
+    /* Recorre los proyectiles de todas las filas, les notifica que paso el tiempo y delega la actualizacion de su grafica en la pantalla a logica.
+    *  Recorre las neves de todas las filas informandoles que paso el tiempo.
+    *  Utiliza la variable contador para controlar la aparicion de los soles en pantalla que recolecta el usuario y son independientes a las naves */
     public void run(){
         while (noTerminoJuego){
             try {
@@ -60,6 +62,7 @@ public class ManejadorNaves extends Thread {
         }
     }
 
+    /* Informa a la fila que elimine todos sus naves, aliens y proyectiles. Se utiliza cuando termina el juego */
     public void detener(){
         for(Fila f: tablero){
             f.limpiar();
