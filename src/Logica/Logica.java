@@ -67,6 +67,7 @@ public class Logica {
 
         //Leemos el archivo del nivel linea por linea
         InputStream input = getClass().getResourceAsStream(p.getProperty(archivos[nivel]));
+        System.out.println(p.getProperty(archivos[nivel]));
         BufferedReader br = null;
         br = new BufferedReader(new InputStreamReader(input));
         List lineas = new List();
@@ -83,8 +84,11 @@ public class Logica {
         LinkedList<Alien> aliens = new LinkedList<>();
         //Recuperamos las tres primeras lineas como la cantidad de aliens de cada tipo que deben aparecer a lo largo del nivel
         int cantAlien1 = Integer.parseInt(lineas.getItem(0));
+        //System.out.println("cantAlien1: "+cantAlien1);
         int cantAlien2 = Integer.parseInt(lineas.getItem(1));
+        //System.out.println("cantAlien2: "+cantAlien2);
         int cantAlien3 = Integer.parseInt(lineas.getItem(2));
+        //System.out.println("cantAlien3: "+cantAlien3);
 
         //Se inicializa la columna final segun el modo,
         //si es el normal esta se situa en el extremo izquierdo del tablero, si es el experto se situa dentro del tablero impidiendo al jugador colocar naves en algunas columnas
@@ -103,25 +107,38 @@ public class Logica {
         int posx;
         int posy;
         Fila filaActual;
-        while(cantAlien1 > 0 && cantAlien2 > 0 && cantAlien3 > 0){
+        LinkedList<String> listaTipos = new LinkedList<>();
+        if(cantAlien1>0) listaTipos.addLast("0");
+        if(cantAlien2>0) listaTipos.addLast("1");
+        if(cantAlien3>0) listaTipos.addLast("2");
+        int tipo;
+        Alien a;
+
+        while(cantAlien1 > 0 || cantAlien2 > 0 || cantAlien3 > 0){
             filaElegida = rand.nextInt(cantFilas);
             filaActual = tablero[filaElegida];
 
             posx = filaActual.getxIni() + (filaActual.cantCeldas()+2)*filaActual.getTam();
             posy = filaActual.getyIni()-10;
-            Alien a = null;
-            int tipo = rand.nextInt(3);
+            a = null;
+
+            if(listaTipos.size()==1) tipo = Integer.parseInt(listaTipos.getFirst());
+             else tipo = Integer.parseInt(listaTipos.get(rand.nextInt(listaTipos.size())));
+
             if(tipo == 0 && cantAlien1 > 0){
                 a = factory.createAlien1(posx, posy);
                 cantAlien1--;
+                if(cantAlien1==0) listaTipos.remove("0");
             }
             else if(tipo == 1 && cantAlien2 > 0){
                 a = factory.createAlien2(posx, posy);
                 cantAlien2--;
+                if(cantAlien2==0) listaTipos.remove("1");
             }
             else if(tipo == 2 && cantAlien3 > 0){
                 a = factory.createAlien3(posx, posy);
                 cantAlien3--;
+                if(cantAlien3==0) listaTipos.remove("2");
             }
             a.setFila(filaElegida);
             aliens.add(a);
