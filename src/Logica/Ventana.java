@@ -17,6 +17,10 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 public class Ventana  {
 	private  JLabel fondo;
+
+	private JButton Bmusica;
+	private int alturaBotonera = 70;
+
 	private int width = 1016;
 	private int height = 623;
 	private Logica logica;
@@ -98,7 +102,6 @@ public class Ventana  {
 	*  Crea el tablero que permite al usuario colocar una nave desde la botonera.
 	*  Inicializa logica y comienza el juego. */
 	private void iniciarJuego(int estado){
-		int alturaBotonera = 70;
 		int inicioTableroX = 238;
 		int inicioTableroY = 42;
 
@@ -121,7 +124,7 @@ public class Ventana  {
 		layeredPane.add(panelBotonera);
 		panelBotonera.setVisible(false);
 
-		JButton Bmusica = new JButton();
+		Bmusica= new JButton();
 		Bmusica.setBackground(Color.green);
 		Bmusica.setOpaque(true);
 		Bmusica.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("iconoPlay"))));
@@ -224,10 +227,21 @@ public class Ventana  {
 
 		frmLaHorda.setVisible(true);
 
-		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
+		boolean seInicia=true;
+		if(estado==1 || estado==2){
+			seInicia = quisoReiniciar();
+		}
 
+		if(seInicia) {
+			llamarLogica();
+			panelBotonera.setVisible(true);
+		}
+	}
+
+
+	private void llamarLogica(){
+		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
 		logica.empezarJuego();
-		panelBotonera.setVisible(true);
 	}
 
 	/* Permite agregar un objeto grafico a la pantalla */
@@ -270,7 +284,7 @@ public class Ventana  {
 	}
 
 	/* Cambia la imagen de fondo del panel del fondo segun el estado pasado por parametro (0 fondo inicial, 1 se gano el juego o 2 se perdio el juego). */
-	synchronized private void ponerFondo(int estado){
+	 private void ponerFondo(int estado){
 		String clave = switch (estado) {
 			case 0 -> "inicioFondo";
 			case 1 -> "ganasteFondo";
@@ -291,6 +305,22 @@ public class Ventana  {
 		fondo.setIcon(fondito);
 	}
 
+	private boolean quisoReiniciar(){
+		boolean quiso = true;
+		UIManager.put("OptionPane.background", Color.BLACK);
+		UIManager.put("Panel.background", Color.BLACK);
+		UIManager.put("Button.background", Color.LIGHT_GRAY);
+
+		JPanel ventanaReinicio = new JPanel(new FlowLayout());
+		JLabel mensaje = new JLabel("Quiere reiniciar el juego?");
+		mensaje.setFont(fuente.deriveFont(10f));
+		mensaje.setForeground(Color.WHITE);
+		ventanaReinicio.add(mensaje);
+
+		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaReinicio,"Elija una opcion...",JOptionPane.YES_NO_OPTION);
+		if(opcionElegida==1) quiso = false;
+		return quiso;
+	}
 	/* Muestra una pantalla inicial de tal forma que el usuario pueda elegir el modo que desea jugar, retorna dicho modo. */
 	public int elegirModoDeJuego() {
 		int toReturn = MODO_NORMAL;
@@ -346,6 +376,7 @@ public class Ventana  {
 		if(nivel == NIVEL_0){
 			input = getClass().getResourceAsStream("/resources/archivos/configNivel1.properties");
 		} else{
+			Bmusica.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("iconoPlay"))));
 			input = getClass().getResourceAsStream("/resources/archivos/configNivel2.properties");
 			firstNivel=false;
 		}
@@ -596,14 +627,14 @@ public class Ventana  {
 
 
 	/* Remueve todos los componentes del frame principal, detiene los hilos de ejecucion y reinicia el juego */
-	public void finDelJuego(int gane){
+	public void finDelJuego(int estado){
 		logica.detenerHilos();
 		frmLaHorda.remove(layeredPane);
 		layeredPane = null;
 		player.pausar();
 		frmLaHorda.repaint();
 
-		iniciarJuego(gane);
+		iniciarJuego(estado);
 	}
 
 }
