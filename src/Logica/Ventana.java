@@ -30,12 +30,10 @@ public class Ventana  {
 	private Properties p;
 	private JPanel panelObjetos;
 
-	private static final int MODO_NORMAL = 0;
-	private static final int MODO_EXPERTO = 1;
+	public static final int MODO_NORMAL = 0;
+	public static final int MODO_EXPERTO = 1;
 
-	private static final int NIVEL_0 = 0;
 
-	private static final int NIVEL_1 = 1;
 
 	private int size = 74;
 
@@ -366,7 +364,7 @@ public class Ventana  {
 		if(opcionElegida==0 && colum.isSelected()) {  toReturn=MODO_EXPERTO;  }
 
 		modoDeJuego = toReturn;
-		organizarVentana(NIVEL_0);
+		organizarVentana(logica.NIVEL_0);
 
 
 		return toReturn;
@@ -377,7 +375,7 @@ public class Ventana  {
 	public void organizarVentana(int nivel){
 		InputStream input;
 		boolean firstNivel = true;
-		if(nivel == NIVEL_0){
+		if(nivel == logica.NIVEL_0){
 			input = getClass().getResourceAsStream("/resources/archivos/configNivel1.properties");
 		} else{
 			Bmusica.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("iconoPlay"))));

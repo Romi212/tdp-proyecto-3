@@ -40,6 +40,10 @@ public class Logica {
 
     private int modo;
 
+    public static final int NIVEL_0 = 0;
+
+    public static final int NIVEL_1 = 1;
+
 
 
     public Logica(Ventana v,Properties p,int xInicial, int yInicial, int tam){
@@ -148,7 +152,7 @@ public class Logica {
 
         //Se inicializan y comienzan los manejadores
         M_Aliens = new ManejadorAliens(aliens,this, tablero);
-        M_Naves = new ManejadorNaves(tablero, this);
+        M_Naves = new ManejadorNaves(tablero, this, nivel);
         M_Aliens.start();
         M_Naves.start();
 
@@ -159,7 +163,7 @@ public class Logica {
         modo = elegirModoDeJuego();
 
         //Se crean las factories correspondientes y los archivos
-        if (modo == 0) {
+        if (modo == ventana.MODO_NORMAL) {
             archivos = new String[2];
             archivos[0] = "archivoN1";
             archivos[1] = "archivoN2";
@@ -171,7 +175,7 @@ public class Logica {
         }
 
         //Creo la factory de aliens de acuerdo al nivel de juego
-        nivel = 0;
+        nivel = NIVEL_0;
         factory = new FactoryDia();
         crearNivel(nivel);
 
@@ -204,7 +208,7 @@ public class Logica {
         M_Aliens.detener();
         M_Naves.detener();
         nivel++;
-        if(nivel == 2){
+        if(nivel > NIVEL_1){
             ventana.finDelJuego(GANE);
         }
         else {

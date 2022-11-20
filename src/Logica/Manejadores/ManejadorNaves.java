@@ -21,10 +21,14 @@ public class ManejadorNaves extends Thread {
     private Logica logica;
 
     private int contador;
-    public ManejadorNaves(Fila[] filas, Logica log){
+
+    private int nivel;
+
+    public ManejadorNaves(Fila[] filas, Logica log, int nivel){
         tablero = filas;
         logica = log;
         noTerminoJuego = true;
+        this.nivel = nivel;
     }
 
     /* Recorre los proyectiles de todas las filas, les notifica que paso el tiempo y delega la actualizacion de su grafica en la pantalla a logica.
@@ -52,13 +56,16 @@ public class ManejadorNaves extends Thread {
                     n.pasoXTiempo();
                 }
             }
-            contador++;
-            if(contador == 80){
-                Random rand = new Random();
-                int posx = rand.nextInt(600) +300;
-                tablero[0].agregarSol(new SolGrafico(posx,10));
-                contador = 0;
+            if(nivel == logica.NIVEL_0){
+                contador++;
+                if(contador == 80){
+                    Random rand = new Random();
+                    int posx = rand.nextInt(600) +300;
+                    tablero[0].agregarSol(new SolGrafico(posx,10));
+                    contador = 0;
+                }
             }
+
         }
     }
 
