@@ -465,13 +465,47 @@
 											"underline": true,
 											"text": "-NIVEL_0: int = 1",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGElsz/Z6smesQ=",
+											"_parent": {
+												"$ref": "AAAAAAGD8akIZXsox/E="
+											},
+											"model": {
+												"$ref": "AAAAAAGElsz/Tasjxb0="
+											},
+											"font": "Arial;13;0",
+											"left": 1549,
+											"top": 1124,
+											"width": 302.0595703125,
+											"height": 13,
+											"text": "-alturaBotonera",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGEls+r4xj6wKE=",
+											"_parent": {
+												"$ref": "AAAAAAGD8akIZXsox/E="
+											},
+											"model": {
+												"$ref": "AAAAAAGEls+r2xj3jdE="
+											},
+											"font": "Arial;13;0",
+											"left": 1549,
+											"top": 1139,
+											"width": 302.0595703125,
+											"height": 13,
+											"text": "-Bmusica",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1544,
 									"top": 849,
 									"width": 312.0595703125,
-									"height": 278
+									"height": 308
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -494,7 +528,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1132,
+											"top": 1162,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+Ventana()",
@@ -511,7 +545,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1147,
+											"top": 1177,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+initialize()",
@@ -528,7 +562,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1162,
+											"top": 1192,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "-iniciarJuego(int estado)",
@@ -545,7 +579,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1177,
+											"top": 1207,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+agregarObjeto(o ObjetoGrafico)",
@@ -616,7 +650,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1192,
+											"top": 1222,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+sacarObjeto(o ObjetoGrafico)",
@@ -633,7 +667,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1207,
+											"top": 1237,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+actualizarGrafico(ObjetoGrafico o)",
@@ -650,7 +684,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1222,
+											"top": 1252,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+elegirModoDeJuego(): int",
@@ -667,7 +701,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1237,
+											"top": 1267,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+organizarVentana(int nivel)",
@@ -684,7 +718,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1252,
+											"top": 1282,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "-ponerFotoNave(botonNave : JToggleButton, int nro)",
@@ -701,7 +735,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1267,
+											"top": 1297,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "-elegirDondeNave(b: JToggleButton)",
@@ -718,7 +752,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1282,
+											"top": 1312,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "-agregarNave(Casilla c)",
@@ -735,7 +769,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1297,
+											"top": 1327,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "-terminoModoPonerPlanta()",
@@ -752,7 +786,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1312,
+											"top": 1342,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "-ponerFondo(int estado)",
@@ -769,7 +803,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1327,
+											"top": 1357,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+pausarMusica()",
@@ -786,7 +820,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1342,
+											"top": 1372,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "-actualizarSoles(int cant)",
@@ -803,7 +837,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1357,
+											"top": 1387,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+solesIniciales(int cant)",
@@ -820,7 +854,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1372,
+											"top": 1402,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "-habilitarBotones()",
@@ -837,7 +871,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1387,
+											"top": 1417,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+agregarSol(SolGrafico s)",
@@ -854,7 +888,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1402,
+											"top": 1432,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+cartelHorda()",
@@ -871,18 +905,52 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1549,
-											"top": 1417,
+											"top": 1447,
 											"width": 302.0595703125,
 											"height": 13,
 											"text": "+finDelJuego(int gane)",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGEls5TLL1YEAk=",
+											"_parent": {
+												"$ref": "AAAAAAGD8akIZnsplvA="
+											},
+											"model": {
+												"$ref": "AAAAAAGEls5TJL1VPF0="
+											},
+											"font": "Arial;13;0",
+											"left": 1549,
+											"top": 1462,
+											"width": 302.0595703125,
+											"height": 13,
+											"text": "-getAsteroidesImg(): ImageIcon",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGEls81L+OLZO4=",
+											"_parent": {
+												"$ref": "AAAAAAGD8akIZnsplvA="
+											},
+											"model": {
+												"$ref": "AAAAAAGEls81JeOIZEU="
+											},
+											"font": "Arial;13;0",
+											"left": 1549,
+											"top": 1477,
+											"width": 302.0595703125,
+											"height": 13,
+											"text": "-llamarLogica()",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1544,
-									"top": 1127,
+									"top": 1157,
 									"width": 312.0595703125,
-									"height": 308
+									"height": 338
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -922,7 +990,7 @@
 							"left": 1544,
 							"top": 824,
 							"width": 312.0595703125,
-							"height": 611,
+							"height": 671,
 							"nameCompartment": {
 								"$ref": "AAAAAAGD8akIZHsjRME="
 							},
@@ -21985,8 +22053,8 @@
 										"$ref": "AAAAAAGEUncwI/nVD4k="
 									},
 									"font": "Arial;13;0",
-									"left": 1864,
-									"top": 1139,
+									"left": 1863,
+									"top": 1151,
 									"width": 42.9990234375,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -22008,8 +22076,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 1888,
-									"top": 1124,
+									"left": 1885,
+									"top": 1136,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -22029,8 +22097,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1880,
-									"top": 1168,
+									"left": 1881,
+									"top": 1180,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -22050,8 +22118,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1884,
-									"top": 1139,
+									"left": 1883,
+									"top": 1150,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -22071,8 +22139,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1888,
-									"top": 1126,
+									"left": 1886,
+									"top": 1137,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -22092,8 +22160,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1875,
-									"top": 1165,
+									"left": 1876,
+									"top": 1178,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -22113,8 +22181,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1887,
-									"top": 1140,
+									"left": 1886,
+									"top": 1151,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -22133,8 +22201,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1887,
-									"top": 1126,
+									"left": 1884,
+									"top": 1137,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -22153,8 +22221,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1887,
-									"top": 1167,
+									"left": 1888,
+									"top": 1178,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -22199,7 +22267,7 @@
 								"$ref": "AAAAAAGD8akIZHsidoc="
 							},
 							"lineStyle": 1,
-							"points": "1856:1156;1911:1165",
+							"points": "1856:1170;1911:1174",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGEUncwJPnaLIY="
@@ -23479,8 +23547,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1619,
-									"top": 1540,
+									"left": 1616,
+									"top": 1570,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -23500,8 +23568,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 1604,
-									"top": 1538,
+									"left": 1601,
+									"top": 1568,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -23521,8 +23589,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1648,
-									"top": 1545,
+									"left": 1645,
+									"top": 1575,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -23543,7 +23611,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1606,
-									"top": 1629,
+									"top": 1628,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -23604,8 +23672,8 @@
 										"$ref": "AAAAAAGEbhU2r8NSZXA="
 									},
 									"font": "Arial;13;0",
-									"left": 1650,
-									"top": 1466,
+									"left": 1643,
+									"top": 1527,
 									"width": 53.853515625,
 									"height": 13,
 									"alpha": 0.7366491737774399,
@@ -23626,8 +23694,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1619,
-									"top": 1452,
+									"left": 1612,
+									"top": 1512,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -23646,8 +23714,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1661,
-									"top": 1452,
+									"left": 1653,
+									"top": 1512,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -23692,7 +23760,7 @@
 								"$ref": "AAAAAAGD8dyhL0Kb18E="
 							},
 							"lineStyle": 1,
-							"points": "1617:1663;1652:1435",
+							"points": "1617:1663;1645:1495",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGEbhU2r8NVKg4="
@@ -26117,6 +26185,26 @@
 							"isStatic": true,
 							"type": "int",
 							"defaultValue": "1"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGElsz/Tasjxb0=",
+							"_parent": {
+								"$ref": "AAAAAAGD8akIYXsgJ3U="
+							},
+							"name": "alturaBotonera",
+							"visibility": "private",
+							"type": ""
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGEls+r2xj3jdE=",
+							"_parent": {
+								"$ref": "AAAAAAGD8akIYXsgJ3U="
+							},
+							"name": "Bmusica",
+							"visibility": "private",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -26474,6 +26562,36 @@
 									"type": ""
 								}
 							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGEls5TJL1VPF0=",
+							"_parent": {
+								"$ref": "AAAAAAGD8akIYXsgJ3U="
+							},
+							"name": "getAsteroidesImg",
+							"visibility": "private",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGEls73atG5Q7M=",
+									"_parent": {
+										"$ref": "AAAAAAGEls5TJL1VPF0="
+									},
+									"type": "ImageIcon",
+									"direction": "return"
+								}
+							],
+							"specification": "\n"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGEls81JeOIZEU=",
+							"_parent": {
+								"$ref": "AAAAAAGD8akIYXsgJ3U="
+							},
+							"name": "llamarLogica",
+							"visibility": "private"
 						}
 					]
 				},
@@ -26908,6 +27026,7 @@
 							"name": "GANE",
 							"visibility": "private",
 							"isStatic": true,
+							"type": "",
 							"defaultValue": "1"
 						},
 						{
@@ -26919,6 +27038,7 @@
 							"name": "PERDI",
 							"visibility": "private",
 							"isStatic": true,
+							"type": "",
 							"defaultValue": "2"
 						}
 					],

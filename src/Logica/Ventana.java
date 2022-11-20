@@ -305,6 +305,7 @@ public class Ventana  {
 		fondo.setIcon(fondito);
 	}
 
+	/*Metodo que se llama cuando el jugador pierda/gana para saber si quiere reiniciar el juego*/
 	private boolean quisoReiniciar(){
 		boolean quiso = true;
 		UIManager.put("OptionPane.background", Color.BLACK);
@@ -411,6 +412,7 @@ public class Ventana  {
 
 	}
 
+	/*Metodo que devuelve el icono de los asteroides para el modo experto*/
 	private ImageIcon getAsteroidesImg(){
 		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("debris")));
 		Image img = ic.getImage();
