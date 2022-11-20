@@ -67,7 +67,7 @@ public class Logica {
 
         //Leemos el archivo del nivel linea por linea
         InputStream input = getClass().getResourceAsStream(p.getProperty(archivos[nivel]));
-        System.out.println(p.getProperty(archivos[nivel]));
+       // System.out.println(p.getProperty(archivos[nivel]));
         BufferedReader br = null;
         br = new BufferedReader(new InputStreamReader(input));
         List lineas = new List();

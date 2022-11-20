@@ -438,7 +438,7 @@ public class Ventana  {
 		Image img2 = ic2.getImage();
 
 		//Image newImg2 = img2.getScaledInstance(menuBotonera.getHeight(), menuBotonera.getHeight(), Image.SCALE_SMOOTH);
-		Image newImg2 = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+		Image newImg2 = img2.getScaledInstance(size, size, Image.SCALE_SMOOTH);
 		ic2 = new ImageIcon(newImg2);
 
 		botonNave.setSelectedIcon(ic2);
