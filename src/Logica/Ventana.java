@@ -18,6 +18,7 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 public class Ventana  {
 	private  JLabel fondo;
 
+	private  JLabel enNivel;
 	private JButton Bmusica;
 	private int alturaBotonera = 70;
 
@@ -169,6 +170,8 @@ public class Ventana  {
 		scrollBotonera.setViewportView(menuBotonera);
 		scrollBotonera.setBounds(300,10, size*5, size+10);
 		panelBotonera.add(scrollBotonera);
+
+		enNivel = new JLabel();
 
 		//Panel de Objetos
 		panelObjetos = new JPanel();
@@ -624,7 +627,18 @@ public class Ventana  {
 	/* Notifica al usuario que paso de nivel */
 															//CUANDO SE IMPLEMENTE ESTO AGREGARLO AL DIAGRAMA
 	public void cartelNivel(int nivel){
+		if(nivel==0){
+			enNivel.setText("Nivel 1");
+			enNivel.setFont(fuente.deriveFont(15f));
+			enNivel.setBounds(700,20,100,20);
+			enNivel.setForeground(Color.white);
+			panelBotonera.add(enNivel);
+		}
+		else{
+			enNivel.setText("Nivel 2");
+		}
 
+		enNivel.repaint();
 	}
 
 
