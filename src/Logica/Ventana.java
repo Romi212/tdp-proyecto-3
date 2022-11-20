@@ -330,8 +330,9 @@ public class Ventana  {
 
 		if(opcionElegida==0 && colum.isSelected()) {  toReturn=MODO_EXPERTO;  }
 
-		organizarVentana(NIVEL_0);
 		modoDeJuego = toReturn;
+		organizarVentana(NIVEL_0);
+
 
 		return toReturn;
 	}
@@ -344,6 +345,7 @@ public class Ventana  {
 			input = getClass().getResourceAsStream("/resources/archivos/configNivel1.properties");
 		} else{
 			input = getClass().getResourceAsStream("/resources/archivos/configNivel2.properties");
+
 		}
 		try {
 			p.load(input);
@@ -363,7 +365,22 @@ public class Ventana  {
 		//Se inicializa el reproductor y comienza la musica
 		player = new Musica(p.getProperty("musica"));
 		player.play();
+		if(modoDeJuego == MODO_EXPERTO){
 
+			for(int i = 0; i<2; i++){
+				System.out.println("ASKHDKAJHDKJSAHDKJAHSD");
+				JLabel aste = new JLabel();
+				ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("debris")));
+				Image img = ic.getImage();
+
+				Image newImg = img.getScaledInstance(size, size*6, Image.SCALE_DEFAULT);
+				ic = new ImageIcon(newImg);
+				aste.setIcon(ic);
+				aste.setBounds(235+(i*size), 40, size,size*6);
+				panelObjetos.add(aste);
+
+			}
+		}
 
 	}
 
