@@ -6,6 +6,7 @@ import Logica.Entidades.SolGrafico;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.net.JarURLConnection;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.Properties;
@@ -341,11 +342,12 @@ public class Ventana  {
     /* Inicializa Properties segun el nivel actual, inserta las imagenes de los botones e inicia el reoductor de musica */
 	public void organizarVentana(int nivel){
 		InputStream input;
+		boolean firstNivel = true;
 		if(nivel == NIVEL_0){
 			input = getClass().getResourceAsStream("/resources/archivos/configNivel1.properties");
 		} else{
 			input = getClass().getResourceAsStream("/resources/archivos/configNivel2.properties");
-
+			firstNivel=false;
 		}
 		try {
 			p.load(input);
@@ -365,23 +367,26 @@ public class Ventana  {
 		//Se inicializa el reproductor y comienza la musica
 		player = new Musica(p.getProperty("musica"));
 		player.play();
-		if(modoDeJuego == MODO_EXPERTO){
-
+		JLabel aste;
+		if(modoDeJuego == MODO_EXPERTO && firstNivel){
 			for(int i = 0; i<2; i++){
-				System.out.println("ASKHDKAJHDKJSAHDKJAHSD");
-				JLabel aste = new JLabel();
-				ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("debris")));
-				Image img = ic.getImage();
-
-				Image newImg = img.getScaledInstance(size, size*6, Image.SCALE_DEFAULT);
-				ic = new ImageIcon(newImg);
-				aste.setIcon(ic);
+				aste = new JLabel();
+				aste.setIcon(getAsteroidesImg());
 				aste.setBounds(235+(i*size), 40, size,size*6);
 				panelObjetos.add(aste);
 
 			}
 		}
 
+	}
+
+	private ImageIcon getAsteroidesImg(){
+		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("debris")));
+		Image img = ic.getImage();
+
+		Image newImg = img.getScaledInstance(size, size*6, Image.SCALE_DEFAULT);
+		ic = new ImageIcon(newImg);
+		return ic;
 	}
 
 	public void pausarMusica(){

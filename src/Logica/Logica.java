@@ -143,13 +143,13 @@ public class Logica {
         //Se crean las factories correspondientes y los archivos
         if (modo == 0) {
             archivos = new String[2];
-            archivos[0] = "archivoD1";
-            archivos[1] = "archivoD2";
+            archivos[0] = "archivoN1";
+            archivos[1] = "archivoN2";
 
         } else {
             archivos = new String[2];
-            archivos[0] = "archivoD1";
-            archivos[1] = "archivoD2";
+            archivos[0] = "archivoE1";
+            archivos[1] = "archivoE2";
         }
 
         //Creo la factory de aliens de acuerdo al nivel de juego
