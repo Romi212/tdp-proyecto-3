@@ -93,7 +93,7 @@ public class Ventana  {
 		frmLaHorda.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLaHorda.getContentPane().setLayout(null);
 		frmLaHorda.setBackground(Color.BLACK);
-
+		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
 		iniciarJuego(0);
 	}
 
@@ -241,7 +241,7 @@ public class Ventana  {
 
 
 	private void llamarLogica(){
-		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
+		//logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
 		logica.empezarJuego();
 	}
 
