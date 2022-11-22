@@ -3,8 +3,6 @@ package Logica.Entidades.Naves;
 import Logica.Entidades.SolGrafico;
 import Logica.Fila;
 
-import java.awt.*;
-
 public class SateliteNoche extends NaveSol{
 	
 	public SateliteNoche(Fila f, int col, int x, int y) {
@@ -12,11 +10,12 @@ public class SateliteNoche extends NaveSol{
 		vida = 100;
 	}
 
+	/* Redefine el metodo para generar dos soles */
 	public void generarSol(){
 		SolGrafico s = new SolGrafico(naveG.getBounds().x,naveG.getBounds().y);
-		fila.agregarSol(s);
-		SolGrafico s2 = new SolGrafico(naveG.getBounds().x+40,naveG.getBounds().y);
-		fila.agregarSol(s2);
+		fila.agregarSolEnPantalla(s);
 
+		SolGrafico s2 = new SolGrafico(naveG.getBounds().x+ naveG.getTam()/2,naveG.getBounds().y);
+		fila.agregarSolEnPantalla(s2);
 	}
 }

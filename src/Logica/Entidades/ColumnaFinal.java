@@ -11,7 +11,7 @@ public class ColumnaFinal extends ObjetoColisionable {
     private Logica logica;
 
     public ColumnaFinal(Rectangle h, Logica l) {
-        setHitbox(h);
+        setHitBox(h);
         this.logica = l;
     }
 
@@ -20,10 +20,7 @@ public class ColumnaFinal extends ObjetoColisionable {
         v.colisionColumnaFinal(this);
     }
 
-    public Rectangle getHitbox() {
-        return hitbox;
-    }
-
+    /* Delega la terminacion del juego a logica, se llama cuando un alien intersecta con la columna final (el jugador pierde) */
     public void avistoTerminoJuego(){
         logica.terminoJuego();
     }

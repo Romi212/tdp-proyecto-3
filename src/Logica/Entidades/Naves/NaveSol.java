@@ -1,10 +1,7 @@
 package Logica.Entidades.Naves;
 
-import Logica.Entidades.Sol;
 import Logica.Entidades.SolGrafico;
 import Logica.Fila;
-
-import java.awt.*;
 
 public abstract class NaveSol extends Nave {
     protected static int MAXTIEMPO = 30;
@@ -12,6 +9,7 @@ public abstract class NaveSol extends Nave {
         super(f,col,x,y, skin);
     }
 
+    /* Si se llamo al metodo MAXTIEMPO veces genera un sol */
     public void pasoXTiempo(){
         contadorC ++;
         if(contadorC == MAXTIEMPO){
@@ -20,10 +18,10 @@ public abstract class NaveSol extends Nave {
         }
 
     }
-    
+
+    /* Crea un sol grafico y lo muestra en pantalla, esto ultimo lo delega a la fila */
     public void generarSol(){
         SolGrafico s = new SolGrafico(naveG.getBounds().x,naveG.getBounds().y);
-        fila.agregarSol(s);
-
+        fila.agregarSolEnPantalla(s);
     }
 }

@@ -11,8 +11,6 @@ import Logica.Entidades.Naves.NaveNocheB;
 import Logica.Entidades.Naves.NaveNocheC;
 import Logica.Entidades.Naves.SateliteNoche;
 
-import java.awt.*;
-
 public class FactoryNoche implements ObjectsFactory{
 
 	public Alien createAlien1(int x, int y) {

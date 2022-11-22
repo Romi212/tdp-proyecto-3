@@ -1,10 +1,6 @@
 package Logica.Entidades.Naves;
 
 import Logica.Fila;
-import Logica.Entidades.Aliens.Alien;
-
-import java.awt.*;
-import java.util.LinkedList;
 
 public class NaveNocheA extends NaveDisparo{
 	
@@ -14,11 +10,12 @@ public class NaveNocheA extends NaveDisparo{
 
 	 }
 
+	 /* Redefine el metodo para generar tres proyectiles por disparo */
 	public void generarProyectil(int x, int y) {
-
+		int sextoImg = naveG.getTam()/6;
 		super.generarProyectil(x, y);
-		super.generarProyectil(x-15, y);
-		super.generarProyectil(x-25, y);
+		super.generarProyectil(x-sextoImg, y);
+		super.generarProyectil(x-sextoImg*2, y);
 	}
 
 }

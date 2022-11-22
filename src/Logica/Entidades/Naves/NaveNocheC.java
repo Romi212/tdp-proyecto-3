@@ -1,8 +1,6 @@
 package Logica.Entidades.Naves;
 import Logica.Entidades.Aliens.Alien;
 import Logica.Fila;
-import java.awt.*;
-import java.util.LinkedList;
 
 public class NaveNocheC extends NaveDisparo{
     public NaveNocheC(Fila f, int col, int x, int y){
@@ -25,19 +23,14 @@ public class NaveNocheC extends NaveDisparo{
         }
     }
 
-    /* Redefine el metodo para congelar a todos los aliens de la fila. Muere luego de causar el daño*/
+    /* Redefine el metodo para congelar a todos los aliens de la fila. Muere luego de causar el daño */
     public void generarProyectil(int x, int y){
 
-            SuperProyectil p = new SuperProyectil(x, y-32);
+            SuperProyectil p = new SuperProyectil(x,y-naveG.getTam()/2);
             fila.agregarProyectil(p);
-            System.out.println("SeGeneroP" );
-            // p.getProyectilGrafico().setDesintegrador();
-            LinkedList<Alien> aliensFila = fila.getAliens();
-            for(int i=0; i < aliensFila.size(); i++) {
-                Alien actual = aliensFila.get(i);
+            for(Alien actual : fila.getAliens()){
                 actual.cambiarAAlienCongelado();
             }
-
             vida = 0;
 
         }

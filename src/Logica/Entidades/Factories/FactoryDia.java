@@ -11,8 +11,6 @@ import Logica.Entidades.Naves.NaveDiaB;
 import Logica.Entidades.Naves.NaveDiaC;
 import Logica.Entidades.Naves.Satelite;
 
-import java.awt.*;
-
 public class FactoryDia implements ObjectsFactory{
 
 	public Alien createAlien1(int x, int y) { return new AlienDia1(x, y); } //Robot

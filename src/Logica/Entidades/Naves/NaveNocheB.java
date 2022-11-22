@@ -2,8 +2,6 @@ package Logica.Entidades.Naves;
 
 import Logica.Fila;
 
-import java.awt.*;
-
 public class NaveNocheB extends NaveDisparo {
 	
 	 protected int tiempoCongelar;
@@ -14,12 +12,14 @@ public class NaveNocheB extends NaveDisparo {
 		 vida = 300;
 	 }
 
-	//Redefine el metodo para generar dos proyectiles en lugar de uno
+	//Redefine el metodo para generar cuatro proyectiles
 	public void generarProyectil(int x, int y){
-		super.generarProyectil(x, y-20);
-		super.generarProyectil(x, y + 10 );
+		int cuartoImg = naveG.getTam()/4;
+		int sextoImg = naveG.getTam()/6;
+		super.generarProyectil(x, y - cuartoImg);
+		super.generarProyectil(x, y + cuartoImg);
 
-		super.generarProyectil(x-5, y-20);
-		super.generarProyectil(x-5, y + 10 );
+		super.generarProyectil(x - sextoImg, y - cuartoImg);
+		super.generarProyectil(x - sextoImg, y + cuartoImg);
 	}
 }

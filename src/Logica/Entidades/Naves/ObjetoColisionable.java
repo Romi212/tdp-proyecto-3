@@ -12,7 +12,7 @@ public abstract class ObjetoColisionable {
 		return hitbox;
 	}
 
-	public void setHitbox(Rectangle h){
+	public void setHitBox(Rectangle h){
 		hitbox = h;
 	}
 }

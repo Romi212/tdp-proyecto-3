@@ -2,8 +2,6 @@ package Logica.Entidades.Aliens;
 
 import Logica.Entidades.ObjetoGrafico;
 
-import javax.swing.*;
-
 public class AlienGrafico extends ObjetoGrafico {
 
 	protected String clave;
@@ -11,41 +9,32 @@ public class AlienGrafico extends ObjetoGrafico {
 	protected int y;
 	protected static final int TAM = 50;
 
-	public AlienGrafico(int px, int py, String c) {
+	//El ultimo parametro representa la cantidad de casillas que ocupa la imagen del alien grafico horizontalmente
+	public AlienGrafico(int px, int py, String c, int anchoCasillas) {
 		clave = c;
 		x = px;
 		y = py;
-		super.setBounds(px, py, TAM, TAM);
+		super.setBounds(px, py, TAM*anchoCasillas, TAM);
 	}
 
+	//Se desplaza hacia la derecha en pantalla segun el parametro
 	public void moverPixeles(int cant){
 		x = (int) super.getBounds().getX();
 		super.setBounds(x-cant, y, (int) getBounds().getWidth(), (int) getBounds().getHeight());
-		//super.repaint();
 	}
 
+	/* Cambia la clave de la imagen para mostrar el alien caminando. Actualiza la varible cambio heredada de Objeto Grafico */
 	public void caminando(){
 		clave = clave.replace("Freeze","");
 		cambio = true;
 	}
-	public void comiendo(){
-		//this.setIcon(skin1);
-	}
+
+	/* Cambia la clave de la imagen para mostrar el alien congelado. Actualiza la varible cambio heredada de Objeto Grafico */
 	public void congelado(){
 		clave+="Freeze";
 		cambio = true;
 	}
 
-	public int getPX(){
-		return x;
-	}
-
-	public int getPY(){
-		return y;
-	}
-
 	@Override
-	public String getRefImagen() {
-		return clave;
-	}
+	public String getRefImagen() { return clave; }
 }

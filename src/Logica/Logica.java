@@ -54,7 +54,7 @@ public class Logica {
         yIni = yInicial;
         sizeC = tam;
         for(int i =0; i < cantFilas; i++){
-            Fila f = new Fila(this, xIni,yIni+(i*sizeC),sizeC);
+            Fila f = new Fila(this, xIni,yIni+(i*sizeC));
             tablero[i] = f;
         }
 
@@ -71,7 +71,6 @@ public class Logica {
 
         //Leemos el archivo del nivel linea por linea
         InputStream input = getClass().getResourceAsStream(p.getProperty(archivos[nivel]));
-       // System.out.println(p.getProperty(archivos[nivel]));
         ventana.cartelNivel(nivel);
         BufferedReader br = null;
         br = new BufferedReader(new InputStreamReader(input));
@@ -89,14 +88,11 @@ public class Logica {
         LinkedList<Alien> aliens = new LinkedList<>();
         //Recuperamos las tres primeras lineas como la cantidad de aliens de cada tipo que deben aparecer a lo largo del nivel
         int cantAlien1 = Integer.parseInt(lineas.getItem(0));
-        //System.out.println("cantAlien1: "+cantAlien1);
         int cantAlien2 = Integer.parseInt(lineas.getItem(1));
-        //System.out.println("cantAlien2: "+cantAlien2);
         int cantAlien3 = Integer.parseInt(lineas.getItem(2));
-        //System.out.println("cantAlien3: "+cantAlien3);
 
-        //Se inicializa la columna final segun el modo,
-        //si es el normal esta se situa en el extremo izquierdo del tablero, si es el experto se situa dentro del tablero impidiendo al jugador colocar naves en algunas columnas
+        /*Se inicializa la columna final segun el modo,
+        si es el normal esta se situa en el extremo izquierdo del tablero, si es el experto se situa dentro del tablero impidiendo al jugador colocar naves en algunas columnas */
         ColumnaFinal fin;
         if(modo == 0)
             fin = new ColumnaFinal(new Rectangle(xIni+sizeC+15,0,sizeC,sizeC*10),this);
@@ -123,7 +119,7 @@ public class Logica {
             filaElegida = rand.nextInt(cantFilas);
             filaActual = tablero[filaElegida];
 
-            posx = filaActual.getxIni() + (filaActual.cantCeldas()+2)*filaActual.getTam();
+            posx = filaActual.getxIni() + (filaActual.getCantCeldas()+2)*sizeC;
             posy = filaActual.getyIni()-10;
             a = null;
 
@@ -158,11 +154,10 @@ public class Logica {
 
     }
 
-    /* Se inicializa las factories de acuerdo alnivel*/
     public void empezarJuego() {
         modo = elegirModoDeJuego();
 
-        //Se crean las factories correspondientes y los archivos
+        //Se crean las factories y los archivos segun el modo de juego
         if (modo == ventana.MODO_NORMAL) {
             archivos = new String[2];
             archivos[0] = "archivoN1";

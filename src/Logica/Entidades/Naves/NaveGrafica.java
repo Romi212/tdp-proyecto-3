@@ -2,8 +2,6 @@ package Logica.Entidades.Naves;
 
 import Logica.Entidades.ObjetoGrafico;
 
-import javax.swing.*;
-
 public class NaveGrafica extends ObjetoGrafico {
     protected String skin;
     protected static final int TAM = 70;
@@ -17,4 +15,6 @@ public class NaveGrafica extends ObjetoGrafico {
     public String getRefImagen() {
         return skin;
     }
+
+    public int getTam(){ return TAM; }
 }

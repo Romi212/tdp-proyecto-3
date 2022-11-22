@@ -1,6 +1,5 @@
 package Logica.Entidades.Aliens;
 
-import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class AlienCaminando implements Estado{
@@ -13,6 +12,8 @@ public class AlienCaminando implements Estado{
         alien.getAlienG().caminando();
         pasoXTiempo = 0;
     }
+
+    @Override
     public void hacerAccion(){
         pasoXTiempo++;
         if(pasoXTiempo == TIEMPO_ACCION) {

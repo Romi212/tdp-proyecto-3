@@ -6,8 +6,6 @@ import Logica.Entidades.SolGrafico;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.net.JarURLConnection;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.Properties;
 
@@ -17,7 +15,6 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 public class Ventana  {
 	private  JLabel fondo;
-
 	private  JLabel enNivel;
 	private JButton Bmusica;
 	private int alturaBotonera = 70;
@@ -32,8 +29,6 @@ public class Ventana  {
 
 	public static final int MODO_NORMAL = 0;
 	public static final int MODO_EXPERTO = 1;
-
-
 
 	private int size = 74;
 
@@ -223,9 +218,6 @@ public class Ventana  {
 			}
 		}
 
-
-
-
 		frmLaHorda.setVisible(true);
 
 		boolean seInicia=true;
@@ -234,15 +226,9 @@ public class Ventana  {
 		}
 
 		if(seInicia) {
-			llamarLogica();
+			logica.empezarJuego();
 			panelBotonera.setVisible(true);
 		}
-	}
-
-
-	private void llamarLogica(){
-		//logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
-		logica.empezarJuego();
 	}
 
 	/* Permite agregar un objeto grafico a la pantalla */
@@ -298,15 +284,11 @@ public class Ventana  {
 		ImageIcon fondito = new ImageIcon(dimg);
 		panelFondo.setLayout(null);
 		panelFondo.setBackground( Color.BLACK);
-	/*	JLabel tapa = new JLabel();
-		tapa.setBounds(0,-20,width,40);
-		tapa.setBackground(Color.BLACK);
-		tapa.setOpaque(true);
-		panelFondo.add(tapa); */
 		fondo.setIcon(fondito);
 	}
 
-	/*Metodo que se llama cuando el jugador pierda/gana para saber si quiere reiniciar el juego*/
+	/*Metodo que se llama cuando el jugador pierda/gana para saber si quiere reiniciar el juego.
+	En caso de que cierre el dialogo se finaliza la ejecucion */
 	private boolean quisoReiniciar(){
 		boolean quiso = true;
 		UIManager.put("OptionPane.background", Color.BLACK);
@@ -320,9 +302,11 @@ public class Ventana  {
 		ventanaReinicio.add(mensaje);
 
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaReinicio,"Elija una opcion...",JOptionPane.YES_NO_OPTION);
+		if(opcionElegida==-1) System.exit(0);
 		if(opcionElegida==1) quiso = false;
 		return quiso;
 	}
+
 	/* Muestra una pantalla inicial de tal forma que el usuario pueda elegir el modo que desea jugar, retorna dicho modo. */
 	public int elegirModoDeJuego() {
 		int toReturn = MODO_NORMAL;
@@ -356,13 +340,10 @@ public class Ventana  {
 
 		modo.add(dia);
 		modo.add(colum);
-
 		ventanaModo.add(modo);
 
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.DEFAULT_OPTION);
-
 		if(opcionElegida==0 && colum.isSelected()) {  toReturn=MODO_EXPERTO;  }
-
 		modoDeJuego = toReturn;
 		organizarVentana(logica.NIVEL_0);
 
@@ -407,7 +388,6 @@ public class Ventana  {
 				aste.setIcon(getAsteroidesImg());
 				aste.setBounds(235+(i*size), 40, size,size*6);
 				panelObjetos.add(aste);
-
 			}
 		}
 
@@ -567,34 +547,34 @@ public class Ventana  {
 		s.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				actualizarSoles(s.getCantSol());
+				actualizarSoles(s.getAumento());
 				sacarObjeto(s);
 
-
-				String soundName = "yourSound.wav";
-				AudioInputStream audioInputStream = null;
-				File m = new File(p.getProperty("ruidito"));
-				try {
-					audioInputStream = AudioSystem.getAudioInputStream(m);
-				} catch (UnsupportedAudioFileException ex) {
-					throw new RuntimeException(ex);
-				} catch (IOException ex) {
-					throw new RuntimeException(ex);
+				if(player.estaReproduciendo()){
+					AudioInputStream audioInputStream = null;
+					File m = new File(p.getProperty("ruidito"));
+					try {
+						audioInputStream = AudioSystem.getAudioInputStream(m);
+					} catch (UnsupportedAudioFileException ex) {
+						throw new RuntimeException(ex);
+					} catch (IOException ex) {
+						throw new RuntimeException(ex);
+					}
+					Clip clip = null;
+					try {
+						clip = AudioSystem.getClip();
+					} catch (LineUnavailableException ex) {
+						throw new RuntimeException(ex);
+					}
+					try {
+						clip.open(audioInputStream);
+					} catch (LineUnavailableException ex) {
+						throw new RuntimeException(ex);
+					} catch (IOException ex) {
+						throw new RuntimeException(ex);
+					}
+					clip.start();
 				}
-				Clip clip = null;
-				try {
-					clip = AudioSystem.getClip();
-				} catch (LineUnavailableException ex) {
-					throw new RuntimeException(ex);
-				}
-				try {
-					clip.open(audioInputStream);
-				} catch (LineUnavailableException ex) {
-					throw new RuntimeException(ex);
-				} catch (IOException ex) {
-					throw new RuntimeException(ex);
-				}
-				clip.start();
 			}
 
 		});
@@ -623,12 +603,11 @@ public class Ventana  {
 	}
 
 	/* Notifica al usuario que paso de nivel */
-															//CUANDO SE IMPLEMENTE ESTO AGREGARLO AL DIAGRAMA
 	public void cartelNivel(int nivel){
 		if(nivel==0){
 			enNivel.setText("Nivel 1");
 			enNivel.setFont(fuente.deriveFont(15f));
-			enNivel.setBounds(700,20,100,20);
+			enNivel.setBounds(800,20,100,20);
 			enNivel.setForeground(Color.white);
 			panelBotonera.add(enNivel);
 		}
