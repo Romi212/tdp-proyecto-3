@@ -307,7 +307,8 @@ public class Ventana  {
 		return quiso;
 	}
 
-	/* Muestra una pantalla inicial de tal forma que el usuario pueda elegir el modo que desea jugar, retorna dicho modo. */
+	/* Muestra una pantalla inicial de tal forma que el usuario pueda elegir el modo que desea jugar, retorna dicho modo.
+	*  Si el usuario cierra el dialogo se termina la ejecucion */
 	public int elegirModoDeJuego() {
 		int toReturn = MODO_NORMAL;
 		UIManager.put("OptionPane.background", Color.BLACK);
@@ -343,6 +344,7 @@ public class Ventana  {
 		ventanaModo.add(modo);
 
 		int opcionElegida = JOptionPane.showConfirmDialog(frmLaHorda,ventanaModo,"Elija una opcion...",JOptionPane.DEFAULT_OPTION);
+		if(opcionElegida==-1) System.exit(0);
 		if(opcionElegida==0 && colum.isSelected()) {  toReturn=MODO_EXPERTO;  }
 		modoDeJuego = toReturn;
 		organizarVentana(logica.NIVEL_0);

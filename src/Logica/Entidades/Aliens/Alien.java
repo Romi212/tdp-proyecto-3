@@ -16,7 +16,8 @@ public abstract class Alien implements Visitor{
 	protected Estado estado;
 	protected int fila;
 	protected int velocidad;
-	protected boolean estabaCaminando;
+	protected boolean estabaCaminando; /* Esta variable se utiliza para detectar las colisiones cuando un alien pasa a estar comiendo,
+										de tal forma que se cree el estado comiendo una unica vez por colision */
 
 	public Alien(int x, int y, String c){
 		alienG = new AlienGrafico(x, y, c, 1);
