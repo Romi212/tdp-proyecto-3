@@ -6,6 +6,7 @@ import Logica.Entidades.Naves.ObjetoColisionable;
 import Logica.Entidades.Naves.Proyectil;
 
 import java.awt.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Alien implements Visitor{
 	
@@ -15,7 +16,7 @@ public abstract class Alien implements Visitor{
 	protected Rectangle hitbox;
 	protected Estado estado;
 	protected int fila;
-	protected int velocidad;
+	protected int tiempoDeAccion;
 	protected boolean estabaCaminando; /* Esta variable se utiliza para detectar las colisiones cuando un alien pasa a estar comiendo,
 										de tal forma que se cree el estado comiendo una unica vez por colision */
 
@@ -24,7 +25,7 @@ public abstract class Alien implements Visitor{
 		estado = new AlienCaminando(this);
 		hitbox = alienG.getBounds();
 		fila = -1;
-		velocidad = 5;
+		tiempoDeAccion = ThreadLocalRandom.current().nextInt(1, 5);
 		estabaCaminando = true;
 	}
 
@@ -53,7 +54,7 @@ public abstract class Alien implements Visitor{
 
 	public int getFila(){ return fila; }
 
-	public int getVelocidad(){ return velocidad; }
+	public int getTiempoDeAccion(){ return tiempoDeAccion; }
 
 	public void destruir(){ vida = 0; }
 
@@ -86,7 +87,7 @@ public abstract class Alien implements Visitor{
 
 	/*Checkea las colisiones entre el alien grafico y el objeto pasado por parametro mediante el metodo intersect de la clase Rectangle
 	 (las hitbox de los objetos colisionables son instancias de dicha clase) */
-	private boolean chequearColision(ObjetoColisionable o){
+	protected boolean chequearColision(ObjetoColisionable o){
 		return o.getHitBox().intersects(hitbox);
 	}
 
