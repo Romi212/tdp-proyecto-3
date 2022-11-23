@@ -5,10 +5,12 @@ import Logica.Entidades.SolGrafico;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Properties;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
@@ -89,7 +91,15 @@ public class Ventana  {
 		frmLaHorda.getContentPane().setLayout(null);
 		frmLaHorda.setBackground(Color.BLACK);
 		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
+		java.net.URL url = ClassLoader.getSystemResource(p.getProperty("icono"));
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Image img = kit.createImage(url);
+		frmLaHorda.setIconImage(img);
+
+		frmLaHorda.setTitle("LA HORDA MALOSA");
 		iniciarJuego(0);
+
+
 	}
 
 	/* Inicializa los paneles asi como tambien los componentes de los mismos.
@@ -121,6 +131,7 @@ public class Ventana  {
 		Bmusica= new JButton();
 		Bmusica.setBackground(Color.green);
 		Bmusica.setOpaque(true);
+
 		Bmusica.setIcon(new ImageIcon(Ventana.class.getResource(p.getProperty("iconoPlay"))));
 		Bmusica.setBounds(0,5,50,50);
 		Bmusica.addActionListener(new ActionListener() {

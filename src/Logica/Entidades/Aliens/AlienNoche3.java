@@ -9,4 +9,7 @@ public class AlienNoche3 extends Alien{
 		alienG = new AlienGrafico(x, y, "alienCImg", 3);
 	}
 
+	//Este alien se caracteriza por ser inmune al rayo congelador
+	public void cambiarAAlienCongelado(){  }
+
 }

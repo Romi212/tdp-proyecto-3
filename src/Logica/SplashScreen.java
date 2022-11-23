@@ -25,6 +25,7 @@ public class SplashScreen extends JFrame implements Runnable{
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
 
+
         //Inicializamos el archivo de propiedades
         p = new Properties();
         InputStream input = getClass().getResourceAsStream("/resources/archivos/configSplash.properties");
@@ -36,6 +37,12 @@ public class SplashScreen extends JFrame implements Runnable{
             fuente = Font.createFont(Font.TRUETYPE_FONT, new File(path));
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(fuente);
+            java.net.URL url = ClassLoader.getSystemResource(p.getProperty("icono"));
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Image img = kit.createImage(url);
+            this.setIconImage(img);
+
+            this.setTitle("LA HORDA MALOSA");
         } catch (IOException|FontFormatException e) {
             e.printStackTrace();
         }
