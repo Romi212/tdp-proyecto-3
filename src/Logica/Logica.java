@@ -143,7 +143,7 @@ public class Logica {
             }
             a.setFila(filaElegida);
             aliens.add(a);
-            ventana.agregarObjeto(a.getAlienG());
+            //ventana.agregarObjeto(a.getAlienG());
         }
 
         //Se inicializan y comienzan los manejadores

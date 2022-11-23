@@ -91,9 +91,8 @@ public class Ventana  {
 		frmLaHorda.getContentPane().setLayout(null);
 		frmLaHorda.setBackground(Color.BLACK);
 		logica = new Logica(this, p , alturaBotonera, alturaBotonera, size);
-		java.net.URL url = ClassLoader.getSystemResource(p.getProperty("icono"));
-		Toolkit kit = Toolkit.getDefaultToolkit();
-		Image img = kit.createImage(url);
+		ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("icono")));
+		Image img = ic.getImage();
 		frmLaHorda.setIconImage(img);
 
 		frmLaHorda.setTitle("LA HORDA MALOSA");

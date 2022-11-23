@@ -39,7 +39,9 @@ public class SplashScreen extends JFrame implements Runnable{
             ge.registerFont(fuente);
             java.net.URL url = ClassLoader.getSystemResource(p.getProperty("icono"));
             Toolkit kit = Toolkit.getDefaultToolkit();
-            Image img = kit.createImage(url);
+            //Image img = kit.createImage(url);
+            ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("icono")));
+            Image img = ic.getImage();
             this.setIconImage(img);
 
             this.setTitle("LA HORDA MALOSA");

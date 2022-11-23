@@ -110,6 +110,7 @@ public class Fila {
 
 	public void agregarAlien(Alien a){
 		listaAliens.addLast(a);
+		logica.agregarObjetoGrafico(a.getAlienG());
 	}
 
 	/* Agrega el proyectil pasado por parametro a la lista de proyectiles y lo muestra en pantalla, esto ultimo lo delega a logica */
