@@ -52,7 +52,7 @@ public class ManejadorNaves extends Thread {
             }
             if(nivel == logica.NIVEL_0){
                 contador++;
-                if(contador == 80){
+                if(contador == 60){
                     Random rand = new Random();
                     int posx = rand.nextInt(600) +300;
                     tablero[0].agregarSolEnPantalla(new SolGrafico(posx,10));
