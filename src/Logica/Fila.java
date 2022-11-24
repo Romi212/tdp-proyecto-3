@@ -1,6 +1,7 @@
 package Logica;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class Fila {
 
 	/* Recorre la lista de proyectiles eliminando los que estan muertos tanto de la fila como de la pantalla, esto ultimo lo delega a logica.
 	*  Retorna un iterable de la lista actualizada. */
-	synchronized public Iterable<Proyectil> getProyectiles(){
+	synchronized public Iterator<Proyectil> getProyectiles(){
 		List<Proyectil> eliminados = new ArrayList<Proyectil>();
 		for(Proyectil p : listaProyectiles){
 			if(!p.estaVivo()){
@@ -89,7 +90,7 @@ public class Fila {
 		}
 
 		listaProyectiles.removeAll(eliminados);
-		return listaProyectiles;
+		return listaProyectiles.iterator();
 	}
 
 	public Nave getPrimerNave(){
@@ -132,7 +133,11 @@ public class Fila {
 
 		LinkedList<ObjetoColisionable> l = new LinkedList<ObjetoColisionable>();
 		l.addLast(primeraNave);
-		l.addAll(listaProyectiles);
+		Iterator<Proyectil> it = getProyectiles();
+		while(it.hasNext()){
+			Proyectil p = it.next();
+			l.addLast(p);
+		}
 
 		return l;
 	}

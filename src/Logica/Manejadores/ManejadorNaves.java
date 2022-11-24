@@ -6,6 +6,8 @@ import Logica.Entidades.Naves.Proyectil;
 import Logica.Entidades.SolGrafico;
 import Logica.Fila;
 import Logica.Logica;
+
+import java.util.Iterator;
 import java.util.Random;
 
 /* Cuando pasa una cantidad determinada de milisegundos recorre todos los proyectiles y naves de las filas notificando que paso el tiempo.
@@ -42,9 +44,11 @@ public class ManejadorNaves extends Thread {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
+            Iterator<Proyectil> it;
             for(Fila f: tablero){
-                for(Proyectil p: f.getProyectiles()){
+                it = f.getProyectiles();
+                while(it.hasNext()){
+                    Proyectil p = it.next();
                     p.pasoXTiempo();
                     logica.actualizarGrafico(p.getProyectilGrafico());
                 }
