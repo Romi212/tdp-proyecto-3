@@ -33,6 +33,9 @@ public class ManejadorNaves extends Thread {
     *  Recorre las neves de todas las filas informandoles que paso el tiempo.
     *  Utiliza la variable contador para controlar la aparicion de los soles en pantalla que recolecta el usuario y son independientes a las naves */
     public void run(){
+        Random rand;
+        int posx;
+
         while (noTerminoJuego){
             try {
                 sleep(TIEMPO);
@@ -53,8 +56,8 @@ public class ManejadorNaves extends Thread {
             if(nivel == logica.NIVEL_0){
                 contador++;
                 if(contador == 60){
-                    Random rand = new Random();
-                    int posx = rand.nextInt(600) +300;
+                    rand = new Random();
+                    posx = rand.nextInt(600) +300;
                     tablero[0].agregarSolEnPantalla(new SolGrafico(posx,10));
                     contador = 0;
                 }

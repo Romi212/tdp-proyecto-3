@@ -37,10 +37,11 @@ public class ManejadorAliens extends Thread {
         if(!quedan){
             logica.terminoNivel();
         }else {
+            Alien a;
             int resto = proximosAliens.size() % 3;
             for (int i = 0; i < aliensPorHorda  + resto && quedan; i++) {
                 if (proximosAliens.size() > 0) {
-                    Alien a = proximosAliens.removeFirst();
+                    a = proximosAliens.removeFirst();
                     tablero[a.getFila()].agregarAlien(a);
                 } else quedan = false;
             }
@@ -52,11 +53,14 @@ public class ManejadorAliens extends Thread {
     *  Checkea las colisiones con la columna final y, si hay naves en la fila, las colisiones de los aliens con los proyectiles ambos mediante el patron visitor */
     @Override
     public void run() {
-        while(noTerminoJuego){
-            boolean hayZombies = false;
+        Iterable<Alien> aliensFila;
+        boolean hayZombies;
+        Iterable<ObjetoColisionable> objetos;
 
+        while(noTerminoJuego){
+            hayZombies = false;
             for(Fila f : tablero){
-                Iterable<Alien> aliensFila= f.getAliens();
+                aliensFila= f.getAliens();
                 for(Alien a: aliensFila){
                     hayZombies = true;
                     a.hacerAccion();
@@ -68,7 +72,7 @@ public class ManejadorAliens extends Thread {
                     }
                     f.getColumna().accept(a);
                     if(f.hayNaveEnFila() ) {
-                        Iterable<ObjetoColisionable> objetos = f.getColisionables();
+                        objetos = f.getColisionables();
                         for (ObjetoColisionable o : objetos) {
                             o.accept(a);
                         }

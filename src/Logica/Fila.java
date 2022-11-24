@@ -132,13 +132,7 @@ public class Fila {
 
 		LinkedList<ObjetoColisionable> l = new LinkedList<ObjetoColisionable>();
 		l.addLast(primeraNave);
-		l.addAll(listaProyectiles); //NO PODRIAMOS HACER ESTO DIRECTO? Por ahora anda bien
-
-	/*	Iterator<Proyectil> it = getProyectiles();
-		while(it.hasNext()){
-			Proyectil p = it.next();
-			l.addLast(p);
-		} */
+		l.addAll(listaProyectiles);
 
 		return l;
 	}
