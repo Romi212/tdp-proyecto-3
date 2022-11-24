@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="tdp-proyecto-3:jar">
+    <output-path>$PROJECT_DIR$/../../../../../../../artifacts/tdp_proyecto_3_jar</output-path>
+    <root id="archive" name="tdp-proyecto-3.jar">
+      <element id="module-output" name="tdp-proyecto-3" />
+    </root>
+  </artifact>
+</component>
