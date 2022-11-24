@@ -2855,17 +2855,16 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3109,
-											"top": 2446,
+											"top": 2430,
 											"width": 250.11669921875,
 											"height": 13,
 											"text": "#cantInvulnerable",
 											"horizontalAlignment": 0
 										}
 									],
-									"visible": false,
 									"font": "Arial;13;0",
 									"left": 3104,
-									"top": 2441,
+									"top": 2425,
 									"width": 260.11669921875,
 									"height": 23
 								},
@@ -2890,7 +2889,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3109,
-											"top": 2430,
+											"top": 2453,
 											"width": 250.11669921875,
 											"height": 13,
 											"text": "+AlienDia3(x: int, y: int)",
@@ -2899,7 +2898,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 3104,
-									"top": 2425,
+									"top": 2448,
 									"width": 260.11669921875,
 									"height": 23
 								},
@@ -2941,11 +2940,10 @@
 							"left": 3104,
 							"top": 2400,
 							"width": 260.11669921875,
-							"height": 68,
+							"height": 71,
 							"nameCompartment": {
 								"$ref": "AAAAAAGD8amjunv36qg="
 							},
-							"suppressAttributes": true,
 							"attributeCompartment": {
 								"$ref": "AAAAAAGD8amjunv8zNo="
 							},
