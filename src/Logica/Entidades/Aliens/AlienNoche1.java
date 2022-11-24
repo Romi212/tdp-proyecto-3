@@ -10,7 +10,7 @@ public class AlienNoche1 extends Alien{
 		danio = 5;
 	}
 
-	/*Este alien se caracteriza por aumentar su velocidad al maximo cuando recibe*/
+	/*Este alien se caracteriza por aumentar su velocidad al maximo cuando recibe un disparo*/
 	public void colisionProyectilAlien(Proyectil p){
 		if(chequearColision(p) && p.estaVivo()){
 			if(vida - p.getDanio() > 0) {

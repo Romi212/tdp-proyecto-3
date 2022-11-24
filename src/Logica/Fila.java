@@ -129,7 +129,7 @@ public class Fila {
 		return fin;
 	}
 
-	synchronized public LinkedList<ObjetoColisionable> getColisionables() {
+	synchronized public Iterable<ObjetoColisionable> getColisionables() {
 
 		LinkedList<ObjetoColisionable> l = new LinkedList<ObjetoColisionable>();
 		l.addLast(primeraNave);

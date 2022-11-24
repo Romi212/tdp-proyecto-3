@@ -31,7 +31,7 @@ public class SplashScreen extends JFrame implements Runnable{
         InputStream input = getClass().getResourceAsStream("/resources/archivos/configSplash.properties");
         try { p.load(input); } catch (IOException e) {  throw new RuntimeException(e);  }
 
-        //Cargamos la fuente para el tecto
+        //Cargamos la fuente para el texto
         try {
             String path = p.getProperty("fuente");
             fuente = Font.createFont(Font.TRUETYPE_FONT, new File(path));
