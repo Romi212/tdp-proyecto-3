@@ -37,9 +37,6 @@ public class SplashScreen extends JFrame implements Runnable{
             fuente = Font.createFont(Font.TRUETYPE_FONT, new File(path));
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(fuente);
-            java.net.URL url = ClassLoader.getSystemResource(p.getProperty("icono"));
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            //Image img = kit.createImage(url);
             ImageIcon ic = new ImageIcon(getClass().getResource(p.getProperty("icono")));
             Image img = ic.getImage();
             this.setIconImage(img);
