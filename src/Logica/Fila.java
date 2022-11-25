@@ -64,7 +64,7 @@ public class Fila {
 
 	/* Recorre la lista de aliens eliminando los que estan muertos tanto de la fila como de la pantalla, esto ultimo lo delega a logica.
 	*  Retorna la lista actualizada. */
-	public Iterable<Alien> getAliens(){
+	synchronized public Iterable<Alien> getAliens(){
 		List<Alien> eliminados = new ArrayList<Alien>();
 		for(Alien a : listaAliens){
 			if(!a.estaVivo()){
