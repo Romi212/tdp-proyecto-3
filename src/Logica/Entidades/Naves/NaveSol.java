@@ -4,7 +4,7 @@ import Logica.Entidades.SolGrafico;
 import Logica.Fila;
 
 public abstract class NaveSol extends Nave {
-    protected static int MAXTIEMPO = 50;
+    protected static int MAXTIEMPO = 60;
     public NaveSol(Fila f, int col, int x, int y, String skin) {
         super(f,col,x,y, skin);
     }
